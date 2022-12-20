@@ -15,7 +15,7 @@ D:/Development/UnityProjects/MyTestProject/quizparty/Spielfeld
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-64199
+52700
 Successfully changed project path to: D:/Development/UnityProjects/MyTestProject/quizparty/Spielfeld
 D:/Development/UnityProjects/MyTestProject/quizparty/Spielfeld
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,7 +47,7 @@ D:/Development/UnityProjects/MyTestProject/quizparty/Spielfeld
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Refreshing native plugins compatible for Editor in 68.68 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 66.17 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.12f1 (8af3c3e441b1)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.12f1/Editor/Data/Resources/UnitySubsystems
@@ -63,92 +63,92 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.12f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.12f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.12f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56844
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56328
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.12f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.12f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.005299 seconds.
+Registered in 0.006952 seconds.
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 66.47 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 69.52 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.483 seconds
+- Completed reload, in  0.512 seconds
 Domain Reload Profiling:
-	ReloadAssembly (484ms)
-		BeginReloadAssembly (53ms)
+	ReloadAssembly (512ms)
+		BeginReloadAssembly (61ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (351ms)
-			LoadAssemblies (52ms)
+		EndReloadAssembly (366ms)
+			LoadAssemblies (60ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (77ms)
+			SetupTypeCache (71ms)
 			ReleaseScriptCaches (0ms)
 			RebuildScriptCaches (21ms)
-			SetupLoadedEditorAssemblies (215ms)
+			SetupLoadedEditorAssemblies (233ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (7ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (67ms)
+				RefreshPlugins (70ms)
 				BeforeProcessingInitializeOnLoad (1ms)
-				ProcessInitializeOnLoadAttributes (106ms)
-				ProcessInitializeOnLoadMethodAttributes (34ms)
+				ProcessInitializeOnLoadAttributes (115ms)
+				ProcessInitializeOnLoadMethodAttributes (40ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.003243 seconds.
+Registered in 0.003124 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image D:\Development\UnityProjects\MyTestProject\quizparty\Spielfeld\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image D:\Development\UnityProjects\MyTestProject\quizparty\Spielfeld\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.72 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 0.83 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.735 seconds
+- Completed reload, in  0.789 seconds
 Domain Reload Profiling:
-	ReloadAssembly (735ms)
-		BeginReloadAssembly (84ms)
+	ReloadAssembly (790ms)
+		BeginReloadAssembly (86ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (6ms)
+			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (16ms)
-		EndReloadAssembly (569ms)
-			LoadAssemblies (61ms)
+			CreateAndSetChildDomain (18ms)
+		EndReloadAssembly (609ms)
+			LoadAssemblies (64ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (175ms)
+			SetupTypeCache (176ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (34ms)
-			SetupLoadedEditorAssemblies (276ms)
+			RebuildScriptCaches (37ms)
+			SetupLoadedEditorAssemblies (296ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (5ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (64ms)
-				ProcessInitializeOnLoadAttributes (179ms)
-				ProcessInitializeOnLoadMethodAttributes (21ms)
-				AfterProcessingInitializeOnLoad (5ms)
+				BeforeProcessingInitializeOnLoad (65ms)
+				ProcessInitializeOnLoadAttributes (192ms)
+				ProcessInitializeOnLoadMethodAttributes (27ms)
+				AfterProcessingInitializeOnLoad (7ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (4ms)
+			AwakeInstancesAfterBackupRestoration (6ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
-Refreshing native plugins compatible for Editor in 0.69 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 0.86 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3383 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 27 unused Assets / (113.6 KB). Loaded Objects now: 3843.
-Memory consumption went from 192.6 MB to 192.5 MB.
-Total: 2.667700 ms (FindLiveObjects: 0.195500 ms CreateObjectMapping: 0.078500 ms MarkObjects: 2.281700 ms  DeleteObjects: 0.111000 ms)
+Unloading 3405 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 27 unused Assets / (113.6 KB). Loaded Objects now: 3865.
+Memory consumption went from 193.2 MB to 193.1 MB.
+Total: 3.217200 ms (FindLiveObjects: 0.241500 ms CreateObjectMapping: 0.078200 ms MarkObjects: 2.786200 ms  DeleteObjects: 0.110300 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -162,22 +162,250 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 1225602.334514 seconds.
-  path: Assets/Simple Vehicle Pack/Textures/bus_albedo_2.tif
-  artifactKey: Guid(71c06d610b4d99e44bafd4130e9e567d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Simple Vehicle Pack/Textures/bus_albedo_2.tif using Guid(71c06d610b4d99e44bafd4130e9e567d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a0acb2eb8610706711e1c6468fd22d1c') in 0.077310 seconds 
+  Time since last request: 81620.589581 seconds.
+  path: Assets/CharacterPack Lowpoly (FREE)/Prefabs/character2 (2).prefab
+  artifactKey: Guid(4f2e058a94bca0742939d136d2b88baf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CharacterPack Lowpoly (FREE)/Prefabs/character2 (2).prefab using Guid(4f2e058a94bca0742939d136d2b88baf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd5004448a524ccbd078d9aea52f03ff2') in 0.111554 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/CharacterPack Lowpoly (FREE)/Prefabs/character2.prefab
+  artifactKey: Guid(e7707aec2cc25b449a610f5087a64251) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CharacterPack Lowpoly (FREE)/Prefabs/character2.prefab using Guid(e7707aec2cc25b449a610f5087a64251) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bce05cb1b9c71a91314138fb9ac622fd') in 0.011407 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/CharacterPack Lowpoly (FREE)/Prefabs/character2 (1) 1.prefab
+  artifactKey: Guid(d0760a66a63a36740b36de46ef865962) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CharacterPack Lowpoly (FREE)/Prefabs/character2 (1) 1.prefab using Guid(d0760a66a63a36740b36de46ef865962) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af80d27789f9fde90f552c6db1bff131') in 0.010058 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 10.098123 seconds.
+  path: Assets/HurlyBurly/FREE_LowPoly_SubwayEntrance/Prefabs/FREE_SW_ENV_StreetEntrance_01_Lower.prefab
+  artifactKey: Guid(55c4e39eded76475a8135f77fe0fd0df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/HurlyBurly/FREE_LowPoly_SubwayEntrance/Prefabs/FREE_SW_ENV_StreetEntrance_01_Lower.prefab using Guid(55c4e39eded76475a8135f77fe0fd0df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be5fe46e888ac59ff1e86ea6a54e9ba2') in 0.235938 seconds 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000018 seconds.
-  path: Assets/Simple Vehicle Pack/Textures/cars_albedo_2.tif
-  artifactKey: Guid(7cb8cb42b17248f4a993ba742a595e5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Simple Vehicle Pack/Textures/cars_albedo_2.tif using Guid(7cb8cb42b17248f4a993ba742a595e5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '293ac0271086cd275c5463abd9719ff3') in 0.020833 seconds 
+  path: Assets/HurlyBurly/FREE_LowPoly_SubwayEntrance/Prefabs/FREE_SW_PROP_Lamp.prefab
+  artifactKey: Guid(79f1d41ba77d549979d8587b92bfda9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/HurlyBurly/FREE_LowPoly_SubwayEntrance/Prefabs/FREE_SW_PROP_Lamp.prefab using Guid(79f1d41ba77d549979d8587b92bfda9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '619dfa712565913b36f8f3130e152402') in 0.028264 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/HurlyBurly/FREE_LowPoly_SubwayEntrance/Prefabs/FREE_SW_PROP_StreetEntrance_Light.prefab
+  artifactKey: Guid(895517404ca174ad39629f9ca90b3b48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/HurlyBurly/FREE_LowPoly_SubwayEntrance/Prefabs/FREE_SW_PROP_StreetEntrance_Light.prefab using Guid(895517404ca174ad39629f9ca90b3b48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf00a17fa3767ab78f5f91708bb616ea') in 0.019517 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 20.907091 seconds.
+  path: Assets/Simple Vehicle Pack/Prefabs/Mobile/Car_1.prefab
+  artifactKey: Guid(1eb894c97da32c940a90228cac9bea1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Simple Vehicle Pack/Prefabs/Mobile/Car_1.prefab using Guid(1eb894c97da32c940a90228cac9bea1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5fa333f2b0b6f9b20f5da2c6349eb78a') in 0.061331 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Simple Vehicle Pack/Prefabs/Mobile/Car_2.prefab
+  artifactKey: Guid(388d83314c9e51c40956fb6908979eee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Simple Vehicle Pack/Prefabs/Mobile/Car_2.prefab using Guid(388d83314c9e51c40956fb6908979eee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '587655a11331754d1ca963560994f402') in 0.009032 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Simple Vehicle Pack/Prefabs/Mobile/road_4.prefab
+  artifactKey: Guid(6d54332e11f957a43984db1df5538f5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Simple Vehicle Pack/Prefabs/Mobile/road_4.prefab using Guid(6d54332e11f957a43984db1df5538f5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '545f7343e6ca9b4fd9194f11d91ed558') in 0.009480 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 11.899973 seconds.
+  path: Assets/Park/Prefabs/Boat.prefab
+  artifactKey: Guid(ff8cc0a917ea2aa4b9a824a1671a0b2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Park/Prefabs/Boat.prefab using Guid(ff8cc0a917ea2aa4b9a824a1671a0b2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '55c96bbd3e442c7b172e9cdad0038d41') in 0.014545 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Park/Prefabs/Hovel_Green.prefab
+  artifactKey: Guid(b8f2804faabf68e449f70316b2e677ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Park/Prefabs/Hovel_Green.prefab using Guid(b8f2804faabf68e449f70316b2e677ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b66bc485e6f30a0b6e4dc13e3d4d7b4c') in 0.009074 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Park/Prefabs/Tree_3.prefab
+  artifactKey: Guid(c8a2cf893b362b14784799d9219265da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Park/Prefabs/Tree_3.prefab using Guid(c8a2cf893b362b14784799d9219265da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b15458049ea1ef0ce6283f7911c72838') in 0.009153 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Park/Prefabs/FanceConnector.prefab
+  artifactKey: Guid(d6a53a0edb1ca654fa47280067859a4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Park/Prefabs/FanceConnector.prefab using Guid(d6a53a0edb1ca654fa47280067859a4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '42f0d5267b31c3d0f427dcfd83e31174') in 0.011014 seconds 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000023 seconds.
-  path: Assets/Simple Vehicle Pack/Textures/bus_AO.tif
-  artifactKey: Guid(9bb22276bb1cd5448b5106f8aab9f69b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Simple Vehicle Pack/Textures/bus_AO.tif using Guid(9bb22276bb1cd5448b5106f8aab9f69b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '780bd5b522102c3c80e0277791e5d82a') in 0.019952 seconds 
+  path: Assets/Park/Prefabs/DoubleBench.prefab
+  artifactKey: Guid(a36eb7c68da723844b826fa2e34e1e06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Park/Prefabs/DoubleBench.prefab using Guid(a36eb7c68da723844b826fa2e34e1e06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9211ebc69949a22dee27e2c49e5438c3') in 0.009529 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Park/Prefabs/Tile_Area.prefab
+  artifactKey: Guid(f7091bdeb24aa4c4497978d79b103410) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Park/Prefabs/Tile_Area.prefab using Guid(f7091bdeb24aa4c4497978d79b103410) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '331777ff97e0de1e8e96b875ddbb1e97') in 0.010355 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Park/Prefabs/Tile_Intersection.prefab
+  artifactKey: Guid(d53a7564f55fb9549a231373bdf456b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Park/Prefabs/Tile_Intersection.prefab using Guid(d53a7564f55fb9549a231373bdf456b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '86805b1c4c47f15f497dcf9de9b2c5ac') in 0.011370 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Park/Prefabs/Lamp.prefab
+  artifactKey: Guid(4eef6f5ff5915b4458bd1d4a4f7b261a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Park/Prefabs/Lamp.prefab using Guid(4eef6f5ff5915b4458bd1d4a4f7b261a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '32531ae1a4f090ba751379e120898762') in 0.014856 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Park/Prefabs/Tree_5_Autumn.prefab
+  artifactKey: Guid(a9180ddcd15c1874fa2dee25085cc1a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Park/Prefabs/Tree_5_Autumn.prefab using Guid(a9180ddcd15c1874fa2dee25085cc1a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0eba5c5236c80da6113cbd720fb05d97') in 0.010075 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Park/Prefabs/Tile_Area2.prefab
+  artifactKey: Guid(c452498b6d5c5d44397ef9fae1436b07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Park/Prefabs/Tile_Area2.prefab using Guid(c452498b6d5c5d44397ef9fae1436b07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b3e38a1bbc987b2d30a3bb09b196584') in 0.010838 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Park/Prefabs/Fountain1.prefab
+  artifactKey: Guid(3aea2b1d4d0db3542af1e9d3474cf6fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Park/Prefabs/Fountain1.prefab using Guid(3aea2b1d4d0db3542af1e9d3474cf6fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b363b1e8e1559a2b31d7af831bacc565') in 0.009438 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Park/Prefabs/Fence_0.prefab
+  artifactKey: Guid(a5eed1cf4e0dbcb44a9092a7ba5e87c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Park/Prefabs/Fence_0.prefab using Guid(a5eed1cf4e0dbcb44a9092a7ba5e87c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8ac7374244da03964071f80d21fdfd0f') in 0.011093 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Park/Prefabs/Tree_4_Autumn.prefab
+  artifactKey: Guid(bcc0a35f1415b2745a222e14393d4318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Park/Prefabs/Tree_4_Autumn.prefab using Guid(bcc0a35f1415b2745a222e14393d4318) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8a4fe1ed5b498c2a3f7487362e730d00') in 0.010761 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Park/Prefabs/Tile_Road.prefab
+  artifactKey: Guid(4089d53e61f85f84a8a4830925f5dbeb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Park/Prefabs/Tile_Road.prefab using Guid(4089d53e61f85f84a8a4830925f5dbeb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '09cfc11922b32ac7ef58f3ce401535ed') in 0.010320 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 198.783076 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Props/pops a.prefab
+  artifactKey: Guid(1a8f91ed09cfe674a8cc7d08c7797c81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Props/pops a.prefab using Guid(1a8f91ed09cfe674a8cc7d08c7797c81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '794766b0c3b1984ed755ca9375300d33') in 0.010120 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Props/pops c.fbx
+  artifactKey: Guid(56c9ed7a7b68d1f478122044668ddee0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Props/pops c.fbx using Guid(56c9ed7a7b68d1f478122044668ddee0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6aac63eb12dcb31a4d2d5a1824b54fca') in 0.049511 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.307632 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Roads/road simple with side cross.prefab
+  artifactKey: Guid(36dc59df29388fb4a9c08dec2aee2706) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Roads/road simple with side cross.prefab using Guid(36dc59df29388fb4a9c08dec2aee2706) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '49df8281bc63f62e4dfd44862b1b2cdf') in 0.011765 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Roads/road simple.fbx
+  artifactKey: Guid(34e5ca6ae89b09c4790d1002a12a080f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Roads/road simple.fbx using Guid(34e5ca6ae89b09c4790d1002a12a080f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec817e135a2d3979d30a392e1ee18e03') in 0.021453 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Roads/road simple with side.prefab
+  artifactKey: Guid(6cecce2da05050e4190c0b105221f058) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Roads/road simple with side.prefab using Guid(6cecce2da05050e4190c0b105221f058) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5032c813ff32079e6c341018d3b46084') in 0.015797 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Roads/road simple with side rgh.fbx
+  artifactKey: Guid(80d89129576ec1248a320e477cf94914) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Roads/road simple with side rgh.fbx using Guid(80d89129576ec1248a320e477cf94914) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '38366364848e282e59f532f177193b44') in 0.015643 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Roads/road simple.prefab
+  artifactKey: Guid(fc82200e2e146ac409c23ff90ecb4e95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Roads/road simple.prefab using Guid(fc82200e2e146ac409c23ff90ecb4e95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f040eb40cbc285c0cd71040c6238ed8') in 0.006942 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Roads/road simple with side left.prefab
+  artifactKey: Guid(d8a03941acfd17945981be5cc7469b18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Roads/road simple with side left.prefab using Guid(d8a03941acfd17945981be5cc7469b18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c30317d68c9621e1f9b8bd23bc71d4a5') in 0.006418 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Roads/road simple with side t.fbx
+  artifactKey: Guid(334be481870985341a0e7e9760d37218) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Roads/road simple with side t.fbx using Guid(334be481870985341a0e7e9760d37218) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6abcb7e17be36a0abca749574421be9f') in 0.017136 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.087414 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Shops/shop a.prefab
+  artifactKey: Guid(be43149279afb7941a4056cb29839460) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Shops/shop a.prefab using Guid(be43149279afb7941a4056cb29839460) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '01464da9fae505b69c04be82e888fe25') in 0.010350 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Shops/shop cyln.fbx
+  artifactKey: Guid(95691f66cfa0157419d55647f08e356d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Shops/shop cyln.fbx using Guid(95691f66cfa0157419d55647f08e356d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6659859cde437f3c9284ff849768c082') in 0.018976 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Shops/shop b.prefab
+  artifactKey: Guid(03e433fb0ec8ea04eb14211de627bedb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Shops/shop b.prefab using Guid(03e433fb0ec8ea04eb14211de627bedb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bfbb527071b3e18de0bcf2d508a913da') in 0.007692 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Shops/shop c.prefab
+  artifactKey: Guid(6bb2fa990835abe418a3edfc114803a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Shops/shop c.prefab using Guid(6bb2fa990835abe418a3edfc114803a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0851d55669e6821638970a624b5b62d0') in 0.008530 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Shops/shop cyln.prefab
+  artifactKey: Guid(439051ec092fe1b46ba7f66d889b793b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Shops/shop cyln.prefab using Guid(439051ec092fe1b46ba7f66d889b793b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '06ccdbb2de8c5f5e71fd9fe4feef2d00') in 0.008439 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.234848 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Vegitations/tree a.prefab
+  artifactKey: Guid(308cb5311953bef4f9305b230d07fd99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Vegitations/tree a.prefab using Guid(308cb5311953bef4f9305b230d07fd99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6528a9836769b61edd40df1036ebb42c') in 0.015032 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Vegitations/tree b.prefab
+  artifactKey: Guid(abcbc17e1b43da54baa88dae1c832f1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Vegitations/tree b.prefab using Guid(abcbc17e1b43da54baa88dae1c832f1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1876cd38edaa766919df77bdd890c1bf') in 0.009514 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.573709 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Vehicles/vehicle a.prefab
+  artifactKey: Guid(6ce21ad129e537f4b8caa5b003f939eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Vehicles/vehicle a.prefab using Guid(6ce21ad129e537f4b8caa5b003f939eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a83003005be206350f53ef3486a0a4cd') in 0.013945 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Vehicles/vehicle c.prefab
+  artifactKey: Guid(6b625fe631c88c345bdbe6c53c905a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CR Creation/Voxel 3D Town Pack for Landscape/Models/Vehicles/vehicle c.prefab using Guid(6b625fe631c88c345bdbe6c53c905a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '92c84b137299a04e10a287935c6eb776') in 0.015773 seconds 
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 AssetImportWorker is now disconnected from the server
 Process exiting
