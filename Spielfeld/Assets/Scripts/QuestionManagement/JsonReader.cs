@@ -12,6 +12,7 @@ public class JsonGameEventField
 {
     //these variables are case sensitive and must match the strings "firstName" and "lastName" in the JSON.
     public int id;
+    public int type;
     public string content;
     public int time;
     public string solution;
@@ -63,6 +64,10 @@ public class JsonReader : MonoBehaviour
 
     public JsonGameEventFieldList getEventFieldList(){
         return eventFieldList;
+    }
+
+    public void setState(int i, int newState){
+        eventFieldList.jsonGameEventFieldList[i].state = newState;
     }
  
     //============= internal structures and methods ======================
