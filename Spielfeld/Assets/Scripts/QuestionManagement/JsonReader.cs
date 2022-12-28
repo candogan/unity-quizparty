@@ -82,7 +82,7 @@ public class JsonReader : MonoBehaviour
  
         foreach (JsonGameEventField gameEventField in testEventFieldList.jsonGameEventFieldList)
         {
-            Debug.Log("Found gameEventField: " + gameEventField.content);
+            //Debug.Log("Found gameEventField: " + gameEventField.content);
         }
  
         return testEventFieldList;
