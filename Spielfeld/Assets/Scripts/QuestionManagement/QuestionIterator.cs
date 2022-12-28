@@ -23,24 +23,24 @@ public class QuestionIterator : MonoBehaviour
         textField = GameObject.Find("QuestionTextfield").GetComponent<TextMeshProUGUI>();
     }
 
-    public void loadKnowledgeField(){
-        randomQuestionPicker(wissensfeld);
+    public void LoadKnowledgeField(){
+        RandomQuestionPicker(wissensfeld);
     }
 
-    public void loadActionField(){
-        randomQuestionPicker(actionfeld);
+    public void LoadActionField(){
+        RandomQuestionPicker(actionfeld);
     }
 
-    public void loadPictureField(){
-        randomQuestionPicker(bildraten);
+    public void LoadPictureField(){
+        RandomQuestionPicker(bildraten);
     }
 
-    public void loadEstimationField(){
-        randomQuestionPicker(schaetzfrage);
+    public void LoadEstimationField(){
+        RandomQuestionPicker(schaetzfrage);
     }
 
-    public void loadInteractionField(){
-        randomQuestionPicker(interaktionsfeld);
+    public void LoadInteractionField(){
+        RandomQuestionPicker(interaktionsfeld);
     }
 
 
@@ -49,7 +49,7 @@ public class QuestionIterator : MonoBehaviour
     Diese Methode prüft, welche Fragen im Spiel noch nicht dran kamen und bestimmt eine zufällige Frage zu der gegebenen Kategorie
     @param: fieldtype = Fragekategorie
     */
-    private void randomQuestionPicker(int fieldType){
+    private void RandomQuestionPicker(int fieldType){
         eventFieldList = FindObjectOfType<JsonReader>().getEventFieldList();
         List<int> availableIndexes = new List<int>();
         int i = 0;
@@ -65,7 +65,7 @@ public class QuestionIterator : MonoBehaviour
         int fieldCount = availableIndexes.Count;
 
         if (fieldCount < 1){
-            availableIndexes = resetStateAndGetAvailableFields(fieldType);
+            availableIndexes = ResetStateAndGetAvailableFields(fieldType);
             fieldCount = availableIndexes.Count;
         }
 
@@ -75,8 +75,7 @@ public class QuestionIterator : MonoBehaviour
         eventFieldList.jsonGameEventFieldList[randomQuestionIndex].state = nichtVerfügbar;
         textField.text =  eventFieldList.jsonGameEventFieldList[randomQuestionIndex].content;
         
-        //todo: Set Countdown Time
-        //setCountdown(eventFieldList.jsonGameEventFieldList[randomQuestionIndex]);
+        FindObjectOfType<CountdownManager>().SetupTimer(eventFieldList.jsonGameEventFieldList[randomQuestionIndex].time);
     }
 
 
@@ -86,7 +85,7 @@ public class QuestionIterator : MonoBehaviour
     Falls alle Fragen einer Kategorie bereits dran kamen, werden mit dieser Methode alle Fragen wieder auf unbenutzt gesetzt.
     @return: neue Liste der möglichen Eventfelder für den Random Question Picker
     */
-    private List<int> resetStateAndGetAvailableFields(int fieldType){
+    private List<int> ResetStateAndGetAvailableFields(int fieldType){
             int i = 0;
             List<int> availableIndexes = new List<int>();
 

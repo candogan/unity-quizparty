@@ -279,6 +279,14 @@ public class Timer : MonoBehaviour
         ResetTimer();
     }
 
+    public void PauseTimer(){
+        timerRunning = false;
+    }
+
+    public void ContinueTimer(){
+        timerRunning = true;
+    }
+
     private void ResetTimer()
     {
         timerPaused = false;
