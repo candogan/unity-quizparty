@@ -12,6 +12,8 @@ public class CountdownManager : MonoBehaviour
     public GameObject timerPauseButton;
     public GameObject timerContinueButton;
     public GameObject showAnswerButton;
+    public GameObject rightAnswerButton;
+    public GameObject wrongAnswerButton;
 
     private int eventFieldTime;
 
@@ -51,17 +53,22 @@ public class CountdownManager : MonoBehaviour
     public void ContinueTimer(){
         timerPauseButton.SetActive(true);
         timerContinueButton.SetActive(false);
+        showAnswerButton.SetActive(false);
         timer.ContinueTimer();
     }
 
     public void ShowAnswer(){
         timerContinueButton.SetActive(false);
         showAnswerButton.SetActive(false);
-        //Debug.Log("verbleibend: " + timer.GetRemainingSeconds + ", Fragezeit: " + eventFieldTime);
+        rightAnswerButton.SetActive(true);
+        wrongAnswerButton.SetActive(true);
+        FindObjectOfType<QuestionIterator>().ShowAnswer();
+        GetTimePoints();
     }
 
     public void GetTimePoints(){
-
+        Debug.Log("Verbleibend: " + timer.GetRemainingSeconds().ToString("#"));
+        Debug.Log("Fragezeit: " + eventFieldTime);
     }
 
     private string ConvertToDisplayFormat(TimeSpan t){

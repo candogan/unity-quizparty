@@ -6,12 +6,17 @@ using TMPro;
 
 public class QuestionIterator : MonoBehaviour
 {
+    public TextMeshProUGUI textField;
+    public TextMeshProUGUI showAnswerField;
+    public GameObject showAnswerObject;
+
     private JsonGameEventFieldList eventFieldList;
-    private TextMeshProUGUI textField;
     private Random rnd = new Random();
 
-    private static int verfügbar = 0;
-    private static int nichtVerfügbar = 1;
+    private JsonGameEventField currentEventField;
+
+    private static int verfuegbar = 0;
+    private static int nichtVerfuegbar = 1;
 
     private static int interaktionsfeld = 1;
     private static int wissensfeld = 2;
@@ -20,7 +25,9 @@ public class QuestionIterator : MonoBehaviour
     private static int actionfeld = 5;
 
     void Start(){
-        textField = GameObject.Find("QuestionTextfield").GetComponent<TextMeshProUGUI>();
+    }
+
+    void Update(){
     }
 
     public void LoadKnowledgeField(){
@@ -54,9 +61,9 @@ public class QuestionIterator : MonoBehaviour
         List<int> availableIndexes = new List<int>();
         int i = 0;
 
-        //Speicherung der Indexe von verfügbaren Feldern (mit gewünschter Kategtorie) in der Liste availableIndexes
+        //Speicherung der Indexe von verfuegbaren Feldern (mit gewünschter Kategtorie) in der Liste availableIndexes
         foreach (JsonGameEventField gameEventField in eventFieldList.jsonGameEventFieldList){
-            if (gameEventField.state == verfügbar && gameEventField.type == fieldType) {
+            if (gameEventField.state == verfuegbar && gameEventField.type == fieldType) {
                 availableIndexes.Add(i);
             }
             i++;
@@ -72,7 +79,8 @@ public class QuestionIterator : MonoBehaviour
         int randomQuestionIndex = availableIndexes[rnd.Next(fieldCount)];
         //Debug.Log("index: " + randomQuestionIndex + ", state: " + eventFieldList.jsonGameEventFieldList[randomQuestionIndex].state + ", fieldcount: " + fieldCount + ", fieldtype: " +  fieldType);
 
-        eventFieldList.jsonGameEventFieldList[randomQuestionIndex].state = nichtVerfügbar;
+        currentEventField = eventFieldList.jsonGameEventFieldList[randomQuestionIndex];
+        eventFieldList.jsonGameEventFieldList[randomQuestionIndex].state = nichtVerfuegbar;
         textField.text =  eventFieldList.jsonGameEventFieldList[randomQuestionIndex].content;
         
         FindObjectOfType<CountdownManager>().SetupTimer(eventFieldList.jsonGameEventFieldList[randomQuestionIndex].time);
@@ -93,12 +101,17 @@ public class QuestionIterator : MonoBehaviour
 
             foreach (JsonGameEventField gameEventField in eventFieldList.jsonGameEventFieldList){
                 if (gameEventField.type == fieldType) {
-                    eventFieldList.jsonGameEventFieldList[i].state = verfügbar;
+                    eventFieldList.jsonGameEventFieldList[i].state = verfuegbar;
                     availableIndexes.Add(i);
                     //Debug.Log("i:" + i + ", state: "+ gameEventField.state);
                 }
                 i++;
             }
         return availableIndexes;
+    }
+
+    public void ShowAnswer(){
+        showAnswerObject.SetActive(true);
+        showAnswerField.text = "Lösung: " + currentEventField.solution;
     }
 }
