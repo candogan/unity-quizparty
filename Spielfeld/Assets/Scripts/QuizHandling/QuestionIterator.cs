@@ -6,7 +6,7 @@ using TMPro;
 
 public class QuestionIterator : MonoBehaviour
 {
-    public TextMeshProUGUI textField;
+    public TextMeshProUGUI questionTextField;
     public TextMeshProUGUI showAnswerField;
     public GameObject showAnswerObject;
 
@@ -24,36 +24,46 @@ public class QuestionIterator : MonoBehaviour
     private static int schaetzfrage = 4;
     private static int actionfeld = 5;
 
+    private static int actualFieldType;
+
     void Start(){
     }
 
     void Update(){
     }
 
-    public void LoadKnowledgeField(){
-        RandomQuestionPicker(wissensfeld);
+    public void setFieldtypeInteraction(){
+        actualFieldType = interaktionsfeld;
+        questionTextField.text = "TEAM X: Macht euch bereit für eine Interaktionsaufgabe!";
+    }
+    
+    public void setFieldtypeKnowledge(){
+        actualFieldType = wissensfeld;
+        questionTextField.text = "TEAM X: Macht euch bereit für eine Wissensaufgabe!";
+    }
+    
+    public void setFieldtypePicture(){
+        actualFieldType = bildraten;
+        questionTextField.text = "TEAM X: Macht euch bereit für ein Bildrätsel!";
+    }
+    
+    public void setFieldtypeEstimation(){
+        actualFieldType = schaetzfrage;
+        questionTextField.text = "Alle Teams: Macht euch bereit für ein Schätzrätsel!";
+    }
+    
+    public void setFieldtypeAction(){
+        actualFieldType = actionfeld;
+        questionTextField.text = "TEAM X: Eure Figur Rückt 5 Felder weiter!";
     }
 
-    public void LoadActionField(){
-        RandomQuestionPicker(actionfeld);
+    public void LoadField(){
+        Debug.Log("Lade Aufgabentyp: " + actualFieldType);
+        RandomQuestionPicker(actualFieldType);
     }
-
-    public void LoadPictureField(){
-        RandomQuestionPicker(bildraten);
-    }
-
-    public void LoadEstimationField(){
-        RandomQuestionPicker(schaetzfrage);
-    }
-
-    public void LoadInteractionField(){
-        RandomQuestionPicker(interaktionsfeld);
-    }
-
-
 
     /*
-    Diese Methode prüft, welche Fragen im Spiel noch nicht dran kamen und bestimmt eine zufällige Frage zu der gegebenen Kategorie
+    Diese Methode prueft, welche Fragen im Spiel noch nicht dran kamen und bestimmt eine zufaellige Frage zu der gegebenen Kategorie
     @param: fieldtype = Fragekategorie
     */
     private void RandomQuestionPicker(int fieldType){
@@ -61,7 +71,7 @@ public class QuestionIterator : MonoBehaviour
         List<int> availableIndexes = new List<int>();
         int i = 0;
 
-        //Speicherung der Indexe von verfuegbaren Feldern (mit gewünschter Kategtorie) in der Liste availableIndexes
+        //Speicherung der Indexe von verfuegbaren Feldern (mit gewuenschter Kategtorie) in der Liste availableIndexes
         foreach (JsonGameEventField gameEventField in eventFieldList.jsonGameEventFieldList){
             if (gameEventField.state == verfuegbar && gameEventField.type == fieldType) {
                 availableIndexes.Add(i);
@@ -81,7 +91,7 @@ public class QuestionIterator : MonoBehaviour
 
         currentEventField = eventFieldList.jsonGameEventFieldList[randomQuestionIndex];
         eventFieldList.jsonGameEventFieldList[randomQuestionIndex].state = nichtVerfuegbar;
-        textField.text =  eventFieldList.jsonGameEventFieldList[randomQuestionIndex].content;
+        questionTextField.text =  eventFieldList.jsonGameEventFieldList[randomQuestionIndex].content;
         
         FindObjectOfType<CountdownManager>().SetupTimer(eventFieldList.jsonGameEventFieldList[randomQuestionIndex].time);
     }
@@ -91,7 +101,7 @@ public class QuestionIterator : MonoBehaviour
 
     /*
     Falls alle Fragen einer Kategorie bereits dran kamen, werden mit dieser Methode alle Fragen wieder auf unbenutzt gesetzt.
-    @return: neue Liste der möglichen Eventfelder für den Random Question Picker
+    @return: neue Liste der moeglichen Eventfelder fuer den Random Question Picker
     */
     private List<int> ResetStateAndGetAvailableFields(int fieldType){
             int i = 0;
@@ -111,7 +121,7 @@ public class QuestionIterator : MonoBehaviour
     }
 
     public void ShowAnswer(){
-        showAnswerObject.SetActive(true);
-        showAnswerField.text = "Lösung: " + currentEventField.solution;
+        //showAnswerObject.SetActive(true);
+        questionTextField.text = "Lösung: " + currentEventField.solution;
     }
 }
