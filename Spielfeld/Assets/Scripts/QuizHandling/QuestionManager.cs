@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Random = System.Random;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
-public class QuestionIterator : MonoBehaviour
+public class QuestionManager : MonoBehaviour
 {
     public TextMeshProUGUI questionTextField;
-    public TextMeshProUGUI showAnswerField;
-    public GameObject showAnswerObject;
 
     private JsonGameEventFieldList eventFieldList;
     private Random rnd = new Random();
+    private GameObject timerPauseButton;
 
     private JsonGameEventField currentEventField;
 
@@ -24,11 +24,13 @@ public class QuestionIterator : MonoBehaviour
     private static int schaetzfrage = 4;
     private static int actionfeld = 5;
 
+    private static int actualEventFieldIndex;
     private static int actualFieldType;
     private static int actualTeamIndex;
     private static int allTeams = 444;
 
     void Start(){
+        timerPauseButton = GameObject.Find("TimerPauseButton");
     }
 
     void Update(){
@@ -38,34 +40,39 @@ public class QuestionIterator : MonoBehaviour
         actualFieldType = interaktionsfeld;
         actualTeamIndex = teamIndex;
         questionTextField.text = "TEAM X: Macht euch bereit für eine Interaktionsaufgabe!";
+        RandomQuestionPicker(actualFieldType);
     }
     
     public void setFieldtypeKnowledge(int teamIndex){
         actualFieldType = wissensfeld;
         questionTextField.text = "TEAM X: Macht euch bereit für eine Wissensaufgabe!";
+        RandomQuestionPicker(actualFieldType);
     }
     
     public void setFieldtypePicture(int teamIndex){
         actualFieldType = bildraten;
         actualTeamIndex = teamIndex;
         questionTextField.text = "TEAM X: Macht euch bereit für ein Bildrätsel!";
+        RandomQuestionPicker(actualFieldType);
     }
     
     public void setFieldtypeEstimation(){
         actualFieldType = schaetzfrage;
         actualTeamIndex = allTeams;
         questionTextField.text = "Alle Teams: Macht euch bereit für ein Schätzrätsel!";
+        RandomQuestionPicker(actualFieldType);
     }
     
     public void setFieldtypeAction(int teamIndex){
         actualFieldType = actionfeld;
         actualTeamIndex = teamIndex;
         questionTextField.text = "TEAM X: Eure Figur Rückt 5 Felder weiter!";
+        RandomQuestionPicker(actualFieldType);
     }
 
     public void LoadField(){
-        Debug.Log("Lade Aufgabentyp: " + actualFieldType);
-        RandomQuestionPicker(actualFieldType);
+        //Debug.Log("Lade Aufgabentyp: " + actualFieldType);
+        questionTextField.text =  eventFieldList.jsonGameEventFieldList[actualEventFieldIndex].content;
     }
 
     /*
@@ -92,14 +99,13 @@ public class QuestionIterator : MonoBehaviour
             fieldCount = availableIndexes.Count;
         }
 
-        int randomQuestionIndex = availableIndexes[rnd.Next(fieldCount)];
-        //Debug.Log("index: " + randomQuestionIndex + ", state: " + eventFieldList.jsonGameEventFieldList[randomQuestionIndex].state + ", fieldcount: " + fieldCount + ", fieldtype: " +  fieldType);
+        actualEventFieldIndex = availableIndexes[rnd.Next(fieldCount)];
+        //Debug.Log("index: " + actualEventFieldIndex + ", state: " + eventFieldList.jsonGameEventFieldList[actualEventFieldIndex].state + ", fieldcount: " + fieldCount + ", fieldtype: " +  fieldType);
 
-        currentEventField = eventFieldList.jsonGameEventFieldList[randomQuestionIndex];
-        eventFieldList.jsonGameEventFieldList[randomQuestionIndex].state = nichtVerfuegbar;
-        questionTextField.text =  eventFieldList.jsonGameEventFieldList[randomQuestionIndex].content;
+        currentEventField = eventFieldList.jsonGameEventFieldList[actualEventFieldIndex];
+        eventFieldList.jsonGameEventFieldList[actualEventFieldIndex].state = nichtVerfuegbar;
         
-        FindObjectOfType<CountdownManager>().SetupTimer(eventFieldList.jsonGameEventFieldList[randomQuestionIndex].time);
+        FindObjectOfType<CountdownUiManager>().SetupTimer(eventFieldList.jsonGameEventFieldList[actualEventFieldIndex].time);
     }
 
 
@@ -130,12 +136,26 @@ public class QuestionIterator : MonoBehaviour
         questionTextField.text = "Lösung: " + currentEventField.solution;
     }
 
-    public void HandleCorrectAnswer(){
+    public void DistributePoints(){
         Debug.Log("Punkte Team vor korrekter Antwort: " + FindObjectOfType<TestTeams>().GetTeamList()[actualTeamIndex].GetScore());
-        int pointsToAdd = FindObjectOfType<CountdownManager>().GetTimePoints();
+        int pointsToAdd = FindObjectOfType<CountdownUiManager>().GetTimePointsAndReset();
 
         FindObjectOfType<TestTeams>().addOrTakePointsToScore(actualTeamIndex, pointsToAdd);
 
         Debug.Log("Punkte Team nach korrekter Antwort: " + FindObjectOfType<TestTeams>().GetTeamList()[actualTeamIndex].GetScore());
+    }
+
+    public bool IsPictureField(){
+        return (currentEventField != default(JsonGameEventField) && currentEventField.type == bildraten);
+    }
+
+    public Sprite LoadPictureFromDisk(){
+        //ToDo:
+        // Load Picture
+        // Resize Picture
+        // return Picture
+
+        Sprite newImage = FindObjectOfType<IMG2Sprite>().LoadNewSprite(currentEventField.file);
+        return newImage;
     }
 }

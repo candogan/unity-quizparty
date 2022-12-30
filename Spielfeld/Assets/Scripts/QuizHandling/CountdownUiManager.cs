@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
-public class CountdownManager : MonoBehaviour
+public class CountdownUiManager : MonoBehaviour
 {
     private Timer timer;
 
@@ -14,6 +15,9 @@ public class CountdownManager : MonoBehaviour
     public GameObject showAnswerButton;
     public GameObject rightAnswerButton;
     public GameObject wrongAnswerButton;
+    public GameObject pictureTask;
+
+    public Image pictureContent;
 
     private int eventFieldTime;
 
@@ -23,21 +27,36 @@ public class CountdownManager : MonoBehaviour
         timer = FindObjectOfType<Timer>();
     }
 
-    void update(){
+    void Update(){
         //Pruefen ob noch zeit vhd. 
         //falls abgelaufen: Moderator bekommt meldung und muss richtig/falsch angeben
+        if (timer.GetRemainingSeconds() < 1){
+            PauseTimer();
+            ShowAnswer();
+        }
+
+        if(FindObjectOfType<QuestionManager>().IsPictureField() && timer.isRunning()){
+            pictureContent.fillAmount += 1.0f / (float)eventFieldTime * Time.deltaTime;
+        }
     }
 
     public void StartTimer(){
         timer.StartTimer();
         timerStartButton.SetActive(false);
         timerPauseButton.SetActive(true);
+
+        if (FindObjectOfType<QuestionManager>().IsPictureField()){
+            timerPauseButton.transform.Translate(0,-365,0);
+            pictureTask.SetActive(true);
+            pictureContent.sprite = FindObjectOfType<QuestionManager>().LoadPictureFromDisk();
+            pictureContent.fillAmount = 0;
+        }
     }
 
     public void SetupTimer(int secs){
         eventFieldTime = secs;
         TimeSpan t = TimeSpan.FromSeconds(secs);
-        timer.textMeshProText.text = ConvertToDisplayFormat(t);
+        timer.textMeshProText.text = t.ToString(@"mm\:ss");
         timer.minutes = t.Minutes;
         timer.seconds = t.Seconds;
     }
@@ -48,6 +67,9 @@ public class CountdownManager : MonoBehaviour
         showAnswerButton.SetActive(true);
         timer.PauseTimer();
 
+        if (FindObjectOfType<QuestionManager>().IsPictureField()){
+            pictureTask.SetActive(false);
+        }
     }
 
     public void ContinueTimer(){
@@ -55,6 +77,10 @@ public class CountdownManager : MonoBehaviour
         timerContinueButton.SetActive(false);
         showAnswerButton.SetActive(false);
         timer.ContinueTimer();
+
+        if (FindObjectOfType<QuestionManager>().IsPictureField()){
+            pictureTask.SetActive(true);
+        }
     }
 
     public void ShowAnswer(){
@@ -62,12 +88,21 @@ public class CountdownManager : MonoBehaviour
         showAnswerButton.SetActive(false);
         rightAnswerButton.SetActive(true);
         wrongAnswerButton.SetActive(true);
-        FindObjectOfType<QuestionIterator>().ShowAnswer();
-        GetTimePoints();
+
+        FindObjectOfType<QuestionManager>().ShowAnswer();
+
+        if (FindObjectOfType<QuestionManager>().IsPictureField()){
+            timerPauseButton.transform.Translate(0,365,0);
+        }
     }
 
-    public int GetTimePoints(){
+    public int GetTimePointsAndReset(){
         double t = timer.GetRemainingSeconds() / eventFieldTime;
+
+        timer.StopTimer();
+        rightAnswerButton.SetActive(false);
+        wrongAnswerButton.SetActive(false);
+        timerStartButton.SetActive(true);
 
     //Todo: Punktelogik ueberarbeiten
         if (t > 0.75){
@@ -79,11 +114,7 @@ public class CountdownManager : MonoBehaviour
         } else {
             return 1;
         }
+        
     }
-
-    private string ConvertToDisplayFormat(TimeSpan t){
-        return t.ToString(@"mm\:ss");
-    }
-
 
 }

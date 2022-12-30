@@ -64,6 +64,10 @@ public class Timer : MonoBehaviour
     public double timeRemaining;
     
 
+    public bool isRunning(){
+        return timerRunning;
+    }
+
     private void Awake()
     {
         if(!standardText)

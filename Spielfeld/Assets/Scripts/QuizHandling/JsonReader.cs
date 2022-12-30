@@ -17,6 +17,7 @@ public class JsonGameEventField
     public int time;
     public string solution;
     public int state;
+    public string file;
 }
  
 [System.Serializable]
