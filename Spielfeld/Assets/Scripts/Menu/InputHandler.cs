@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 public class InputHandler : MonoBehaviour {
-    [SerializeField] InputField type;
-    [SerializeField] InputField question;
-    [SerializeField] InputField answer;
-    [SerializeField] InputField time;
+    [SerializeField] TMP_InputField question;
+    [SerializeField] TMP_InputField answer;
+    [SerializeField] TMP_InputField time;
     [SerializeField] string filename;
 
     private List<GameEventField> entries = new List<GameEventField> ();
@@ -17,8 +17,7 @@ public class InputHandler : MonoBehaviour {
     }
 
     public void AddFieldToList () {
-        entries.Add (new GameEventField (Convert.ToInt32(type.text), question.text, answer.text, Convert.ToInt32(time.text), 0));
-        type.text = "";
+        entries.Add (new GameEventField (2, question.text, answer.text, Convert.ToInt32(time.text), 0));
         question.text = "";
         answer.text = "";
         time.text = "";
