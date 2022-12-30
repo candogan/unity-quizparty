@@ -25,6 +25,8 @@ public class QuestionIterator : MonoBehaviour
     private static int actionfeld = 5;
 
     private static int actualFieldType;
+    private static int actualTeamIndex;
+    private static int allTeams = 444;
 
     void Start(){
     }
@@ -32,28 +34,32 @@ public class QuestionIterator : MonoBehaviour
     void Update(){
     }
 
-    public void setFieldtypeInteraction(){
+    public void setFieldtypeInteraction(int teamIndex){
         actualFieldType = interaktionsfeld;
+        actualTeamIndex = teamIndex;
         questionTextField.text = "TEAM X: Macht euch bereit für eine Interaktionsaufgabe!";
     }
     
-    public void setFieldtypeKnowledge(){
+    public void setFieldtypeKnowledge(int teamIndex){
         actualFieldType = wissensfeld;
         questionTextField.text = "TEAM X: Macht euch bereit für eine Wissensaufgabe!";
     }
     
-    public void setFieldtypePicture(){
+    public void setFieldtypePicture(int teamIndex){
         actualFieldType = bildraten;
+        actualTeamIndex = teamIndex;
         questionTextField.text = "TEAM X: Macht euch bereit für ein Bildrätsel!";
     }
     
     public void setFieldtypeEstimation(){
         actualFieldType = schaetzfrage;
+        actualTeamIndex = allTeams;
         questionTextField.text = "Alle Teams: Macht euch bereit für ein Schätzrätsel!";
     }
     
-    public void setFieldtypeAction(){
+    public void setFieldtypeAction(int teamIndex){
         actualFieldType = actionfeld;
+        actualTeamIndex = teamIndex;
         questionTextField.text = "TEAM X: Eure Figur Rückt 5 Felder weiter!";
     }
 
@@ -121,7 +127,15 @@ public class QuestionIterator : MonoBehaviour
     }
 
     public void ShowAnswer(){
-        //showAnswerObject.SetActive(true);
         questionTextField.text = "Lösung: " + currentEventField.solution;
+    }
+
+    public void HandleCorrectAnswer(){
+        Debug.Log("Punkte Team vor korrekter Antwort: " + FindObjectOfType<TestTeams>().GetTeamList()[actualTeamIndex].GetScore());
+        int pointsToAdd = FindObjectOfType<CountdownManager>().GetTimePoints();
+
+        FindObjectOfType<TestTeams>().addOrTakePointsToScore(actualTeamIndex, pointsToAdd);
+
+        Debug.Log("Punkte Team nach korrekter Antwort: " + FindObjectOfType<TestTeams>().GetTeamList()[actualTeamIndex].GetScore());
     }
 }

@@ -66,9 +66,19 @@ public class CountdownManager : MonoBehaviour
         GetTimePoints();
     }
 
-    public void GetTimePoints(){
-        Debug.Log("Verbleibend: " + timer.GetRemainingSeconds().ToString("#"));
-        Debug.Log("Fragezeit: " + eventFieldTime);
+    public int GetTimePoints(){
+        double t = timer.GetRemainingSeconds() / eventFieldTime;
+
+    //Todo: Punktelogik ueberarbeiten
+        if (t > 0.75){
+            return 4;
+        } else if (t > 0.5 && t < 0.75){
+            return 3;
+        } else if (t > 0.25 && t < 0.5){
+            return 2;
+        } else {
+            return 1;
+        }
     }
 
     private string ConvertToDisplayFormat(TimeSpan t){
