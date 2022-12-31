@@ -23,7 +23,7 @@
 			"id":3,
 			"type": 3,
 			"content": "Wer / Was ist auf dem Bild abgebildet?",
-			"time": 100,
+			"time": 20,
 			"solution": "Angela Merkel",
 			"state":0,
 			"file":"angela_merkel.jpg"
@@ -54,6 +54,15 @@
 			"solution": "Schloßpl. 1-3, 65183 Wiesbaden",
 			"state":0,
 			"file":""
+		},
+		{
+			"id":7,
+			"type": 3,
+			"content": "Wer / Was ist auf dem Bild abgebildet?",
+			"time": 15,
+			"solution": "hessischer Landtag",
+			"state":0,
+			"file":"Landtag.png"
 		}
 	]
 }

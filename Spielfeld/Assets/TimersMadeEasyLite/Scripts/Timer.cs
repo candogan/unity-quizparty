@@ -230,7 +230,7 @@ public class Timer : MonoBehaviour
     private void DialSliderDown()
     {
         float timeRangeClamped = Mathf.InverseLerp(ReturnTotalSeconds(), 0, (float)timeRemaining);
-        dialSlider.fillAmount = Mathf.Lerp(1, 0, timeRangeClamped);
+        dialSlider.fillAmount = Mathf.Lerp(1, 0 , timeRangeClamped);
     }
     private void DialSliderUp()
     {

@@ -150,12 +150,9 @@ public class QuestionManager : MonoBehaviour
     }
 
     public Sprite LoadPictureFromDisk(){
-        //ToDo:
-        // Load Picture
-        // Resize Picture
-        // return Picture
-
-        Sprite newImage = FindObjectOfType<IMG2Sprite>().LoadNewSprite(currentEventField.file);
+        string filePath = Application.dataPath + "/Resources/" + currentEventField.file;
+        Debug.Log("Lade: " + filePath);
+        Sprite newImage = IMG2Sprite.instance.LoadNewSprite(filePath);
         return newImage;
     }
 }

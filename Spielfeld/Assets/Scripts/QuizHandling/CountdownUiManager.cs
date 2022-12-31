@@ -36,7 +36,7 @@ public class CountdownUiManager : MonoBehaviour
         }
 
         if(FindObjectOfType<QuestionManager>().IsPictureField() && timer.isRunning()){
-            pictureContent.fillAmount += 1.0f / (float)eventFieldTime * Time.deltaTime;
+            pictureContent.fillAmount += 1.1f / (float)eventFieldTime * Time.deltaTime;
         }
     }
 
