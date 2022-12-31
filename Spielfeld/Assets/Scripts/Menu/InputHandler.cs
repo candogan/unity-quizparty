@@ -7,7 +7,6 @@ using TMPro;
 public class InputHandler : MonoBehaviour {
     [SerializeField] TMP_InputField question;
     [SerializeField] TMP_InputField answer;
-    [SerializeField] TMP_InputField time;
     [SerializeField] string filename;
 
     private List<GameEventField> entries = new List<GameEventField> ();
@@ -17,10 +16,10 @@ public class InputHandler : MonoBehaviour {
     }
 
     public void AddFieldToList () {
-        entries.Add (new GameEventField (2, question.text, answer.text, Convert.ToInt32(time.text), 0));
+        entries = FileHandler.ReadListFromJSON<GameEventField> (filename);
+        entries.Add (new GameEventField (2, question.text, answer.text, 60, 0));
         question.text = "";
         answer.text = "";
-        time.text = "";
         FileHandler.SaveToJSON<GameEventField> (entries, filename);
     }
 }

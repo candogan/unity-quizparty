@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+using System.IO;
 
 public class FragenHandler : MonoBehaviour
 {
@@ -23,10 +25,23 @@ public class FragenHandler : MonoBehaviour
                 g = Instantiate (fragenTemplate, transform);
                 g.transform.GetChild (0).GetComponent <TMP_Text> ().text = field.GetQuestion();
                 g.transform.GetChild (1).GetComponent <TMP_Text> ().text = field.GetAnswer();
+
+                g.transform.GetChild (2).GetComponent <Button>().onClick.AddListener (delegate() {
+                    DeleteItem(field, fragenKatalog);
+                });
+
+                g.SetActive(true);
             } 
         }
 
-        Destroy (fragenTemplate);  
+        //Destroy (fragenTemplate);  
+    }
+
+    void DeleteItem(GameEventField field, List<GameEventField> fragenKatalog ){
+        fragenKatalog.Remove(field);
+        File.Delete(FileHandler.GetPath("testjson.json"));
+        FileHandler.SaveToJSON<GameEventField> (fragenKatalog, "testjson.json");
+        RenewList(); 
     }
 
     public void RenewList(){
@@ -35,4 +50,5 @@ public class FragenHandler : MonoBehaviour
         }
         LoadList();
     }
+
 }
