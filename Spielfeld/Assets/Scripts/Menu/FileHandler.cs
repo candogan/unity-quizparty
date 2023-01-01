@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEditor;
 
 public static class FileHandler {
 
@@ -45,6 +46,15 @@ public static class FileHandler {
 
     public static string GetPath (string filename) {
         return Application.dataPath + "/Resources/" +  filename;
+    }
+
+    public static void DownloadOptions(){
+        String path = EditorUtility.SaveFilePanel("Save texture as PNG", "", "" + "", "");
+        
+    }
+    public static void UploadOptions(){
+        String path = EditorUtility.SaveFilePanel("Save texture as PNG", "", "" + "", "");
+        
     }
 
     private static void WriteFile (string path, string content) {
