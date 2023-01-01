@@ -28,7 +28,7 @@ public class FragenHandler : MonoBehaviour
                 g.transform.GetChild (0).GetComponent <TMP_Text> ().text = field.GetQuestion();
                 if (field.GetFieldType() == 1)
                 {
-                    g.transform.GetChild (1).GetComponent <TMP_Text> ().text = field.GetTime().ToString();
+                    g.transform.GetChild (1).GetComponent <TMP_Text> ().text = field.GetTime().ToString() + " Sekunden";
                 }
                 else 
                 {
