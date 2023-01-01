@@ -44,7 +44,7 @@ public static class FileHandler {
     }
 
     public static string GetPath (string filename) {
-        return Application.persistentDataPath + "/" + filename;
+        return Application.dataPath + "/Resources/" +  filename;
     }
 
     private static void WriteFile (string path, string content) {

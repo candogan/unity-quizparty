@@ -9,23 +9,31 @@ using System.IO;
 public class FragenHandler : MonoBehaviour
 {
 
+    public int gameEventType;
+
     void Start()
     {
-        LoadList();
+        LoadList(gameEventType);
     }
 
-    public void LoadList(){
+    public void LoadList(int type){
         GameObject fragenTemplate = transform.GetChild (0).gameObject;
         GameObject g;
 
         List<GameEventField> fragenKatalog = FileHandler.ReadListFromJSON<GameEventField> ("testjson.json");
  
         foreach (GameEventField field in fragenKatalog) {
-            if (field.GetFieldType() == 2){
+            if (field.GetFieldType() == type){
                 g = Instantiate (fragenTemplate, transform);
                 g.transform.GetChild (0).GetComponent <TMP_Text> ().text = field.GetQuestion();
+                if (field.GetFieldType() == 1)
+                {
+                    g.transform.GetChild (1).GetComponent <TMP_Text> ().text = field.GetTime().ToString();
+                }
+                else 
+                {
                 g.transform.GetChild (1).GetComponent <TMP_Text> ().text = field.GetAnswer();
-
+                }
                 g.transform.GetChild (2).GetComponent <Button>().onClick.AddListener (delegate() {
                     DeleteItem(field, fragenKatalog);
                 });
@@ -48,7 +56,7 @@ public class FragenHandler : MonoBehaviour
         for (int i = 1; i < transform.childCount; i++){
             Destroy (transform.GetChild (i).gameObject);
         }
-        LoadList();
+        LoadList(gameEventType);
     }
 
 }

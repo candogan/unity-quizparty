@@ -15,9 +15,15 @@ public class InputHandler : MonoBehaviour {
         entries = FileHandler.ReadListFromJSON<GameEventField> (filename);
     }
 
-    public void AddFieldToList () {
+    public void AddFieldToList (int type) {
         entries = FileHandler.ReadListFromJSON<GameEventField> (filename);
-        entries.Add (new GameEventField (2, question.text, answer.text, 60, 0));
+        if (type == 1)
+        {
+            entries.Add (new GameEventField (type, question.text, "", Convert.ToInt32(answer.text), 0));
+        }
+        else{
+            entries.Add (new GameEventField (type, question.text, answer.text, 60, 0));
+        }
         question.text = "";
         answer.text = "";
         FileHandler.SaveToJSON<GameEventField> (entries, filename);
