@@ -33,10 +33,15 @@ public class DownUpManager : MonoBehaviour
 
 			byte[] bytes = FileBrowserHelpers.ReadBytesFromFile( FileBrowser.Result[0] );
 
-			string destinationPath = Application.dataPath + "/Resources/" +  "TestOrdner.zip";
-			FileBrowserHelpers.CopyFile( FileBrowser.Result[0], destinationPath );
+			string destinationPath = Application.dataPath + "/Resources/" +  "RessourceOrdner.zip";
+
 			DeleteResources();
+
+			FileBrowserHelpers.CopyFile( FileBrowser.Result[0], destinationPath );
+			
 			UnpackResources();
+
+			File.Delete(Application.dataPath + "/Resources/" +  "RessourceOrdner.zip");
 		}
 	}
 
@@ -52,7 +57,7 @@ public class DownUpManager : MonoBehaviour
 
 	public void UnpackResources()
 	{
-		ZipFile.ExtractToDirectory(Application.dataPath + "/Resources/" +  "TestOrdner.zip", Application.dataPath + "/Resources/");
+		ZipFile.ExtractToDirectory(Application.dataPath + "/Resources/" +  "RessourceOrdner.zip", Application.dataPath + "/Resources/");
 	}
 
 	public void DeleteResources()
