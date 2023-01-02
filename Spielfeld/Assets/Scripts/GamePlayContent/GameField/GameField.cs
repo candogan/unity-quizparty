@@ -21,7 +21,7 @@ public class GameField {
     }
 
     public void setPosition(Vector3 newPosition){
-        posX = newPosition;
+        position = newPosition;
     }
 
     public void setNextFieldMove(string newNextFieldMove){
