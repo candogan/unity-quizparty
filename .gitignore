@@ -43,6 +43,9 @@ ExportedObj/
 *.opendb
 *.VC.db
 
+# Usersettings dwlt File
+Spielfeld/UserSettings/Layouts/default-2021.dwlt
+
 # Unity3D generated meta files
 *.pidb.meta
 *.pdb.meta
