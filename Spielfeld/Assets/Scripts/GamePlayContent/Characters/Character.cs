@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    Animator character_Animator;
+
     Vector3 initPosition;
     Vector3 currentLocation;
 
     // Start is called before the first frame update
     void Start()
     {
+        character_Animator = gameObject.GetComponent<Animator>();
+
         initPosition = transform.position;
     }
 
@@ -18,7 +22,7 @@ public class Character : MonoBehaviour
     {
         currentLocation = transform.position;
         if (currentLocation.x >= initPosition.x - 7) {
-                Animator.SetTrigger();
+                character_Animator.SetTrigger("Run In Place");
                 Vector3 destiny = new Vector3(0, 0, 2) * Time.deltaTime;
                 transform.Translate(destiny);
         } else {
