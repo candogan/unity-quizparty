@@ -14,25 +14,29 @@ public class BildFragenHandler : MonoBehaviour
 
     [SerializeField] TMP_InputField answer;
     [SerializeField] string filename;
-    //GameObject fragenTemplate;
+    public GameObject uploadButton;
+    public GameObject addButton;
+
 
     private List<GameEventField> entries = new List<GameEventField> ();
 
     private void Start () {
         entries = FileHandler.ReadListFromJSON<GameEventField> (filename);
-        //GameObject fragenTemplate = transform.GetChild (1).gameObject;
     }
 
     private void Update (){
         if (answer.text == ""){
-            //GetComponent <Button>().interactable = false;
+            uploadButton.GetComponent <Button>().interactable = false;
+            addButton.GetComponent <Button>().interactable = false;
+        } else {
+            uploadButton.GetComponent <Button>().interactable = true;
         }
     }
 
-    public void AddFieldToList (string bildPath) {
+    public void AddFieldToList () {
         entries = FileHandler.ReadListFromJSON<GameEventField> (filename);
    
-        entries.Add (new GameEventField (3, bildPath, answer.text, 60, 0));
+        entries.Add (new GameEventField (3, Application.dataPath + "/Resources/" + answer.text, answer.text, 60, 0));
        
         answer.text = "";
         FileHandler.SaveToJSON<GameEventField> (entries, filename);
@@ -61,11 +65,13 @@ public class BildFragenHandler : MonoBehaviour
 
 			byte[] bytes = FileBrowserHelpers.ReadBytesFromFile( FileBrowser.Result[0] );
 
-			string destinationPath = Application.dataPath + "/Resources/test.png";
+			string destinationPath = Application.dataPath + "/Resources/" + answer.text + ".png";
 
 			FileBrowserHelpers.CopyFile( FileBrowser.Result[0], destinationPath );
 			
             UnityEngine.Debug.Log(FileBrowser.Result[0]);
+
+            addButton.GetComponent <Button>().interactable = true;
 
 		}
 	}
