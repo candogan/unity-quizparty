@@ -136,6 +136,14 @@ public class QuestionManager : MonoBehaviour
         questionTextField.text = "Lösung: " + currentEventField.solution;
     }
 
+    public string GetAnswer(){
+        return currentEventField.solution;
+    }
+
+    public void EmptyQuestiontext(){
+        questionTextField.text = "";
+    }
+
     public void DistributePoints(){
         Debug.Log("Punkte Team vor korrekter Antwort: " + FindObjectOfType<TestTeams>().GetTeamList()[actualTeamIndex].GetScore());
         int pointsToAdd = FindObjectOfType<PanelUiManager>().GetTimePointsAndReset();

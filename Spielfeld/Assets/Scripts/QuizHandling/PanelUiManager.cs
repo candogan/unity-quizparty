@@ -90,12 +90,12 @@ public class PanelUiManager : MonoBehaviour
         
         if(FindObjectOfType<QuestionManager>().IsEstimationField()){
             estimationPopup.SetActive(true);
+            FindObjectOfType<QuestionManager>().EmptyQuestiontext();
         } else {
             rightAnswerButton.SetActive(true);
             wrongAnswerButton.SetActive(true);
+            FindObjectOfType<QuestionManager>().ShowAnswer();
         }
-        
-        FindObjectOfType<QuestionManager>().ShowAnswer();
 
         //versetzen des Pause Buttons falls mehr Platz fuer ein Bildraetsel benoetigt wird
         if (FindObjectOfType<QuestionManager>().IsPictureField()){
