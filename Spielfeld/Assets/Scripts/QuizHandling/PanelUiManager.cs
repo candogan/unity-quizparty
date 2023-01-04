@@ -17,6 +17,7 @@ public class PanelUiManager : MonoBehaviour
     public GameObject wrongAnswerButton;
     public GameObject pictureTask;
     public GameObject estimationPopup;
+    public GameObject estimationWinnersPopup;
 
     public Image pictureContent;
 
@@ -101,6 +102,12 @@ public class PanelUiManager : MonoBehaviour
         if (FindObjectOfType<QuestionManager>().IsPictureField()){
             timerPauseButton.transform.Translate(0,365,0);
         }
+    }
+
+    public void DisableEstimationPopup(){
+        estimationPopup.SetActive(false);
+        FindObjectOfType<QuestionManager>().ShowAnswer();
+        estimationWinnersPopup.SetActive(true);
     }
 
     public int GetTimePointsAndReset(){

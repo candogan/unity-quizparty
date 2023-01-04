@@ -10,6 +10,8 @@ public class EstimationCheck : MonoBehaviour
 {
     public GameObject estimationPopup;
     public GameObject inputFieldSample;
+    public GameObject winnerFieldSample;
+    public GameObject estimationWinnersPopup;
 
     private List<Team> teamList = new List<Team>();
     private List<GameObject> InputFields = new List<GameObject>();
@@ -58,9 +60,31 @@ public class EstimationCheck : MonoBehaviour
         
     }
 
-    private bool Validate(){
-        Debug.Log("--------Start Validation--------");
+    public void CheckEstimations(){
+        if(Validate()){
+            Debug.Log("-------- Eingaben valide --------");
+            teamList = FindObjectOfType<TestTeams>().GetTeamList();
+            List<int> winnerTeams = IdentifyEstimationWinner();
+            int yPosInputField = -190;
 
+            foreach (int winner in winnerTeams){
+                FindObjectOfType<TestTeams>().addOrTakePointsToScore(winner, 2);
+
+                GameObject newWinnerField = Instantiate(winnerFieldSample, new Vector3(250 , yPosInputField , 0), Quaternion.identity);
+                newWinnerField.transform.SetParent(estimationWinnersPopup.transform, false);
+
+                newWinnerField.transform.GetChild(0).GetComponent<Image>().color = teamList[winner].GetColor();
+                newWinnerField.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Team " + winner + ": +2 Punkte";
+
+                yPosInputField -= 85;
+            }
+
+            FindObjectOfType<PanelUiManager>().DisableEstimationPopup();
+        }
+    
+    }
+
+    private bool Validate(){
         bool isValid = true;
         
         foreach (GameObject thisInputfield in InputFields){
@@ -82,21 +106,10 @@ public class EstimationCheck : MonoBehaviour
             }
         
         }
-
+        Debug.Log("Validierungsergebnis: " + isValid);
         return isValid;
     }
 
-    public void TestValidate(){
-        if(Validate()){
-            Debug.Log("-------- Eingaben valide --------");
-            List<int> winnerTeams = IdentifyEstimationWinner();
-            foreach (int winner in winnerTeams){
-                Debug.Log("Team " + winner + " ist ein Sieger");
-            }
-        } else {
-            Debug.Log("Schecht");
-        }
-    }
 
     private List<int> IdentifyEstimationWinner(){
         List<int> differencesToSolution = new List<int>();
@@ -109,11 +122,9 @@ public class EstimationCheck : MonoBehaviour
             GameObject newInputText = newInputTextArea.transform.GetChild(2).gameObject;
             string inputValue = newInputText.GetComponent<TextMeshProUGUI>().text.Replace("\u200B", ""); 
             int.TryParse(inputValue, out int estimation);
-            //estimatetValues.Add(estimation);
 
             if(estimation == solution){
                 teamsWithRightAnswer.Add(i);
-                Debug.Log("Richte Antwort von Team: " + i);
             } else if (estimation < solution){
                 differencesToSolution.Add(solution-estimation);
             } else if (estimation > solution){
