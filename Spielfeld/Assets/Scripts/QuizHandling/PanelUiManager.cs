@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CountdownUiManager : MonoBehaviour
+public class PanelUiManager : MonoBehaviour
 {
     private Timer timer;
 
@@ -16,6 +16,7 @@ public class CountdownUiManager : MonoBehaviour
     public GameObject rightAnswerButton;
     public GameObject wrongAnswerButton;
     public GameObject pictureTask;
+    public GameObject estimationPopup;
 
     public Image pictureContent;
 
@@ -86,11 +87,17 @@ public class CountdownUiManager : MonoBehaviour
     public void ShowAnswer(){
         timerContinueButton.SetActive(false);
         showAnswerButton.SetActive(false);
-        rightAnswerButton.SetActive(true);
-        wrongAnswerButton.SetActive(true);
-
+        
+        if(FindObjectOfType<QuestionManager>().IsEstimationField()){
+            estimationPopup.SetActive(true);
+        } else {
+            rightAnswerButton.SetActive(true);
+            wrongAnswerButton.SetActive(true);
+        }
+        
         FindObjectOfType<QuestionManager>().ShowAnswer();
 
+        //versetzen des Pause Buttons falls mehr Platz fuer ein Bildraetsel benoetigt wird
         if (FindObjectOfType<QuestionManager>().IsPictureField()){
             timerPauseButton.transform.Translate(0,365,0);
         }

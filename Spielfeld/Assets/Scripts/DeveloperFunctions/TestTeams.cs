@@ -18,6 +18,9 @@ public class TestTeams : MonoBehaviour
         Teamlist.Add(blue);
         Teamlist.Add(yellow);
         Teamlist.Add(green);
+
+        Debug.Log("test");
+        FindObjectOfType<Estimation_Check>().InitializeEstimationPopup();
     }
 
     // Update is called once per frame

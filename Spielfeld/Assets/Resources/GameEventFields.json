@@ -63,6 +63,15 @@
 			"solution": "hessischer Landtag",
 			"state":0,
 			"file":"Landtag.png"
+		},
+		{
+			"id":8,
+			"type": 4,
+			"content": "Wie hoch ist der Landtag in Metern?",
+			"time": 15,
+			"solution": "40 Meter",
+			"state":0,
+			"file":"Landtag.png"
 		}
 	]
 }

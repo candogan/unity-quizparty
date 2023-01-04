@@ -105,7 +105,7 @@ public class QuestionManager : MonoBehaviour
         currentEventField = eventFieldList.jsonGameEventFieldList[actualEventFieldIndex];
         eventFieldList.jsonGameEventFieldList[actualEventFieldIndex].state = nichtVerfuegbar;
         
-        FindObjectOfType<CountdownUiManager>().SetupTimer(eventFieldList.jsonGameEventFieldList[actualEventFieldIndex].time);
+        FindObjectOfType<PanelUiManager>().SetupTimer(eventFieldList.jsonGameEventFieldList[actualEventFieldIndex].time);
     }
 
 
@@ -138,7 +138,7 @@ public class QuestionManager : MonoBehaviour
 
     public void DistributePoints(){
         Debug.Log("Punkte Team vor korrekter Antwort: " + FindObjectOfType<TestTeams>().GetTeamList()[actualTeamIndex].GetScore());
-        int pointsToAdd = FindObjectOfType<CountdownUiManager>().GetTimePointsAndReset();
+        int pointsToAdd = FindObjectOfType<PanelUiManager>().GetTimePointsAndReset();
 
         FindObjectOfType<TestTeams>().addOrTakePointsToScore(actualTeamIndex, pointsToAdd);
 
@@ -147,6 +147,10 @@ public class QuestionManager : MonoBehaviour
 
     public bool IsPictureField(){
         return (currentEventField != default(JsonGameEventField) && currentEventField.type == bildraten);
+    }
+
+    public bool IsEstimationField(){
+        return (currentEventField != default(JsonGameEventField) && currentEventField.type == schaetzfrage);
     }
 
     public Sprite LoadPictureFromDisk(){

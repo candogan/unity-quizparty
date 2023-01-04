@@ -22,7 +22,8 @@ public class Character : MonoBehaviour
     {
         currentLocation = transform.position;
         if (currentLocation.x >= initPosition.x - 7) {
-                character_Animator.SetTrigger("Run In Place");
+                //character_Animator.SetTrigger("Run In Place");
+                //Temp Fix um Exception zu umgehen
                 Vector3 destiny = new Vector3(0, 0, 2) * Time.deltaTime;
                 transform.Translate(destiny);
         } else {
