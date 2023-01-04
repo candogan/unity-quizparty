@@ -36,7 +36,7 @@ public class BildFragenHandler : MonoBehaviour
     public void AddFieldToList () {
         entries = FileHandler.ReadListFromJSON<GameEventField> (filename);
    
-        entries.Add (new GameEventField (3, Application.dataPath + "/Resources/" + answer.text, answer.text, 60, 0));
+        entries.Add (new GameEventField (3, Application.dataPath + "/Resources/" + answer.text + ".png", answer.text, 60, 0));
        
         answer.text = "";
         FileHandler.SaveToJSON<GameEventField> (entries, filename);

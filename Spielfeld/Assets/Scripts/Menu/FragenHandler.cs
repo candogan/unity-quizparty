@@ -25,7 +25,12 @@ public class FragenHandler : MonoBehaviour
         foreach (GameEventField field in fragenKatalog) {
             if (field.GetFieldType() == type){
                 g = Instantiate (fragenTemplate, transform);
-                g.transform.GetChild (0).GetComponent <TMP_Text> ().text = field.GetQuestion();
+                if (field.GetFieldType() == 3){
+                    g.transform.GetChild (0).GetComponent <Image> ().sprite = IMG2Sprite.instance.LoadNewSprite(field.GetQuestion());
+                } else {
+                    g.transform.GetChild (0).GetComponent <TMP_Text> ().text = field.GetQuestion();
+                }
+                
                 if (field.GetFieldType() == 1)
                 {
                     g.transform.GetChild (1).GetComponent <TMP_Text> ().text = field.GetTime().ToString() + " Sekunden";
