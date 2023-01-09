@@ -8004,7 +8004,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 300}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1300, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &960543378
 GameObject:
@@ -17257,6 +17257,7 @@ GameObject:
   - component: {fileID: 1938429451}
   - component: {fileID: 1938429450}
   - component: {fileID: 1938429452}
+  - component: {fileID: 1938429453}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -17304,6 +17305,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f248e893bc055c544a7b4ebe1b333fdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1938429453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938429449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d63657508831b84fbc426f22b4d27ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1938550089
