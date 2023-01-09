@@ -54,7 +54,7 @@ public class PanelUiManager : MonoBehaviour
         timerPauseButton.SetActive(false);
         timerStartButton.SetActive(true);
         timer.StopTimer();
-        timerPauseButton.transform.Translate(0,365,0);
+        timerPauseButton.transform.localPosition = new Vector3(0,0,0);
         quizText.GetComponent<TextMeshProUGUI>().text = "Lade neues Rätsel...";
     }
 
