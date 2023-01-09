@@ -26,7 +26,9 @@ public class FragenHandler : MonoBehaviour
             if (field.GetFieldType() == type){
                 g = Instantiate (fragenTemplate, transform);
                 if (field.GetFieldType() == 3){
-                    g.transform.GetChild (0).GetComponent <Image> ().sprite = IMG2Sprite.instance.LoadNewSprite(field.GetQuestion());
+                    string filePath = Application.dataPath + "/Resources/" + field.GetQuestion();
+                    Sprite newImage = IMG2Sprite.instance.LoadNewSprite(filePath);
+                    g.transform.GetChild (0).GetComponent <Image> ().sprite = newImage;
                 } else {
                     g.transform.GetChild (0).GetComponent <TMP_Text> ().text = field.GetQuestion();
                 }
