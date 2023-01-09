@@ -18,6 +18,7 @@ public class PanelUiManager : MonoBehaviour
     public GameObject pictureTask;
     public GameObject estimationPopup;
     public GameObject estimationWinnersPopup;
+    public GameObject quizText;
 
     public Image pictureContent;
 
@@ -41,6 +42,22 @@ public class PanelUiManager : MonoBehaviour
             pictureContent.fillAmount += 1.1f / (float)eventFieldTime * Time.deltaTime;
         }
     }
+
+    public void Reset(){
+        estimationWinnersPopup.SetActive(false);
+        estimationPopup.SetActive(false);
+        pictureTask.SetActive(false);
+        wrongAnswerButton.SetActive(false);
+        rightAnswerButton.SetActive(false);
+        showAnswerButton.SetActive(false);
+        timerContinueButton.SetActive(false);
+        timerPauseButton.SetActive(false);
+        timerStartButton.SetActive(true);
+        timer.StopTimer();
+        timerPauseButton.transform.Translate(0,365,0);
+        quizText.GetComponent<TextMeshProUGUI>().text = "Lade neues Rätsel...";
+    }
+
 
     public void StartTimer(){
         timer.StartTimer();
