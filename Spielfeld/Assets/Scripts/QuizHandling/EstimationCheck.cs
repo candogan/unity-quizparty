@@ -10,11 +10,13 @@ public class EstimationCheck : MonoBehaviour
 {
     public GameObject estimationPopup;
     public GameObject inputFieldSample;
-    public GameObject winnerFieldSample;
-    public GameObject estimationWinnersPopup;
+    public GameObject checkEstimationButton;
 
     private List<Team> teamList = new List<Team>();
     private List<GameObject> InputFields = new List<GameObject>();
+    private GameObject winnersPopup;
+    private int estimationFieldHeight = 50;
+
     Regex regexNumbers = new Regex(@"^\d+$");
     // Start is called before the first frame update
     void Start()
@@ -29,10 +31,25 @@ public class EstimationCheck : MonoBehaviour
 
     public void InitializeEstimationPopup()
     {
+        teamList = FindObjectOfType<TestTeams>().GetTeamList();
+
+        RectTransform popupRectTrans = estimationPopup.GetComponent<RectTransform>();
+        Vector2 popupSize = popupRectTrans.sizeDelta;
+
+        Vector3 checkEstimationButtonPosition = checkEstimationButton.transform.position;
+        
+
+        foreach (Team thisTeam in teamList){
+            popupSize.y += estimationFieldHeight;
+            popupRectTrans.sizeDelta = popupSize;
+
+            checkEstimationButtonPosition += new Vector3(0, -22.5f, 0);
+            checkEstimationButton.transform.position = checkEstimationButtonPosition; 
+        }
+
         if(InputFields.Count < 1 && FindObjectOfType<TestTeams>().GetTeamList().Count > 0) {
 
             Debug.Log("-------- Start Initialization Estimation-Popup --------");
-            teamList = FindObjectOfType<TestTeams>().GetTeamList();
             GameObject newInputfield;
             GameObject newInputTextArea;
             GameObject newInputDefaultText;
@@ -60,25 +77,21 @@ public class EstimationCheck : MonoBehaviour
         
     }
 
+    private void ResetInputFields(){
+        foreach(GameObject inputField in InputFields){
+            inputField.GetComponent<TMP_InputField>().text = "";
+        }
+    }
+
+
     public void CheckEstimations(){
         if(Validate()){
             Debug.Log("-------- Eingaben valide --------");
-            teamList = FindObjectOfType<TestTeams>().GetTeamList();
             List<int> winnerTeams = IdentifyEstimationWinner();
-            int yPosInputField = -190;
+            ResetInputFields();
 
-            foreach (int winner in winnerTeams){
-                FindObjectOfType<TestTeams>().addOrTakePointsToScore(winner, 2);
-
-                GameObject newWinnerField = Instantiate(winnerFieldSample, new Vector3(250 , yPosInputField , 0), Quaternion.identity);
-                newWinnerField.transform.SetParent(estimationWinnersPopup.transform, false);
-
-                newWinnerField.transform.GetChild(0).GetComponent<Image>().color = teamList[winner].GetColor();
-                newWinnerField.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Team " + winner + ": +2 Punkte";
-
-                yPosInputField -= 85;
-            }
-
+            FindObjectOfType<QuestionManager>().DistributePoints(winnerTeams, 2);
+            FindObjectOfType<PanelUiManager>().ShowDistributedPoints(winnerTeams, 2);
             FindObjectOfType<PanelUiManager>().DisableEstimationPopup();
         }
     
@@ -88,12 +101,10 @@ public class EstimationCheck : MonoBehaviour
         bool isValid = true;
         
         foreach (GameObject thisInputfield in InputFields){
-            GameObject newInputTextArea = thisInputfield.transform.GetChild(2).gameObject;
-            GameObject newInputText = newInputTextArea.transform.GetChild(2).gameObject;
             GameObject thisErrorIcon = thisInputfield.transform.GetChild(3).gameObject;
             GameObject thisErrorBorder = thisInputfield.transform.GetChild(0).gameObject;
 
-            string inputValue = newInputText.GetComponent<TextMeshProUGUI>().text.Replace("\u200B", "");
+            string inputValue = thisInputfield.GetComponent<TMP_InputField>().text.Replace("\u200B", "");
                 
             if(!int.TryParse(inputValue, out int result) || inputValue.Length < 1)
             {
@@ -106,7 +117,6 @@ public class EstimationCheck : MonoBehaviour
             }
         
         }
-        Debug.Log("Validierungsergebnis: " + isValid);
         return isValid;
     }
 
@@ -118,9 +128,7 @@ public class EstimationCheck : MonoBehaviour
         int i = 0;
 
         foreach (GameObject thisInputfield in InputFields){
-            GameObject newInputTextArea = thisInputfield.transform.GetChild(2).gameObject;
-            GameObject newInputText = newInputTextArea.transform.GetChild(2).gameObject;
-            string inputValue = newInputText.GetComponent<TextMeshProUGUI>().text.Replace("\u200B", ""); 
+            string inputValue = thisInputfield.GetComponent<TMP_InputField>().text.Replace("\u200B", "");
             int.TryParse(inputValue, out int estimation);
 
             if(estimation == solution){
@@ -147,6 +155,7 @@ public class EstimationCheck : MonoBehaviour
         List<int> bestEstimations = new List<int>();
 
         foreach (int thisDifference in differencesToSolution){
+            Debug.Log(i);
             if (thisDifference == smallestDiffernce){
                 bestEstimations.Add(i);
             }
@@ -155,5 +164,4 @@ public class EstimationCheck : MonoBehaviour
 
         return bestEstimations;
     }
-
 }

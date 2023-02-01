@@ -36,6 +36,10 @@ public class QuestionManager : MonoBehaviour
     void Update(){
     }
 
+    public int GetActualTeamIndex(){
+        return actualTeamIndex;
+    }
+
     public void setFieldtypeInteraction(int teamIndex){
         actualFieldType = interaktionsfeld;
         actualTeamIndex = teamIndex;
@@ -132,7 +136,7 @@ public class QuestionManager : MonoBehaviour
         return availableIndexes;
     }
 
-    public void ShowAnswer(){
+    public void ShowCorrectAnswer(){
         questionTextField.text = "Lösung: " + currentEventField.solution;
     }
 
@@ -144,13 +148,12 @@ public class QuestionManager : MonoBehaviour
         questionTextField.text = "";
     }
 
-    public void DistributePoints(){
-        Debug.Log("Punkte Team vor korrekter Antwort: " + FindObjectOfType<TestTeams>().GetTeamList()[actualTeamIndex].GetScore());
-        int pointsToAdd = FindObjectOfType<PanelUiManager>().GetTimePointsAndReset();
-
-        FindObjectOfType<TestTeams>().addOrTakePointsToScore(actualTeamIndex, pointsToAdd);
-
-        Debug.Log("Punkte Team nach korrekter Antwort: " + FindObjectOfType<TestTeams>().GetTeamList()[actualTeamIndex].GetScore());
+    public void DistributePoints(List<int> winnerTeams, int pointsToAdd){
+        foreach (int winner in winnerTeams){
+            //Debug.Log("Punkte Team " + winner +" vor korrekter Antwort: " + FindObjectOfType<TestTeams>().GetTeamList()[winner].GetScore());
+            FindObjectOfType<TestTeams>().addOrTakePointsToScore(winner, pointsToAdd);
+            //Debug.Log("Punkte Team " + winner +" nach korrekter Antwort: " + FindObjectOfType<TestTeams>().GetTeamList()[winner].GetScore());
+        }
     }
 
     public bool IsPictureField(){

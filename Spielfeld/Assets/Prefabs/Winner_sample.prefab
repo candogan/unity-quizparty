@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 4994125211093975815}
   - component: {fileID: 4994125211093975814}
   m_Layer: 0
-  m_Name: EstimationWinner_sample
+  m_Name: Winner_sample
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

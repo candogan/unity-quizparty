@@ -7,8 +7,7 @@ using TMPro;
 
 public class PanelUiManager : MonoBehaviour
 {
-    private Timer timer;
-
+    public GameObject questionPanel;
     public GameObject timerStartButton;
     public GameObject timerPauseButton;
     public GameObject timerContinueButton;
@@ -17,25 +16,30 @@ public class PanelUiManager : MonoBehaviour
     public GameObject wrongAnswerButton;
     public GameObject pictureTask;
     public GameObject estimationPopup;
-    public GameObject estimationWinnersPopup;
+    public GameObject winnerPopupSample;
+    public GameObject winnerFieldSample;
     public GameObject quizText;
 
     public Image pictureContent;
 
+    private Timer timer;
     private int eventFieldTime;
+    private GameObject winnersPopup;
+    private List<Team> teamList = new List<Team>();
 
     // Start is called before the first frame update
     void Start()
     {     
         timer = FindObjectOfType<Timer>();
+        teamList = FindObjectOfType<TestTeams>().GetTeamList();
     }
 
     void Update(){
         //Pruefen ob noch zeit vhd. 
         //falls abgelaufen: Moderator bekommt meldung und muss richtig/falsch angeben
         if (timer.GetRemainingSeconds() < 1){
-            PauseTimer();
-            ShowAnswer();
+            timer.StopTimer();
+            WaitForAnswer();
         }
 
         if(FindObjectOfType<QuestionManager>().IsPictureField() && timer.isRunning()){
@@ -44,7 +48,7 @@ public class PanelUiManager : MonoBehaviour
     }
 
     public void Reset(){
-        estimationWinnersPopup.SetActive(false);
+        Destroy(winnersPopup);
         estimationPopup.SetActive(false);
         pictureTask.SetActive(false);
         wrongAnswerButton.SetActive(false);
@@ -102,7 +106,7 @@ public class PanelUiManager : MonoBehaviour
         }
     }
 
-    public void ShowAnswer(){
+    public void WaitForAnswer(){
         timerContinueButton.SetActive(false);
         showAnswerButton.SetActive(false);
         
@@ -112,7 +116,7 @@ public class PanelUiManager : MonoBehaviour
         } else {
             rightAnswerButton.SetActive(true);
             wrongAnswerButton.SetActive(true);
-            FindObjectOfType<QuestionManager>().ShowAnswer();
+            FindObjectOfType<QuestionManager>().ShowCorrectAnswer();
         }
 
         //versetzen des Pause Buttons falls mehr Platz fuer ein Bildraetsel benoetigt wird
@@ -123,17 +127,28 @@ public class PanelUiManager : MonoBehaviour
 
     public void DisableEstimationPopup(){
         estimationPopup.SetActive(false);
-        FindObjectOfType<QuestionManager>().ShowAnswer();
-        estimationWinnersPopup.SetActive(true);
+        FindObjectOfType<QuestionManager>().ShowCorrectAnswer();
+        winnersPopup.SetActive(true);
     }
 
-    public int GetTimePointsAndReset(){
+    public void HandleCorrectAnswer(){
+        List<int> winnerTeams = new List<int>();
+        int winner = FindObjectOfType<QuestionManager>().GetActualTeamIndex();
+        winnerTeams.Add(winner);
+        FindObjectOfType<QuestionManager>().DistributePoints(winnerTeams, GetTimePointsAndRemoveAnswerButtons());
+        ShowDistributedPoints(winnerTeams, GetTimePointsAndRemoveAnswerButtons());
+    }
+
+    public void HandleWrongAnswer(){
+
+    }
+
+    private int GetTimePointsAndRemoveAnswerButtons(){
         double t = timer.GetRemainingSeconds() / eventFieldTime;
 
         timer.StopTimer();
         rightAnswerButton.SetActive(false);
         wrongAnswerButton.SetActive(false);
-        timerStartButton.SetActive(true);
 
     //Todo: Punktelogik ueberarbeiten
         if (t > 0.75){
@@ -146,6 +161,29 @@ public class PanelUiManager : MonoBehaviour
             return 1;
         }
         
+    }
+
+    public void ShowDistributedPoints(List<int> winnerTeams, int distributedPoints){
+        int yPosInputField = -190;
+
+        winnersPopup = Instantiate(winnerPopupSample, new Vector3(0 , 0 , 0), Quaternion.identity);
+        winnersPopup.transform.SetParent(questionPanel.transform, false);
+        RectTransform popupRectTrans = GameObject.Find("WinnersPopup(Clone)").GetComponent<RectTransform>();
+        Vector2 popupSize = popupRectTrans.sizeDelta;
+
+        foreach (int winner in winnerTeams){
+            popupSize.y += 85;
+            popupRectTrans.sizeDelta = popupSize;
+            int winnerReadable = winner + 1; 
+            
+            GameObject newWinnerField = Instantiate(winnerFieldSample, new Vector3(250 , yPosInputField , 0), Quaternion.identity);
+            newWinnerField.transform.SetParent(winnersPopup.transform, false);
+
+            newWinnerField.transform.GetChild(0).GetComponent<Image>().color = teamList[winner].GetColor();
+            newWinnerField.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Team " + winnerReadable + ": +"+ distributedPoints + " Punkte";
+
+            yPosInputField -= 85;
+        }
     }
 
 }
