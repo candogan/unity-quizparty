@@ -14557,6 +14557,7 @@ GameObject:
   - component: {fileID: 758051463}
   - component: {fileID: 758051464}
   - component: {fileID: 758051465}
+  - component: {fileID: 758051466}
   m_Layer: 0
   m_Name: GameplayManager
   m_TagString: Untagged
@@ -14616,6 +14617,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d63657508831b84fbc426f22b4d27ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &758051466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758051461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e78f648e467b540b7360a66d7b6d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &759326842 stripped
@@ -21834,7 +21847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4674286094358681688, guid: 27e25e3bc7ba5f640aea250f9a3842bd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -177.06143
+      value: -174.81
       objectReference: {fileID: 0}
     - target: {fileID: 4674286094358681688, guid: 27e25e3bc7ba5f640aea250f9a3842bd, type: 3}
       propertyPath: m_LocalPosition.y

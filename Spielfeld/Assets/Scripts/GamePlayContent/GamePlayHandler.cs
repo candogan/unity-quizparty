@@ -7,13 +7,13 @@ using static NextFieldDirectionEnum;
 
 public class GamePlayHandler : MonoBehaviour
 {
-
-    public GameField[] gameFields;
+    //Objecttyp zu liste gewechselt -> bietet einfacheren zugriff auf die values
+    private List<GameField> gameFields = new List<GameField>();
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        InitializeGameFields();
     }
 
     // Update is called once per frame
@@ -22,53 +22,65 @@ public class GamePlayHandler : MonoBehaviour
         
     }
 
-    GameField[] prepareGameFields()
+    public List<GameField> GetGameFieldList(){
+        return gameFields;
+    }
+
+    public string GetNextFieldMoveOfFieldindex(int fieldindex){
+        return gameFields[fieldindex].getNextFieldMove();
+    }
+
+    public Vector3 GetLocationOfFieldindex(int fieldindex){
+        return gameFields[fieldindex].getPosition();
+    }
+
+
+    private void InitializeGameFields()
     {
-        // TODO
+        /*
+        Todo:
+        - Gamefieldtypes einpflegen (hier am besten warten bis actionfield auch implementiert ist)
+        */
 
-        GameField[] gameFieldArray = {
-            new GameField(new Vector3((float)-123.8314,(float) 71.35801,(float) -6.518653), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-131.8314,(float) 71.35801,(float) -6.518653), GameFieldTypeEnum.NOTHING, NextFieldDirectionEnum.RIGHT),
-            new GameField(new Vector3((float)-131.8314,(float) 71.35801,(float) 1.481347), GameFieldTypeEnum.GUESSQUESTION, NextFieldDirectionEnum.LEFT),
-            new GameField(new Vector3((float)-139.8314,(float) 71.35801,(float) 1.481347), GameFieldTypeEnum.KNOWLEDGE, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-147.8314,(float) 71.35801,(float) 1.481347), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-155.8314,(float) 71.35801,(float) 1.481347), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT), // bridge
-            new GameField(new Vector3((float)-163.8314,(float) 71.35801,(float) 1.481347), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT), // bridge
-            new GameField(new Vector3((float)-171.8314,(float) 71.35801,(float) 1.481347), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT), // bridge
-            new GameField(new Vector3((float)-179.8314,(float) 71.35801,(float) 1.481347), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-187.8314,(float) 71.35801,(float) 1.481347), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.LEFT),
-            new GameField(new Vector3((float)-187.8314,(float) 71.35801,(float) -6.518653), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-187.8314,(float) 71.35801,(float) -14.51865), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.RIGHT),
-            new GameField(new Vector3((float)-195.8314,(float) 71.35801,(float) -14.51865), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-203.8314,(float) 71.35801,(float) -14.51865), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-211.8314,(float) 71.35801,(float) -14.51865), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.RIGHT),
-            new GameField(new Vector3((float)-211.8314,(float) 71.35801,(float) -6.518653), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-211.8314,(float) 71.35801,(float) 1.481347), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-211.8314,(float) 71.35801,(float) 9.481347), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-211.8314,(float) 71.35801,(float) 17.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-211.8314,(float) 71.35801,(float) 25.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-211.8314,(float) 71.35801,(float) 33.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.RIGHT),
-            new GameField(new Vector3((float)-203.8314,(float) 71.35801,(float) 33.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-195.8314,(float) 71.35801,(float) 33.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-187.8314,(float) 71.35801,(float) 33.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-179.8314,(float) 71.35801,(float) 33.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-171.8314,(float) 71.35801,(float) 33.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT), // bridge
-            new GameField(new Vector3((float)-163.8314,(float) 71.35801,(float) 33.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-155.8314,(float) 71.35801,(float) 33.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.RIGHT),
-            new GameField(new Vector3((float)-155.8314,(float) 71.35801,(float) 25.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.LEFT),
-            new GameField(new Vector3((float)-147.8314,(float) 71.35801,(float) 25.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-139.8314,(float) 71.35801,(float) 25.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-131.8314,(float) 71.35801,(float) 25.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.LEFT),
-            new GameField(new Vector3((float)-131.8314,(float) 71.35801,(float) 33.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.RIGHT),
-            new GameField(new Vector3((float)-123.8314,(float) 71.35801,(float) 33.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-115.8314,(float) 71.35801,(float) 33.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.RIGHT),
-            new GameField(new Vector3((float)-115.8314,(float) 71.35801,(float) 25.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-115.8314,(float) 71.35801,(float) 17.48135), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-115.8314,(float) 71.35801,(float) 9.481347), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-115.8314,(float) 71.35801,(float) 1.481347), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.STRAIGHT),
-            new GameField(new Vector3((float)-115.8314,(float) 71.35801,(float) -6.518653), GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.RIGHT),
-        };
-
-        return gameFieldArray;
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (82)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_DOWN));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (114)").transform.position, GameFieldTypeEnum.NOTHING, NextFieldDirectionEnum.Z_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (95)").transform.position, GameFieldTypeEnum.GUESSQUESTION, NextFieldDirectionEnum.X_ACHSIS_DOWN));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (97)").transform.position, GameFieldTypeEnum.KNOWLEDGE, NextFieldDirectionEnum.X_ACHSIS_DOWN));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (77)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_DOWN));
+        gameFields.Add(new GameField(GameObject.Find("bridge_small (5)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_DOWN)); // bridge
+        gameFields.Add(new GameField(GameObject.Find("bridge_small (1)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_DOWN)); // bridge
+        gameFields.Add(new GameField(GameObject.Find("bridge_small (2)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_DOWN)); // bridge
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (119)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_DOWN));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (108)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_DOWN));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (99)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_DOWN));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (74)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_DOWN));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (47)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_DOWN));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (111)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_DOWN));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (98)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (89)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (103)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (53)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (90)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (46)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (75)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (73)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (120)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (58)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (63)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("bridge_small (6)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP)); // bridge
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (65)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (85)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_DOWN));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (87)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (106)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (59)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (109)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (118)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (93)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (48)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_DOWN));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (57)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_DOWN));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (94)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_DOWN));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (51)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_DOWN));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (91)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_DOWN));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (56)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_DOWN));
     }
 }
