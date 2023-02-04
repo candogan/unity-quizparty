@@ -11,10 +11,11 @@ public class Character : MonoBehaviour
     private GamePlayHandler gamePlayHandler;
 
     private int actualFieldIndex = 0;
-    private int goalFieldIndex = 30;
     private bool readyForNextMove = true;
-    string movingDirection;
+    private string movingDirection;
     private float fieldDistance = 0;
+    private int fieldsToMove = 100; // Todo: Delete = 100 and connect to dice result using the TransferDiceResult() Method
+    private int fieldCount;
 
     private Vector3 initPosition;
     private Vector3 currentLocation;
@@ -26,16 +27,17 @@ public class Character : MonoBehaviour
         character_Animator = gameObject.GetComponent<Animator>();
 
         gamePlayHandler = FindObjectOfType<GamePlayHandler>();
+        fieldCount = gamePlayHandler.GetFieldCount();
     }
 
     // Update is called once per frame
     void Update()
     {
         currentLocation = transform.position;
-        if(actualFieldIndex < goalFieldIndex && readyForNextMove){
+        if(0 < fieldsToMove && readyForNextMove){
             SpecifyMovingParameters();
 
-        } else if(actualFieldIndex < goalFieldIndex && !readyForNextMove){
+        } else if(0 < fieldsToMove && !readyForNextMove){
 
             if (movingDirection == NextFieldDirectionEnum.X_ACHSIS_DOWN){
                 //Debug.Log("X-DOWN, Field-ID: " + actualFieldIndex);
@@ -54,13 +56,13 @@ public class Character : MonoBehaviour
     }
 
     public void TransferDiceResult(int diceResult){
-        goalFieldIndex += diceResult;
+        fieldsToMove = diceResult;
     }
 
     private void SpecifyMovingParameters(){
         initPosition = transform.position;
         movingDirection = gamePlayHandler.GetNextFieldMoveOfFieldindex(actualFieldIndex);
-        goalLocation = gamePlayHandler.GetLocationOfFieldindex(actualFieldIndex+1);
+        goalLocation = gamePlayHandler.GetLocationOfFieldindex((actualFieldIndex + 1) % fieldCount);
         Debug.Log("Richtung: " + movingDirection + ", Ziel: " + goalLocation + ",actualFieldIndex " + actualFieldIndex + ", readyForNextMove" + readyForNextMove);
         readyForNextMove = false;
 
@@ -83,7 +85,6 @@ public class Character : MonoBehaviour
 
 
     private void MoveCharacterXDown(){
-        Debug.Log("currentLocation: " + currentLocation + ", initPosition");
         if (currentLocation.x >= initPosition.x - fieldDistance) {
                 //character_Animator.SetTrigger("Run In Place");
                 //Temp Fix um Exception zu umgehen
@@ -93,7 +94,8 @@ public class Character : MonoBehaviour
             Vector3 speed = new Vector3(0, 0, 0) * Time.deltaTime;
             transform.Translate(speed);
             if (!readyForNextMove){
-                actualFieldIndex += 1;
+                actualFieldIndex = (actualFieldIndex + 1) % fieldCount;
+                fieldsToMove -= 1;
             }
             readyForNextMove = true;
         }
@@ -109,7 +111,8 @@ public class Character : MonoBehaviour
             Vector3 speed = new Vector3(0, 0, 0) * Time.deltaTime;
             transform.Translate(speed);
             if (!readyForNextMove){
-                actualFieldIndex += 1;
+                actualFieldIndex = (actualFieldIndex + 1) % fieldCount;
+                fieldsToMove -= 1;
             }
             readyForNextMove = true;
         }
@@ -125,7 +128,8 @@ public class Character : MonoBehaviour
             Vector3 speed = new Vector3(0, 0, 0) * Time.deltaTime;
             transform.Translate(speed);
             if (!readyForNextMove){
-                actualFieldIndex += 1;
+                actualFieldIndex = (actualFieldIndex + 1) % fieldCount;
+                fieldsToMove -= 1;
             }
             readyForNextMove = true;
         }
@@ -141,7 +145,8 @@ public class Character : MonoBehaviour
             Vector3 speed = new Vector3(0, 0, 0) * Time.deltaTime;
             transform.Translate(speed);
             if (!readyForNextMove){
-                actualFieldIndex += 1;
+                actualFieldIndex = (actualFieldIndex + 1) % fieldCount;
+                fieldsToMove -= 1;
             }
             readyForNextMove = true;
         }

@@ -34,6 +34,10 @@ public class GamePlayHandler : MonoBehaviour
         return gameFields[fieldindex].getPosition();
     }
 
+    public int GetFieldCount(){
+        return gameFields.Count;
+    }
+
 
     private void InitializeGameFields()
     {
