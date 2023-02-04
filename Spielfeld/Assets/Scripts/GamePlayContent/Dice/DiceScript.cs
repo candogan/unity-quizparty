@@ -45,7 +45,7 @@ public class DiceScript : MonoBehaviour
         if (!thrown && !hasLanded) {
             thrown = true;
             rb.useGravity = true;
-            rb.AddTorque(Random.Range(0, 5000), Random.Range(0, 5000), Random.Range(0, 5000));
+            rb.AddTorque(Random.Range(0, 100000), Random.Range(0, 100000), Random.Range(0, 100000));
         }
         else if (thrown && hasLanded) {
             Reset();
