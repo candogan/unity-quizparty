@@ -14,12 +14,13 @@ public class Character : MonoBehaviour
     private bool readyForNextMove = true;
     private string movingDirection;
     private float fieldDistance = 0;
-    private int fieldsToMove = 100; // Todo: Delete = 100 and connect to dice result using the TransferDiceResult() Method
+    private int fieldsToMove = 20; // Todo: Delete = 100 and connect to dice result using the TransferDiceResult() Method
     private int fieldCount;
 
-    private Vector3 initPosition;
+    private Vector3 initFieldPosition;
+    private Vector3 initCharacterPosition;
     private Vector3 currentLocation;
-    private Vector3 goalLocation;
+    private Vector3 nextFieldLocation;
 
     // Start is called before the first frame update
     void Start()
@@ -60,32 +61,33 @@ public class Character : MonoBehaviour
     }
 
     private void SpecifyMovingParameters(){
-        initPosition = transform.position;
+        initFieldPosition = gamePlayHandler.GetLocationOfFieldindex(actualFieldIndex);
+        initCharacterPosition = transform.position;
         movingDirection = gamePlayHandler.GetNextFieldMoveOfFieldindex(actualFieldIndex);
-        goalLocation = gamePlayHandler.GetLocationOfFieldindex((actualFieldIndex + 1) % fieldCount);
-        Debug.Log("Richtung: " + movingDirection + ", Ziel: " + goalLocation + ",actualFieldIndex " + actualFieldIndex + ", readyForNextMove" + readyForNextMove);
+        nextFieldLocation = gamePlayHandler.GetLocationOfFieldindex((actualFieldIndex + 1) % fieldCount);
+        Debug.Log("Richtung: " + movingDirection + ", Ziel: " + nextFieldLocation + ",actualFieldIndex " + actualFieldIndex + ", readyForNextMove" + readyForNextMove);
         readyForNextMove = false;
 
 
         if (movingDirection == NextFieldDirectionEnum.X_ACHSIS_DOWN){
             //Debug.Log("X-DOWN, Field-ID: " + actualFieldIndex);
-            fieldDistance = initPosition.x - goalLocation.x;
+            fieldDistance = initFieldPosition.x - nextFieldLocation.x;
         } else if(movingDirection == NextFieldDirectionEnum.X_ACHSIS_UP){
             //Debug.Log("X-UP, Field-ID: " + actualFieldIndex);
-            fieldDistance = goalLocation.x - initPosition.x;
+            fieldDistance = nextFieldLocation.x - initFieldPosition.x;
         } else if (movingDirection == NextFieldDirectionEnum.Z_ACHSIS_DOWN){
             //Debug.Log("Z-Down, Field-ID: " + actualFieldIndex);
-            fieldDistance = initPosition.z - goalLocation.z;
+            fieldDistance = initFieldPosition.z - nextFieldLocation.z;
         } else if(movingDirection == NextFieldDirectionEnum.Z_ACHSIS_UP){
             //Debug.Log("Z-Up, Field-ID: " + actualFieldIndex);
-            fieldDistance = goalLocation.z - initPosition.z;
+            fieldDistance = nextFieldLocation.z - initFieldPosition.z;
         }
         Debug.Log("Distanz: " + fieldDistance);
     }
 
 
     private void MoveCharacterXDown(){
-        if (currentLocation.x >= initPosition.x - fieldDistance) {
+        if (currentLocation.x >= initCharacterPosition.x - fieldDistance) {
                 //character_Animator.SetTrigger("Run In Place");
                 //Temp Fix um Exception zu umgehen
                 Vector3 destiny = new Vector3(0, 0, 8) * Time.deltaTime;
@@ -102,7 +104,7 @@ public class Character : MonoBehaviour
     }
 
     private void MoveCharacterXUp(){
-        if (currentLocation.x <= initPosition.x + fieldDistance) {
+        if (currentLocation.x <= initCharacterPosition.x + fieldDistance) {
                 //character_Animator.SetTrigger("Run In Place");
                 //Temp Fix um Exception zu umgehen
                 Vector3 destiny = new Vector3(0, 0, -8) * Time.deltaTime;
@@ -119,7 +121,7 @@ public class Character : MonoBehaviour
     }
 
     private void MoveCharacterZDown(){
-        if (currentLocation.z >= initPosition.z - fieldDistance) {
+        if (currentLocation.z >= initCharacterPosition.z - fieldDistance) {
                 //character_Animator.SetTrigger("Run In Place");
                 //Temp Fix um Exception zu umgehen
                 Vector3 destiny = new Vector3(-8, 0, 0) * Time.deltaTime;
@@ -136,7 +138,7 @@ public class Character : MonoBehaviour
     }
 
     private void MoveCharacterZUp(){
-        if (currentLocation.z <= initPosition.z + fieldDistance) {
+        if (currentLocation.z <= initCharacterPosition.z + fieldDistance) {
                 //character_Animator.SetTrigger("Run In Place");
                 //Temp Fix um Exception zu umgehen
                 Vector3 destiny = new Vector3(8, 0, 0) * Time.deltaTime;
