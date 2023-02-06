@@ -14632,6 +14632,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41e78f648e467b540b7360a66d7b6d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  dice: {fileID: 0}
+  diceSc: {fileID: 0}
 --- !u!114 &758051467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21722,7 +21725,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067762247}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1067762249
 Camera:
   m_ObjectHideFlags: 0
@@ -43254,7 +43257,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2074744417}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &2074744419
 Camera:
   m_ObjectHideFlags: 0

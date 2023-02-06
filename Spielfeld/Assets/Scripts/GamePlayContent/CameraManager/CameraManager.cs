@@ -5,12 +5,16 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
 
-    GameObject diceCamera;
-    GameObject mainCamera;
-    GameObject sideCamera;
+    public GameObject diceCamera;
+    public GameObject mainCamera;
+    public GameObject sideCamera;
 
     // Start is called before the first frame update
     void Start()
+    {
+    }
+
+    public void StartClass()
     {
         diceCamera = GameObject.Find("DiceCamera");
         mainCamera = GameObject.Find("MainCamera");
@@ -20,32 +24,23 @@ public class CameraManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow)) {
-            FocusMainCamera();
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow)) {
-            FocusDiceCamera();
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow)) {
-            FocusSideCamera();
-        }
     }
 
-    void FocusDiceCamera()
+    public void FocusDiceCamera()
     {
         mainCamera.SetActive(false);
         sideCamera.SetActive(false);
         diceCamera.SetActive(true);
     }
 
-    void FocusMainCamera()
+    public void FocusMainCamera()
     {
         sideCamera.SetActive(false);
         diceCamera.SetActive(false);
         mainCamera.SetActive(true);
     }
 
-    void FocusSideCamera()
+    public void FocusSideCamera()
     {
         diceCamera.SetActive(false);
         mainCamera.SetActive(false);

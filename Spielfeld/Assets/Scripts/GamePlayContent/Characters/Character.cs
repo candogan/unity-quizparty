@@ -65,7 +65,7 @@ public class Character : MonoBehaviour
         initCharacterPosition = transform.position;
         movingDirection = gamePlayHandler.GetNextFieldMoveOfFieldindex(actualFieldIndex);
         nextFieldLocation = gamePlayHandler.GetLocationOfFieldindex((actualFieldIndex + 1) % fieldCount);
-        Debug.Log("Richtung: " + movingDirection + ", Ziel: " + nextFieldLocation + ",actualFieldIndex " + actualFieldIndex + ", readyForNextMove" + readyForNextMove);
+        // Debug.Log("Richtung: " + movingDirection + ", Ziel: " + nextFieldLocation + ",actualFieldIndex " + actualFieldIndex + ", readyForNextMove" + readyForNextMove);
         readyForNextMove = false;
 
 
@@ -82,7 +82,7 @@ public class Character : MonoBehaviour
             //Debug.Log("Z-Up, Field-ID: " + actualFieldIndex);
             fieldDistance = nextFieldLocation.z - initFieldPosition.z;
         }
-        Debug.Log("Distanz: " + fieldDistance);
+        // Debug.Log("Distanz: " + fieldDistance);
     }
 
 

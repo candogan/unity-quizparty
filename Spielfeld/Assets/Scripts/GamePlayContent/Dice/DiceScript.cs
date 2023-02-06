@@ -5,17 +5,18 @@ using UnityEngine;
 public class DiceScript : MonoBehaviour
 {
     Rigidbody rb;
-
+    bool classInitialized;
     bool hasLanded;
     bool thrown;
-
     Vector3 initPosition;
-
     public int diceValue;
-
     public DiceSide[] diceSides;
 
-    void Start()
+    public void Start()
+    {
+    }
+
+    public void StartClass()
     {
         rb = GetComponent<Rigidbody>();
         initPosition = transform.position;
@@ -24,9 +25,11 @@ public class DiceScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            RollDice();
-        }
+    }
+
+    public void TriggerDice()
+    {
+        RollDice();
 
         if (rb.IsSleeping() && !hasLanded && thrown) {
             hasLanded = true;
@@ -40,7 +43,12 @@ public class DiceScript : MonoBehaviour
         }
     }
 
-    void RollDice()
+    public int getDiceValue()
+    {
+        return diceValue;
+    }
+
+    private void RollDice()
     {
         if (!thrown && !hasLanded) {
             thrown = true;
@@ -52,7 +60,7 @@ public class DiceScript : MonoBehaviour
         }
     }
 
-    void Reset()
+    private void Reset()
     {
         transform.position = initPosition;
         thrown = false;
@@ -61,15 +69,15 @@ public class DiceScript : MonoBehaviour
         rb.isKinematic = false;
     }
 
-    void RollAgain()
+    private void RollAgain()
     {
         Reset();
         thrown = true;
         rb.useGravity = true;
-        rb.AddTorque(Random.Range(0, 5000), Random.Range(0, 5000), Random.Range(0, 5000));
+        rb.AddTorque(Random.Range(0, 100000), Random.Range(0, 100000), Random.Range(0, 100000));
     }
 
-    void SideValueCheck()
+    private void SideValueCheck()
     {
         diceValue = 0;
         foreach (DiceSide side in diceSides) {

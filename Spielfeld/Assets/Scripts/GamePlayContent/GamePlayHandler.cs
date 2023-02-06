@@ -9,17 +9,38 @@ public class GamePlayHandler : MonoBehaviour
 {
     //Objecttyp zu liste gewechselt -> bietet einfacheren zugriff auf die values
     private List<GameField> gameFields = new List<GameField>();
+    public CameraManager camera;
+    public GameObject dice;
+    public DiceScript diceSc;
 
     // Start is called before the first frame update
     void Start()
     {
         InitializeGameFields();
+        InitializeClasses();
+        RollDice();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void RollDice()
+    {
+        camera.FocusDiceCamera();
+        diceSc.TriggerDice();
+        // You dont get the result. Implementation required!
+        StartCoroutine(waiterForResult());
+    }
+
+    IEnumerator waiterForResult()
+    {
+        //Wait for 4 seconds
+        yield return new WaitForSecondsRealtime(6);
+        int diceValue = diceSc.getDiceValue();
+        Debug.Log("Folgende Zahl wurde gewürfelt: " + diceValue);
     }
 
     public List<GameField> GetGameFieldList(){
@@ -38,6 +59,15 @@ public class GamePlayHandler : MonoBehaviour
         return gameFields.Count;
     }
 
+    private void InitializeClasses()
+    {
+        dice = GameObject.Find("Dice (1)");
+        diceSc = (DiceScript) dice.GetComponent<DiceScript>();
+        diceSc.StartClass();
+
+        camera = new CameraManager();
+        camera.StartClass();
+    }
 
     private void InitializeGameFields()
     {
