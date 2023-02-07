@@ -22,25 +22,30 @@ public class BildFragenHandler : MonoBehaviour
 
     private List<GameEventField> entries = new List<GameEventField> ();
 
-    private void Start () {
+    private void Start ()
+    {
         entries = FileHandler.ReadListFromJSON<GameEventField> (filename);
     }
 
-    private void Update (){
-        if (answer.text == ""){
+    private void Update ()
+    {
+        if (answer.text == "")
+        {
             uploadButton.GetComponent <Button>().interactable = false;
             addButton.GetComponent <Button>().interactable = false;
-        } else {
+        } 
+        else 
+        {
             uploadButton.GetComponent <Button>().interactable = true;
         }
     }
 
-    public void AddFieldToList () {
+    public void AddFieldToList () 
+    {
         entries = FileHandler.ReadListFromJSON<GameEventField> (filename);
-   
         entries.Add (new GameEventField (3, timestamp + ".png", answer.text, 60, difficulty.value + 1, 0));
-       
         answer.text = "";
+        
         FileHandler.SaveToJSON<GameEventField> (entries, filename);
     }
 

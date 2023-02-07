@@ -16,20 +16,26 @@ public class FragenHandler : MonoBehaviour
         LoadList(gameEventType);
     }
 
-    public void LoadList(int type){
+    public void LoadList(int type)
+    {
         GameObject fragenTemplate = transform.GetChild (0).gameObject;
         GameObject g;
 
         List<GameEventField> fragenKatalog = FileHandler.ReadListFromJSON<GameEventField> ("GameFieldQuestions.json");
  
-        foreach (GameEventField field in fragenKatalog) {
-            if (field.GetFieldType() == type){
+        foreach (GameEventField field in fragenKatalog) 
+        {
+            if (field.GetFieldType() == type)
+            {
                 g = Instantiate (fragenTemplate, transform);
-                if (field.GetFieldType() == 3){
+                if (field.GetFieldType() == 3)
+                {
                     string filePath = Application.dataPath + "/Resources/" + field.GetContent();
                     Sprite newImage = IMG2Sprite.instance.LoadNewSprite(filePath);
                     g.transform.GetChild (0).GetComponent <Image> ().sprite = newImage;
-                } else {
+                }
+                else 
+                {
                     g.transform.GetChild (0).GetComponent <TMP_Text> ().text = field.GetContent();
                 }
                 
@@ -49,20 +55,22 @@ public class FragenHandler : MonoBehaviour
 
                 g.SetActive(true);
             } 
-        }
-
-        //Destroy (fragenTemplate);  
+        } 
     }
 
-    void DeleteItem(GameEventField field, List<GameEventField> fragenKatalog ){
+    void DeleteItem(GameEventField field, List<GameEventField> fragenKatalog )
+    {
         fragenKatalog.Remove(field);
         File.Delete(FileHandler.GetPath("GameFieldQuestions.json"));
         FileHandler.SaveToJSON<GameEventField> (fragenKatalog, "GameFieldQuestions.json");
+
         RenewList(); 
     }
 
-    public void RenewList(){
-        for (int i = 1; i < transform.childCount; i++){
+    public void RenewList()
+    {
+        for (int i = 1; i < transform.childCount; i++)
+        {
             Destroy (transform.GetChild (i).gameObject);
         }
         LoadList(gameEventType);

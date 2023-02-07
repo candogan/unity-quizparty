@@ -43,7 +43,8 @@ public class GameOptionsHandler : MonoBehaviour
         difficulty2 = diffTwoToggle.isOn;
         difficulty3 = diffThreeToggle.isOn;
 
-        if (difficulty1 == true || difficulty2 == true || difficulty3 == true){
+        if (difficulty1 == true || difficulty2 == true || difficulty3 == true)
+        {
             teamCount = teamSlider.value;
             roundCount  = roundSlider.value;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

@@ -52,7 +52,6 @@ public class DownUpManager : MonoBehaviour
         string zipPath =  Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Resources" + timestamp + ".zip";
 
         ZipFile.CreateFromDirectory(startPath, zipPath);
-
     }
 
 	public void UnpackResources()

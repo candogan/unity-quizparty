@@ -1,7 +1,8 @@
 using System;
 
 [Serializable]
-public class GameEventField {
+public class GameEventField 
+{
     public int type;
     public string content;
     public string answer;
@@ -9,7 +10,8 @@ public class GameEventField {
     public int difficulty;
     public int used;
 
-    public GameEventField (int type, string content, string answer, int time, int difficulty, int used) {
+    public GameEventField (int type, string content, string answer, int time, int difficulty, int used) 
+    {
         this.type = type;
         this.content = content;
         this.answer = answer;
@@ -18,51 +20,63 @@ public class GameEventField {
         this.used = used;
     }
 
-    public int GetFieldType(){
+    public int GetFieldType()
+    {
         return type;
     }
 
-    public void SetFieldType(int newType){
+    public void SetFieldType(int newType)
+    {
         type = newType;
     }
 
-    public string GetContent(){
+    public string GetContent()
+    {
         return content;
     }
 
-    public void SetContent(string newContent){
+    public void SetContent(string newContent)
+    {
         content = newContent;
     }
 
-    public string GetAnswer(){
+    public string GetAnswer()
+    {
         return answer;
     }
 
-    public void SetAnswer(string newAnswer){
+    public void SetAnswer(string newAnswer)
+    {
         answer = newAnswer;
     }
 
-    public int GetTime(){
+    public int GetTime()
+    {
         return time;
     }
 
-    public void SetTime(int newTime){
+    public void SetTime(int newTime)
+    {
         time = newTime;
     }
 
-    public int GetDifficulty(){
+    public int GetDifficulty()
+    {
         return difficulty;
     }
 
-    public void SetDifficulty(int newDifficulty){
+    public void SetDifficulty(int newDifficulty)
+    {
         difficulty = newDifficulty;
     }
 
-    public int GetUsed(){
+    public int GetUsed()
+    {
         return used;
     }
 
-    public void SetUsed(int newUsed){
+    public void SetUsed(int newUsed)
+    {
         used = newUsed;
     }
 

@@ -4,7 +4,8 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 
-public class InputHandler : MonoBehaviour {
+public class InputHandler : MonoBehaviour 
+{
     [SerializeField] TMP_InputField question;
     [SerializeField] TMP_InputField answer;
     [SerializeField] TMP_Dropdown difficulty;
@@ -13,20 +14,26 @@ public class InputHandler : MonoBehaviour {
 
     private List<GameEventField> entries = new List<GameEventField> ();
 
-    private void Start () {
+    private void Start () 
+    {
         entries = FileHandler.ReadListFromJSON<GameEventField> (filename);
         addButton.GetComponent <Button>().interactable = false;
     }
 
-    private void Update (){
-        if (question.text == "" || answer.text == "" ){
+    private void Update ()
+    {
+        if (question.text == "" || answer.text == "" )
+        {
             addButton.GetComponent <Button>().interactable = false;
-        } else {
+        } 
+        else 
+        {
             addButton.GetComponent <Button>().interactable = true;
         }
     }
 
-    public void AddFieldToList (int type) {
+    public void AddFieldToList (int type) 
+    {
         entries = FileHandler.ReadListFromJSON<GameEventField> (filename);
         Debug.Log(difficulty.value);
 
