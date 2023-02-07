@@ -12,6 +12,8 @@ public class GamePlayHandler : MonoBehaviour
     public CameraManager camera;
     public GameObject dice;
     public DiceScript diceSc;
+    public GameObject characterOne;
+    public Character characterOneSc;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +43,8 @@ public class GamePlayHandler : MonoBehaviour
         yield return new WaitForSecondsRealtime(4);
         int diceValue = diceSc.getDiceValue();
         Debug.Log("Folgende Zahl wurde gewürfelt: " + diceValue);
+        camera.FocusSideCamera();
+        characterOneSc.TransferDiceResult(diceValue);
     }
 
     public List<GameField> GetGameFieldList(){
@@ -61,12 +65,16 @@ public class GamePlayHandler : MonoBehaviour
 
     private void InitializeClasses()
     {
+        camera = new CameraManager();
+        camera.StartClass();
+
         dice = GameObject.Find("Dice (1)");
         diceSc = (DiceScript) dice.GetComponent<DiceScript>();
         diceSc.StartClass();
 
-        camera = new CameraManager();
-        camera.StartClass();
+        characterOne = GameObject.Find("Toon Chicken Team 1");
+        characterOneSc = (Character) characterOne.GetComponent<Character>();
+        characterOneSc.StartClass();
     }
 
     private void InitializeGameFields()

@@ -14,7 +14,7 @@ public class Character : MonoBehaviour
     private bool readyForNextMove = true;
     private string movingDirection;
     private float fieldDistance = 0;
-    private int fieldsToMove = 20; // Todo: Delete = 100 and connect to dice result using the TransferDiceResult() Method
+    private int fieldsToMove = 0;
     private int fieldCount;
 
     private Vector3 initFieldPosition;
@@ -24,6 +24,10 @@ public class Character : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
+    {
+    }
+
+    public void StartClass()
     {
         character_Animator = gameObject.GetComponent<Animator>();
 
