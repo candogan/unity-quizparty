@@ -25,22 +25,21 @@ public class DiceScript : MonoBehaviour
 
     void Update()
     {
-    }
-
-    public void TriggerDice()
-    {
-        RollDice();
-
         if (rb.IsSleeping() && !hasLanded && thrown) {
+            Debug.Log("Inside");
             hasLanded = true;
             rb.useGravity = false;
             rb.isKinematic = true;
 
             SideValueCheck();
-        }
-        else if (rb.IsSleeping() && hasLanded && diceValue == 0) {
+        } else if (rb.IsSleeping() && hasLanded && diceValue == 0) {
             RollAgain();
         }
+    }
+
+    public void TriggerDice()
+    {
+        RollDice();
     }
 
     public int getDiceValue()
@@ -83,7 +82,7 @@ public class DiceScript : MonoBehaviour
         foreach (DiceSide side in diceSides) {
             if (side.OnGround()) {
                 diceValue = side.sideValue;
-                Debug.Log(diceValue + " has been rolled!");
+                // Debug.Log(diceValue + " has been rolled!");
             }
         }
     }

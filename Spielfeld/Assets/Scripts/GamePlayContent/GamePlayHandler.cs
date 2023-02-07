@@ -37,8 +37,8 @@ public class GamePlayHandler : MonoBehaviour
 
     IEnumerator waiterForResult()
     {
-        //Wait for 4 seconds
-        yield return new WaitForSecondsRealtime(6);
+        //Wait for x seconds
+        yield return new WaitForSecondsRealtime(4);
         int diceValue = diceSc.getDiceValue();
         Debug.Log("Folgende Zahl wurde gewürfelt: " + diceValue);
     }
