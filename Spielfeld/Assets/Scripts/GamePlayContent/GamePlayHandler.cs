@@ -12,8 +12,10 @@ public class GamePlayHandler : MonoBehaviour
     public CameraManager camera;
     public GameObject dice;
     public DiceScript diceSc;
+    public int diceValue;
     public GameObject characterOne;
     public Character characterOneSc;
+    private bool oneRoundFinished;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +28,10 @@ public class GamePlayHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (oneRoundFinished) {
+            oneRoundFinished = false;
+            RollDice();
+        }
     }
 
     public void RollDice()
@@ -34,17 +39,25 @@ public class GamePlayHandler : MonoBehaviour
         camera.FocusDiceCamera();
         diceSc.TriggerDice();
         // You dont get the result. Implementation required!
-        StartCoroutine(waiterForResult());
+        StartCoroutine(waitForResult());
     }
 
-    IEnumerator waiterForResult()
+    IEnumerator waitForResult()
     {
         //Wait for x seconds
         yield return new WaitForSecondsRealtime(4);
-        int diceValue = diceSc.getDiceValue();
+        diceValue = diceSc.getDiceValue();
         Debug.Log("Folgende Zahl wurde gewürfelt: " + diceValue);
         camera.FocusSideCamera();
         characterOneSc.TransferDiceResult(diceValue);
+        StartCoroutine(waitCharacterToMove());
+    }
+
+    IEnumerator waitCharacterToMove()
+    {
+        // Wait for x seconds
+        yield return new WaitForSecondsRealtime(6);
+        oneRoundFinished = true;
     }
 
     public List<GameField> GetGameFieldList(){

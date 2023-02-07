@@ -26,15 +26,21 @@ public class DiceScript : MonoBehaviour
     void Update()
     {
         if (rb.IsSleeping() && !hasLanded && thrown) {
-            Debug.Log("Inside");
             hasLanded = true;
             rb.useGravity = false;
             rb.isKinematic = true;
 
             SideValueCheck();
+            Reset();
         } else if (rb.IsSleeping() && hasLanded && diceValue == 0) {
             RollAgain();
         }
+    }
+
+    IEnumerator WaitToResetDice()
+    {
+        yield return new WaitForSecondsRealtime(2);
+        Reset();
     }
 
     public void TriggerDice()
@@ -52,7 +58,7 @@ public class DiceScript : MonoBehaviour
         if (!thrown && !hasLanded) {
             thrown = true;
             rb.useGravity = true;
-            rb.AddTorque(Random.Range(0, 100000), Random.Range(0, 100000), Random.Range(0, 100000));
+            rb.AddTorque(Random.Range(0, 1000000), Random.Range(0, 1000000), Random.Range(0, 1000000));
         }
         else if (thrown && hasLanded) {
             Reset();
@@ -73,7 +79,7 @@ public class DiceScript : MonoBehaviour
         Reset();
         thrown = true;
         rb.useGravity = true;
-        rb.AddTorque(Random.Range(0, 100000), Random.Range(0, 100000), Random.Range(0, 100000));
+        rb.AddTorque(Random.Range(0, 1000000), Random.Range(0, 1000000), Random.Range(0, 1000000));
     }
 
     private void SideValueCheck()
