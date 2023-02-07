@@ -31,20 +31,14 @@ public class DiceScript : MonoBehaviour
             rb.isKinematic = true;
 
             SideValueCheck();
-            Reset();
         } else if (rb.IsSleeping() && hasLanded && diceValue == 0) {
             RollAgain();
         }
     }
 
-    IEnumerator WaitToResetDice()
-    {
-        yield return new WaitForSecondsRealtime(2);
-        Reset();
-    }
-
     public void TriggerDice()
     {
+        Reset();
         RollDice();
     }
 
