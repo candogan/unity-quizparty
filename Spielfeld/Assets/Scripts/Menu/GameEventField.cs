@@ -3,16 +3,18 @@ using System;
 [Serializable]
 public class GameEventField {
     public int type;
-    public string question;
+    public string content;
     public string answer;
     public int time;
+    public int difficulty;
     public int used;
 
-    public GameEventField (int type, string question, string answer, int time, int used) {
+    public GameEventField (int type, string content, string answer, int time, int difficulty, int used) {
         this.type = type;
-        this.question = question;
+        this.content = content;
         this.answer = answer;
         this.time = time;
+        this.difficulty = difficulty;
         this.used = used;
     }
 
@@ -24,12 +26,12 @@ public class GameEventField {
         type = newType;
     }
 
-    public string GetQuestion(){
-        return question;
+    public string GetContent(){
+        return content;
     }
 
-    public void SetQuestion(string newQuestion){
-        question = newQuestion;
+    public void SetContent(string newContent){
+        content = newContent;
     }
 
     public string GetAnswer(){
@@ -48,6 +50,14 @@ public class GameEventField {
         time = newTime;
     }
 
+    public int GetDifficulty(){
+        return difficulty;
+    }
+
+    public void SetDifficulty(int newDifficulty){
+        difficulty = newDifficulty;
+    }
+
     public int GetUsed(){
         return used;
     }
@@ -58,7 +68,7 @@ public class GameEventField {
 
     public override string ToString()
     {
-        return type + question + answer + time + used;
+        return type + content + answer + time + difficulty + used;
     }
 
 }

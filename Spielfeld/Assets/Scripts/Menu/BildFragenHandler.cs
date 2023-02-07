@@ -13,9 +13,11 @@ public class BildFragenHandler : MonoBehaviour
 {
 
     [SerializeField] TMP_InputField answer;
+    [SerializeField] TMP_Dropdown difficulty;
     [SerializeField] string filename;
     public GameObject uploadButton;
     public GameObject addButton;
+    private long timestamp;
 
 
     private List<GameEventField> entries = new List<GameEventField> ();
@@ -36,7 +38,7 @@ public class BildFragenHandler : MonoBehaviour
     public void AddFieldToList () {
         entries = FileHandler.ReadListFromJSON<GameEventField> (filename);
    
-        entries.Add (new GameEventField (3, answer.text + ".png", answer.text, 60, 0));
+        entries.Add (new GameEventField (3, timestamp + ".png", answer.text, 60, difficulty.value + 1, 0));
        
         answer.text = "";
         FileHandler.SaveToJSON<GameEventField> (entries, filename);
@@ -65,7 +67,9 @@ public class BildFragenHandler : MonoBehaviour
 
 			byte[] bytes = FileBrowserHelpers.ReadBytesFromFile( FileBrowser.Result[0] );
 
-			string destinationPath = Application.dataPath + "/Resources/" + answer.text + ".png";
+            timestamp = DateTime.Now.ToFileTime();
+
+			string destinationPath = Application.dataPath + "/Resources/" + timestamp + ".png";
 
 			FileBrowserHelpers.CopyFile( FileBrowser.Result[0], destinationPath );
 			
