@@ -9,28 +9,43 @@ public class QuestionManager : MonoBehaviour
 {
     public TextMeshProUGUI questionTextField;
 
-    private JsonGameEventFieldList eventFieldList;
+    private List<GameEventField> eventFieldList;
+    private List<int> availableFieldTypes = new List<int>(); 
+    private List<int> difficulty;
+    private bool basicMode = false;
     private Random rnd = new Random();
     private GameObject timerPauseButton;
 
-    private JsonGameEventField currentEventField;
+    private GameEventField currentEventField;
 
     private static int verfuegbar = 0;
     private static int nichtVerfuegbar = 1;
 
-    private static int interaktionsfeld = 1;
-    private static int wissensfeld = 2;
+    //private static int interaktionsfeld = 1;
+    //private static int wissensfeld = 2;
     private static int bildraten = 3;
     private static int schaetzfrage = 4;
-    private static int actionfeld = 5;
+    //private static int actionfeld = 5;
 
     private static int actualEventFieldIndex;
     private static int actualFieldType;
     private static int actualTeamIndex;
-    private static int allTeams = 444;
+
+    private static string filename = "GameFieldQuestions.json";
+
+    private static List<string> teaserTextList = new List<string>{
+        "TEAM {0}: Macht euch bereit für eine Interaktionsaufgabe!",
+        "TEAM {0}: Macht euch bereit für eine Wissensaufgabe!",
+        "TEAM {0}: Macht euch bereit für ein Bildrätsel!",
+        "Alle Teams: Macht euch bereit für ein Schätzrätsel!",
+        "TEAM {0}: Eure Figur Rückt 5 Felder weiter!"
+        };
 
     void Start(){
+        difficulty = new List<int>{3};
         timerPauseButton = GameObject.Find("TimerPauseButton");
+        eventFieldList = FileHandler.ReadListFromJSON<GameEventField> (filename);
+        SearchAvailableTypes();
     }
 
     void Update(){
@@ -40,82 +55,97 @@ public class QuestionManager : MonoBehaviour
         return actualTeamIndex;
     }
 
-    public void setFieldtypeInteraction(int teamIndex){
-        actualFieldType = interaktionsfeld;
+    
+    public void SetTeamIndex(int teamIndex){
         actualTeamIndex = teamIndex;
-        questionTextField.text = "TEAM X: Macht euch bereit für eine Interaktionsaufgabe!";
-        RandomQuestionPicker(actualFieldType);
-    }
-    
-    public void setFieldtypeKnowledge(int teamIndex){
-        actualFieldType = wissensfeld;
-        questionTextField.text = "TEAM X: Macht euch bereit für eine Wissensaufgabe!";
-        RandomQuestionPicker(actualFieldType);
-    }
-    
-    public void setFieldtypePicture(int teamIndex){
-        actualFieldType = bildraten;
-        actualTeamIndex = teamIndex;
-        questionTextField.text = "TEAM X: Macht euch bereit für ein Bildrätsel!";
-        RandomQuestionPicker(actualFieldType);
-    }
-    
-    public void setFieldtypeEstimation(){
-        actualFieldType = schaetzfrage;
-        actualTeamIndex = allTeams;
-        questionTextField.text = "Alle Teams: Macht euch bereit für ein Schätzrätsel!";
-        RandomQuestionPicker(actualFieldType);
-    }
-    
-    public void setFieldtypeAction(int teamIndex){
-        actualFieldType = actionfeld;
-        actualTeamIndex = teamIndex;
-        questionTextField.text = "TEAM X: Eure Figur Rückt 5 Felder weiter!";
-        RandomQuestionPicker(actualFieldType);
     }
 
-    public void LoadField(){
-        //Debug.Log("Lade Aufgabentyp: " + actualFieldType);
-        questionTextField.text =  eventFieldList.jsonGameEventFieldList[actualEventFieldIndex].content;
+    public void SetFieldTypeAndLoadTeaser(int newFieldType){
+        actualFieldType = newFieldType;
+        questionTextField.text = string.Format(teaserTextList[actualFieldType-1], actualTeamIndex);
+        RandomQuestionPicker(actualFieldType);
+        FindObjectOfType<PanelUiManager>().SetupTimer(eventFieldList[actualEventFieldIndex].GetTime());
     }
+
+    public void LoadQuestionText(){
+        //Debug.Log("Lade Aufgabentyp: " + actualFieldType);
+        if (IsPictureField()){
+            questionTextField.text = "Wer / Was ist auf dem Bild abgebildet?";
+        } else {
+            questionTextField.text = eventFieldList[actualEventFieldIndex].GetContent();
+        }
+    }
+
+
+    private void SearchAvailableTypes(){
+        foreach(GameEventField gameEventField in eventFieldList){
+            if(!availableFieldTypes.Contains(gameEventField.GetFieldType())){
+                availableFieldTypes.Add(gameEventField.GetFieldType());
+            }
+        }
+    }
+
 
     /*
     Diese Methode prueft, welche Fragen im Spiel noch nicht dran kamen und bestimmt eine zufaellige Frage zu der gegebenen Kategorie
     @param: fieldtype = Fragekategorie
     */
     private void RandomQuestionPicker(int fieldType){
-        eventFieldList = FindObjectOfType<JsonReader>().getEventFieldList();
-        List<int> availableIndexes = new List<int>();
+        List<int> availableFields = GetAvailbleFields(fieldType);
+
+        if (availableFields.Count > 0){
+            int fieldCount = availableFields.Count;
+
+            actualEventFieldIndex = availableFields[rnd.Next(fieldCount)];
+
+            Debug.Log("actualEventFieldIndex: " + actualEventFieldIndex);
+
+            currentEventField = eventFieldList[actualEventFieldIndex];
+            eventFieldList[actualEventFieldIndex].SetUsed(nichtVerfuegbar);
+        }
+    }
+
+
+    /*
+    Gibt alle verfügbaren Eventfelder für den fieldtype zurück und beinhaltet Auswahllogik, falls zuwenige Fragen eingepflegt wurden 
+    */
+    private List<int> GetAvailbleFields(int fieldtype){
+
+        if(!availableFieldTypes.Contains(fieldtype)){
+            Debug.Log("WARNING: NOT ENOUGH QUESTIONS. PICKED RANDOM QUESTIONTYPE");
+            fieldtype = availableFieldTypes[rnd.Next(availableFieldTypes.Count)];
+            SetFieldTypeAndLoadTeaser(fieldtype);
+        }
+
+        List<int> thisAvailableFields = new List<int>();
         int i = 0;
 
-        //Speicherung der Indexe von verfuegbaren Feldern (mit gewuenschter Kategtorie) in der Liste availableIndexes
-        foreach (JsonGameEventField gameEventField in eventFieldList.jsonGameEventFieldList){
-            if (gameEventField.state == verfuegbar && gameEventField.type == fieldType) {
-                availableIndexes.Add(i);
+        foreach(GameEventField gameEventField in eventFieldList){
+            if(gameEventField.GetUsed() == verfuegbar && gameEventField.GetFieldType() == fieldtype && difficulty.Contains(gameEventField.GetDifficulty())){
+                thisAvailableFields.Add(i);
             }
             i++;
         }
 
-        int fieldCount = availableIndexes.Count;
+        if (!basicMode && thisAvailableFields.Count < 1){
+            //Falls nicht genug Fragen zur Schwierigkeitstufe vhd wird der schwierigkeitsfilter aufgehoben => Basic Mode des Spiels
+            Debug.Log("WARNING: NOT ENOUGH QUESTIONS. SWITCHED TO BASICMODE");
 
-        if (fieldCount < 1){
-            availableIndexes = ResetStateAndGetAvailableFields(fieldType);
-            fieldCount = availableIndexes.Count;
+            difficulty = new List<int>{1,2,3};
+            basicMode = true;
+            return GetAvailbleFields(fieldtype);
+
+        }else if (basicMode && thisAvailableFields.Count < 1){
+            //Letzter Ausweg falls zu wenig Fragen da sind: Wiederholung von Fragen
+            Debug.Log("WARNING: NOT ENOUGH QUESTIONS. REPEATING QUESTIONS...");
+
+            return ResetStateAndGetAvailableFields(fieldtype);
         }
 
-        actualEventFieldIndex = availableIndexes[rnd.Next(fieldCount)];
-        //Debug.Log("index: " + actualEventFieldIndex + ", state: " + eventFieldList.jsonGameEventFieldList[actualEventFieldIndex].state + ", fieldcount: " + fieldCount + ", fieldtype: " +  fieldType);
-
-        currentEventField = eventFieldList.jsonGameEventFieldList[actualEventFieldIndex];
-        eventFieldList.jsonGameEventFieldList[actualEventFieldIndex].state = nichtVerfuegbar;
-        
-        FindObjectOfType<PanelUiManager>().SetupTimer(eventFieldList.jsonGameEventFieldList[actualEventFieldIndex].time);
+        return thisAvailableFields;
     }
 
-
-
-
-    /*
+        /*
     Falls alle Fragen einer Kategorie bereits dran kamen, werden mit dieser Methode alle Fragen wieder auf unbenutzt gesetzt.
     @return: neue Liste der moeglichen Eventfelder fuer den Random Question Picker
     */
@@ -125,9 +155,9 @@ public class QuestionManager : MonoBehaviour
 
             //Debug.Log("--------reset fieldtype: " + fieldType + "--------");
 
-            foreach (JsonGameEventField gameEventField in eventFieldList.jsonGameEventFieldList){
-                if (gameEventField.type == fieldType) {
-                    eventFieldList.jsonGameEventFieldList[i].state = verfuegbar;
+            foreach (GameEventField gameEventField in eventFieldList){
+                if (gameEventField.GetFieldType() == fieldType) {
+                    eventFieldList[i].SetUsed(verfuegbar);
                     availableIndexes.Add(i);
                     //Debug.Log("i:" + i + ", state: "+ gameEventField.state);
                 }
@@ -136,12 +166,13 @@ public class QuestionManager : MonoBehaviour
         return availableIndexes;
     }
 
+
     public void ShowCorrectAnswer(){
-        questionTextField.text = "Lösung: " + currentEventField.solution;
+        questionTextField.text = "Lösung: " + currentEventField.GetAnswer();
     }
 
-    public string GetAnswer(){
-        return currentEventField.solution;
+    public string GetActualAnswer(){
+        return currentEventField.GetAnswer();
     }
 
     public void EmptyQuestiontext(){
@@ -157,15 +188,15 @@ public class QuestionManager : MonoBehaviour
     }
 
     public bool IsPictureField(){
-        return (currentEventField != default(JsonGameEventField) && currentEventField.type == bildraten);
+        return (currentEventField != default(GameEventField) && currentEventField.GetFieldType() == bildraten);
     }
 
     public bool IsEstimationField(){
-        return (currentEventField != default(JsonGameEventField) && currentEventField.type == schaetzfrage);
+        return (currentEventField != default(GameEventField) && currentEventField.GetFieldType() == schaetzfrage);
     }
 
     public Sprite LoadPictureFromDisk(){
-        string filePath = Application.dataPath + "/Resources/" + currentEventField.file;
+        string filePath = Application.dataPath + "/Resources/" + currentEventField.GetContent();
         Debug.Log("Lade: " + filePath);
         Sprite newImage = IMG2Sprite.instance.LoadNewSprite(filePath);
         return newImage;

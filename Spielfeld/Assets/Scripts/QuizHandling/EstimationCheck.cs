@@ -124,7 +124,7 @@ public class EstimationCheck : MonoBehaviour
     private List<int> IdentifyEstimationWinner(){
         List<int> differencesToSolution = new List<int>();
         List<int> teamsWithRightAnswer = new List<int>();
-        int.TryParse(FindObjectOfType<QuestionManager>().GetAnswer(), out int solution);
+        int.TryParse(FindObjectOfType<QuestionManager>().GetActualAnswer(), out int solution);
         int i = 0;
 
         foreach (GameObject thisInputfield in InputFields){
@@ -155,7 +155,6 @@ public class EstimationCheck : MonoBehaviour
         List<int> bestEstimations = new List<int>();
 
         foreach (int thisDifference in differencesToSolution){
-            Debug.Log(i);
             if (thisDifference == smallestDiffernce){
                 bestEstimations.Add(i);
             }

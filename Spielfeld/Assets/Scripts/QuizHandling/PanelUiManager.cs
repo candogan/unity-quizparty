@@ -132,11 +132,14 @@ public class PanelUiManager : MonoBehaviour
     }
 
     public void HandleCorrectAnswer(){
+        int points = GetTimePointsAndRemoveAnswerButtons();
         List<int> winnerTeams = new List<int>();
         int winner = FindObjectOfType<QuestionManager>().GetActualTeamIndex();
         winnerTeams.Add(winner);
-        FindObjectOfType<QuestionManager>().DistributePoints(winnerTeams, GetTimePointsAndRemoveAnswerButtons());
-        ShowDistributedPoints(winnerTeams, GetTimePointsAndRemoveAnswerButtons());
+        FindObjectOfType<QuestionManager>().DistributePoints(winnerTeams, points);
+        ShowDistributedPoints(winnerTeams, points);
+
+        timer.StopTimer();
     }
 
     public void HandleWrongAnswer(){
@@ -146,11 +149,9 @@ public class PanelUiManager : MonoBehaviour
     private int GetTimePointsAndRemoveAnswerButtons(){
         double t = timer.GetRemainingSeconds() / eventFieldTime;
 
-        timer.StopTimer();
         rightAnswerButton.SetActive(false);
         wrongAnswerButton.SetActive(false);
 
-    //Todo: Punktelogik ueberarbeiten
         if (t > 0.75){
             return 4;
         } else if (t > 0.5 && t < 0.75){
