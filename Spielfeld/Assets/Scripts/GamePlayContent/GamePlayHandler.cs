@@ -45,7 +45,7 @@ public class GamePlayHandler : MonoBehaviour
     IEnumerator waitForResult()
     {
         //Wait for x seconds
-        yield return new WaitForSecondsRealtime(4);
+        yield return new WaitForSecondsRealtime(5);
         diceValue = diceSc.getDiceValue();
         Debug.Log("Folgende Zahl wurde gewürfelt: " + diceValue);
         camera.FocusSideCamera();
@@ -56,7 +56,7 @@ public class GamePlayHandler : MonoBehaviour
     IEnumerator waitCharacterToMove()
     {
         // Wait for x seconds
-        yield return new WaitForSecondsRealtime(6);
+        yield return new WaitForSecondsRealtime(7);
         oneRoundFinished = true;
     }
 
