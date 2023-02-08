@@ -31,7 +31,7 @@ public class PanelUiManager : MonoBehaviour
     void Start()
     {     
         timer = FindObjectOfType<Timer>();
-        teamList = FindObjectOfType<TestTeams>().GetTeamList();
+        teamList = FindObjectOfType<TeamHandler>().GetTeamList();
     }
 
     void Update(){
@@ -175,7 +175,7 @@ public class PanelUiManager : MonoBehaviour
         foreach (int winner in winnerTeams){
             popupSize.y += 85;
             popupRectTrans.sizeDelta = popupSize;
-            int winnerReadable = winner + 1; 
+            int winnerReadable = winner; 
             
             GameObject newWinnerField = Instantiate(winnerFieldSample, new Vector3(250 , yPosInputField , 0), Quaternion.identity);
             newWinnerField.transform.SetParent(winnersPopup.transform, false);

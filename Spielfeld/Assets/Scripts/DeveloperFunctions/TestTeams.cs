@@ -6,13 +6,14 @@ public class TestTeams : MonoBehaviour
 {
     private List<Team> Teamlist = new List<Team>();
     // Start is called before the first frame update
+    public GameObject emptyGameobject;
 
     void Start()
     {
-        Team red = new Team(Color.red, 0, 1 );
-        Team blue = new Team(Color.blue, 15, 1);
-        Team yellow = new Team(Color.yellow, 5, 3 );
-        Team green = new Team(Color.green, 20, 15);
+        Team red = new Team(Color.red, emptyGameobject );
+        Team blue = new Team(Color.blue, emptyGameobject);
+        Team yellow = new Team(Color.yellow, emptyGameobject );
+        Team green = new Team(Color.green, emptyGameobject);
 
         Teamlist.Add(red);
         Teamlist.Add(blue);

@@ -31,7 +31,7 @@ public class EstimationCheck : MonoBehaviour
 
     public void InitializeEstimationPopup()
     {
-        teamList = FindObjectOfType<TestTeams>().GetTeamList();
+        teamList = FindObjectOfType<TeamHandler>().GetTeamList();
 
         RectTransform popupRectTrans = estimationPopup.GetComponent<RectTransform>();
         Vector2 popupSize = popupRectTrans.sizeDelta;

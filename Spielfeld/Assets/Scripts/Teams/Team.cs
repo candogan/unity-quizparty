@@ -6,12 +6,20 @@ public class Team
 {
     private Color color;
     private int score;
-    private int positionOnMap;
+    private GameObject character;
 
-    public Team(Color thisColor, int thisScore, int thisPositionOnMap){
+    public Team(Color thisColor, GameObject thisCharacter){
         color = thisColor;
-        score = thisScore;
-        positionOnMap = thisPositionOnMap;
+        score = 0;
+        character = thisCharacter;
+    }
+
+    public GameObject GetCharacter(){
+        return character;
+    }
+
+    public void SetCharacter(GameObject thisCharacter){
+        character = thisCharacter;
     }
 
 
@@ -34,17 +42,4 @@ public class Team
     public void addOrTakePointsToScore(int pointsToAddOrTake){
         score += pointsToAddOrTake;
     }
-
-    public int GetPositionOnMap(){
-        return positionOnMap;
-    }
-
-    public void SetPositionOnMap(int newPositionOnMap){
-        positionOnMap = newPositionOnMap;
-    }
-
-    public void MovePositionOnMap(int fieldsToMove){
-        positionOnMap += fieldsToMove;
-    }
-
 }

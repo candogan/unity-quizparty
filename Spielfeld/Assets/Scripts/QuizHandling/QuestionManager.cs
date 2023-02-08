@@ -181,9 +181,9 @@ public class QuestionManager : MonoBehaviour
 
     public void DistributePoints(List<int> winnerTeams, int pointsToAdd){
         foreach (int winner in winnerTeams){
-            //Debug.Log("Punkte Team " + winner +" vor korrekter Antwort: " + FindObjectOfType<TestTeams>().GetTeamList()[winner].GetScore());
-            FindObjectOfType<TestTeams>().addOrTakePointsToScore(winner, pointsToAdd);
-            //Debug.Log("Punkte Team " + winner +" nach korrekter Antwort: " + FindObjectOfType<TestTeams>().GetTeamList()[winner].GetScore());
+            //Debug.Log("Punkte Team " + winner +" vor korrekter Antwort: " + FindObjectOfType<TeamHandler>().GetTeamList()[winner].GetScore());
+            FindObjectOfType<TeamHandler>().addOrTakePointsToScore(winner, pointsToAdd);
+            //Debug.Log("Punkte Team " + winner +" nach korrekter Antwort: " + FindObjectOfType<TeamHandler>().GetTeamList()[winner].GetScore());
         }
     }
 
