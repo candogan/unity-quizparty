@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using static GamePlayHandler;
+using static GameFieldHandler;
 using static NextFieldDirectionEnum;
 
 public class Character : MonoBehaviour
 {
     private Animator character_Animator;
-    private GamePlayHandler gamePlayHandler;
+    private GameFieldHandler gameFieldHandler;
 
     private int actualFieldIndex = 0;
     private bool readyForNextMove = true;
@@ -31,8 +31,8 @@ public class Character : MonoBehaviour
     {
         character_Animator = gameObject.GetComponent<Animator>();
 
-        gamePlayHandler = FindObjectOfType<GamePlayHandler>();
-        fieldCount = gamePlayHandler.GetFieldCount();
+        gameFieldHandler = FindObjectOfType<GameFieldHandler>();
+        fieldCount = gameFieldHandler.GetFieldCount();
     }
 
     // Update is called once per frame
@@ -65,10 +65,10 @@ public class Character : MonoBehaviour
     }
 
     private void SpecifyMovingParameters(){
-        initFieldPosition = gamePlayHandler.GetLocationOfFieldindex(actualFieldIndex);
+        initFieldPosition = gameFieldHandler.GetLocationOfFieldindex(actualFieldIndex);
         initCharacterPosition = transform.position;
-        movingDirection = gamePlayHandler.GetNextFieldMoveOfFieldindex(actualFieldIndex);
-        nextFieldLocation = gamePlayHandler.GetLocationOfFieldindex((actualFieldIndex + 1) % fieldCount);
+        movingDirection = gameFieldHandler.GetNextFieldMoveOfFieldindex(actualFieldIndex);
+        nextFieldLocation = gameFieldHandler.GetLocationOfFieldindex((actualFieldIndex + 1) % fieldCount);
         // Debug.Log("Richtung: " + movingDirection + ", Ziel: " + nextFieldLocation + ",actualFieldIndex " + actualFieldIndex + ", readyForNextMove" + readyForNextMove);
         readyForNextMove = false;
 

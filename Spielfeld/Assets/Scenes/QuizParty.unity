@@ -6927,6 +6927,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 358187789}
+  - component: {fileID: 358187791}
+  - component: {fileID: 358187790}
   m_Layer: 0
   m_Name: GameFieldManager
   m_TagString: Untagged
@@ -6949,6 +6951,31 @@ Transform:
   m_Father: {fileID: 854589179}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &358187790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358187788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b1444bc37f7ec847a72aa7956bc6617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questionTextField: {fileID: 846746862}
+--- !u!114 &358187791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358187788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa544b1f5b768fb4793c32ce9c6cac30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &360499759 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 522459008932552855, guid: 23bd600a3424d9e44ac451d447977c93, type: 3}
@@ -8073,7 +8100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &414249975
 Transform:
   m_ObjectHideFlags: 0
@@ -10109,21 +10136,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2008707308}
+      - m_Target: {fileID: 358187790}
         m_TargetAssemblyTypeName: QuestionManager, Assembly-CSharp
-        m_MethodName: SetTeamIndex
+        m_MethodName: SetFieldTypeAndLoadTeaser
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2008707308}
+      - m_Target: {fileID: 358187790}
         m_TargetAssemblyTypeName: QuestionManager, Assembly-CSharp
-        m_MethodName: SetFieldTypeAndLoadTeaser
+        m_MethodName: SetTeamIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14465,7 +14492,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 758051462}
-  - component: {fileID: 758051464}
   - component: {fileID: 758051465}
   - component: {fileID: 758051466}
   - component: {fileID: 758051467}
@@ -14491,18 +14517,6 @@ Transform:
   m_Father: {fileID: 854589179}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &758051464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 758051461}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e0b1b323b9519b42b0675490706dc62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &758051465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14530,6 +14544,9 @@ MonoBehaviour:
   camera: {fileID: 0}
   dice: {fileID: 0}
   diceSc: {fileID: 0}
+  diceValue: 0
+  characterOne: {fileID: 0}
+  characterOneSc: {fileID: 0}
 --- !u!114 &758051467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16266,7 +16283,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1974066388}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16822,19 +16839,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2008707308}
+      - m_Target: {fileID: 358187790}
         m_TargetAssemblyTypeName: QuestionManager, Assembly-CSharp
         m_MethodName: SetTeamIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2008707308}
+      - m_Target: {fileID: 358187790}
         m_TargetAssemblyTypeName: QuestionManager, Assembly-CSharp
         m_MethodName: SetFieldTypeAndLoadTeaser
         m_Mode: 3
@@ -22239,6 +22256,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1114389113}
+  - component: {fileID: 1114389114}
   m_Layer: 0
   m_Name: CharacterManager
   m_TagString: Untagged
@@ -22261,6 +22279,18 @@ Transform:
   m_Father: {fileID: 854589179}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1114389114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114389112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e0b1b323b9519b42b0675490706dc62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1115005825 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3916574325633068106, guid: 18bb023d75a113f4cb8d1452371f5c0e, type: 3}
@@ -22519,21 +22549,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2008707308}
+      - m_Target: {fileID: 358187790}
         m_TargetAssemblyTypeName: QuestionManager, Assembly-CSharp
-        m_MethodName: SetTeamIndex
+        m_MethodName: SetFieldTypeAndLoadTeaser
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2008707308}
+      - m_Target: {fileID: 358187790}
         m_TargetAssemblyTypeName: QuestionManager, Assembly-CSharp
-        m_MethodName: SetFieldTypeAndLoadTeaser
+        m_MethodName: SetTeamIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -24548,7 +24578,7 @@ RectTransform:
   m_Children:
   - {fileID: 37737707}
   m_Father: {fileID: 1974066388}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -24747,7 +24777,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1974066388}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -26831,7 +26861,7 @@ RectTransform:
   - {fileID: 357776593}
   - {fileID: 387443195}
   m_Father: {fileID: 1974066388}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -30204,7 +30234,7 @@ RectTransform:
   m_Children:
   - {fileID: 164538308}
   m_Father: {fileID: 1974066388}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -30550,19 +30580,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2008707308}
-        m_TargetAssemblyTypeName: QuestionManager, Assembly-CSharp
-        m_MethodName: SetTeamIndex
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2008707308}
+      - m_Target: {fileID: 358187790}
         m_TargetAssemblyTypeName: QuestionManager, Assembly-CSharp
         m_MethodName: SetFieldTypeAndLoadTeaser
         m_Mode: 3
@@ -30570,6 +30588,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 358187790}
+        m_TargetAssemblyTypeName: QuestionManager, Assembly-CSharp
+        m_MethodName: SetTeamIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -32996,19 +33026,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2008707308}
-        m_TargetAssemblyTypeName: QuestionManager, Assembly-CSharp
-        m_MethodName: SetTeamIndex
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2008707308}
+      - m_Target: {fileID: 358187790}
         m_TargetAssemblyTypeName: QuestionManager, Assembly-CSharp
         m_MethodName: SetFieldTypeAndLoadTeaser
         m_Mode: 3
@@ -33016,6 +33034,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 358187790}
+        m_TargetAssemblyTypeName: QuestionManager, Assembly-CSharp
+        m_MethodName: SetTeamIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -40556,7 +40586,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2126356842}
-  - {fileID: 2008707307}
   - {fileID: 1264185660}
   - {fileID: 846746861}
   - {fileID: 1532258675}
@@ -41484,64 +41513,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18bb023d75a113f4cb8d1452371f5c0e, type: 3}
---- !u!1 &2008707306
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2008707307}
-  - component: {fileID: 2008707308}
-  - component: {fileID: 2008707309}
-  m_Layer: 0
-  m_Name: QuestionManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2008707307
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008707306}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 49.577454, y: -24.735962, z: 454.53854}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1974066388}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2008707308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008707306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b1444bc37f7ec847a72aa7956bc6617, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questionTextField: {fileID: 846746862}
---- !u!114 &2008707309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008707306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17351daa5dcc0e34686afa7973dc18b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2012962050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44922,7 +44893,7 @@ RectTransform:
   - {fileID: 679128319}
   - {fileID: 698499538567404329}
   m_Father: {fileID: 1974066388}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -45174,7 +45145,7 @@ RectTransform:
   - {fileID: 1386236995}
   - {fileID: 698499538435495572}
   m_Father: {fileID: 1974066388}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -45560,7 +45531,7 @@ RectTransform:
   - {fileID: 193520526}
   - {fileID: 698499539014461570}
   m_Father: {fileID: 1974066388}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -45705,7 +45676,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2008707308}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: QuestionManager, Assembly-CSharp
         m_MethodName: LoadQuestionText
         m_Mode: 1
@@ -45744,7 +45715,7 @@ RectTransform:
   - {fileID: 839742511}
   - {fileID: 698499538977594793}
   m_Father: {fileID: 1974066388}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -46355,7 +46326,7 @@ RectTransform:
   - {fileID: 7606351583402159934}
   - {fileID: 5582492860841092550}
   m_Father: {fileID: 1974066388}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -46453,7 +46424,7 @@ RectTransform:
   - {fileID: 8317532570315131247}
   - {fileID: 415746693}
   m_Father: {fileID: 1974066388}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -46654,7 +46625,7 @@ RectTransform:
   - {fileID: 8882726664991781151}
   - {fileID: 1650503549}
   m_Father: {fileID: 1974066388}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
