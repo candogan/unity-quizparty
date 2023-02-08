@@ -5,12 +5,14 @@ using UnityEngine;
 public class TeamHandler : MonoBehaviour
 {
 
-    public static int testTeamCount = 4;                                //ToDo: Import settings from start menue
+
     public GameObject characterPrefab;
     public GameObject characterArea;
 
+    public static float teamCount;
 
     private List<Team> teamlist = new List<Team>();
+
     private List<Color> colorlist = new List<Color>{                    // Colors for the Teams
         Color.red,
         Color.blue,
@@ -33,6 +35,7 @@ public class TeamHandler : MonoBehaviour
 
     void Start()
     {
+        teamCount = GameOptionsHandler.teamCount;
         InitializeTeams();
     }
 
@@ -58,10 +61,10 @@ public class TeamHandler : MonoBehaviour
         //ToDo: Charactere in Laufrichtung drehen
 
 
-        for (int i = 0; i < testTeamCount; i++){
+        for (int i = 0; i < teamCount; i++){
             GameObject newCharacter = Instantiate(characterPrefab, initCharacterPositions[i], Quaternion.identity);
             newCharacter.transform.SetParent(characterArea.transform, false);
-            
+
             Team newTeam = new Team(colorlist[i], newCharacter);
             teamlist.Add(newTeam);
         }

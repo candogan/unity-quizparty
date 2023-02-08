@@ -7,12 +7,12 @@ using UnityEngine.SceneManagement;
 public class GameOptionsHandler : MonoBehaviour
 {
     
-    public float teamCount;
-    public float roundCount;
+    public static float teamCount;
+    public static float roundCount;
 
-    public bool difficulty1;
-    public bool difficulty2;
-    public bool difficulty3;
+    public static bool difficulty1;
+    public static bool difficulty2;
+    public static bool difficulty3;
 
     public Slider teamSlider;
     public Slider roundSlider;
