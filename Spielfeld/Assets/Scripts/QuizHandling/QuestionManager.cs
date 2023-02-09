@@ -44,7 +44,7 @@ public class QuestionManager : MonoBehaviour
         };
 
     void Start(){
-        difficulty = new List<int>{3};                                              //ToDo Anbinden ans start Menü
+        difficulty = GameOptionsHandler.getDifficulties();
         eventFieldList = FileHandler.ReadListFromJSON<GameEventField> (filename);
         SearchAvailableTypes();
     }

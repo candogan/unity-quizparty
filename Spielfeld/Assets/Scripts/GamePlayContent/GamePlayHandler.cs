@@ -16,6 +16,9 @@ public class GamePlayHandler : MonoBehaviour
     public Character characterOneSc;
     private bool oneRoundFinished;
 
+    private float teamCount;
+    private float roundCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,5 +73,8 @@ public class GamePlayHandler : MonoBehaviour
         characterOne = GameObject.Find("Toon Chicken Team 1");
         characterOneSc = (Character) characterOne.GetComponent<Character>();
         characterOneSc.StartClass();
+
+        teamCount = GameOptionsHandler.getTeamCount();
+        roundCount = GameOptionsHandler.getRoundCount();
     }
 }

@@ -7,12 +7,14 @@ using UnityEngine.SceneManagement;
 public class GameOptionsHandler : MonoBehaviour
 {
     
-    public static float teamCount;
-    public static float roundCount;
+    private static float teamCount;
+    private static float roundCount;
 
-    public static bool difficulty1;
-    public static bool difficulty2;
-    public static bool difficulty3;
+    private static bool difficulty1;
+    private static bool difficulty2;
+    private static bool difficulty3;
+
+    private static List<int> difficulties;
 
     public Slider teamSlider;
     public Slider roundSlider;
@@ -21,34 +23,95 @@ public class GameOptionsHandler : MonoBehaviour
     public Toggle diffTwoToggle;
     public Toggle diffThreeToggle;
 
-    // Start is called before the first frame update
+    // Initialisieren der Variablen bei Start des Spiels
     void Start()
+    {
+        initialiazeVariables();
+    }
+
+    public void PlayGame ()
+    {
+        //Variablen der ausgewählten Schwierigkeit anpassen
+        updateDiffList();
+        //Prüfen ob mindestens eine Schwierigkeit ausgewählt wurde
+        //Spiel starten
+        checkDiffSelection();
+    }
+
+    //Initialisieren der Variablen
+    private void initialiazeVariables()
     {
         teamCount = 2;
         roundCount = 3;
         difficulty1 = true;
         difficulty2 = true;
         difficulty3 = true;
+        difficulties = new List<int>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void PlayGame ()
+    //Variablen der ausgewählten Schwierigkeit anpassen
+    private void updateDiffList()
     {
         difficulty1 = diffOneToggle.isOn;
         difficulty2 = diffTwoToggle.isOn;
         difficulty3 = diffThreeToggle.isOn;
 
+        if (difficulty1 == true)
+        {
+            difficulties.Add(1);
+        }
+        if (difficulty2 == true)
+        {
+            difficulties.Add(2);
+        }
+        if (difficulty3 == true)
+        {
+            difficulties.Add(3);
+        }
+    }
+
+    //Prüfen ob mindestens eine Schwierigkeit ausgewählt wurde
+    //Spiel starten
+    private void checkDiffSelection(){
         if (difficulty1 == true || difficulty2 == true || difficulty3 == true)
         {
             teamCount = teamSlider.value;
             roundCount  = roundSlider.value;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        } 
+        else
+        {
+            difficulties.Clear();
         }
+    }
 
+    public static float getTeamCount()
+    {
+        return teamCount;      
+    }
+
+    public static float getRoundCount()
+    {
+        return roundCount;      
+    }
+
+    public static bool getDiff1()
+    {
+        return difficulty1;      
+    }
+
+    public static bool getDiff2()
+    {
+        return difficulty2;      
+    }
+
+    public static bool getDiff3()
+    {
+        return difficulty3;      
+    }
+
+    public static List<int> getDifficulties()
+    {
+        return difficulties;      
     }
 }

@@ -30,7 +30,7 @@ public class TeamHandler : MonoBehaviour
 
     void Start()
     {
-        teamCount = GameOptionsHandler.teamCount;
+        teamCount = GameOptionsHandler.getTeamCount();
         InitializeTeams();
     }
 
