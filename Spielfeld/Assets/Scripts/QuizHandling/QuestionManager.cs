@@ -8,13 +8,15 @@ using TMPro;
 public class QuestionManager : MonoBehaviour
 {
     public TextMeshProUGUI questionTextField;
+    public GameObject timerPauseButton;
+    public PanelUiManager panelUiManager;
+    public TeamHandler teamHandler;
 
     private List<GameEventField> eventFieldList;
     private List<int> availableFieldTypes = new List<int>(); 
     private List<int> difficulty;
     private bool basicMode = false;
     private Random rnd = new Random();
-    private GameObject timerPauseButton;
 
     private GameEventField currentEventField;
 
@@ -42,36 +44,33 @@ public class QuestionManager : MonoBehaviour
         };
 
     void Start(){
-        difficulty = new List<int>{3};
-        timerPauseButton = GameObject.Find("TimerPauseButton");
+        difficulty = new List<int>{3};                                              //ToDo Anbinden ans start Menü
         eventFieldList = FileHandler.ReadListFromJSON<GameEventField> (filename);
         SearchAvailableTypes();
-    }
-
-    void Update(){
     }
 
     public int GetActualTeamIndex(){
         return actualTeamIndex;
     }
 
-    
-    public void SetTeamIndex(int teamIndex){
+    public void StartNewQuestion(int teamIndex, int fieldtype){
         actualTeamIndex = teamIndex;
-    }
 
-    public void SetFieldTypeAndLoadTeaser(int newFieldType){
-        actualFieldType = newFieldType;
+        actualFieldType = fieldtype;
         questionTextField.text = string.Format(teaserTextList[actualFieldType-1], actualTeamIndex);
         RandomQuestionPicker(actualFieldType);
-        FindObjectOfType<PanelUiManager>().SetupTimer(eventFieldList[actualEventFieldIndex].GetTime());
+
+        panelUiManager.SetupTimer(eventFieldList[actualEventFieldIndex].GetTime());
+        panelUiManager.ShowQuestionUi();
     }
+
 
     public void LoadQuestionText(){
         //Debug.Log("Lade Aufgabentyp: " + actualFieldType);
         if (IsPictureField()){
             questionTextField.text = "Wer / Was ist auf dem Bild abgebildet?";
         } else {
+
             questionTextField.text = eventFieldList[actualEventFieldIndex].GetContent();
         }
     }
@@ -98,8 +97,6 @@ public class QuestionManager : MonoBehaviour
 
             actualEventFieldIndex = availableFields[rnd.Next(fieldCount)];
 
-            Debug.Log("actualEventFieldIndex: " + actualEventFieldIndex);
-
             currentEventField = eventFieldList[actualEventFieldIndex];
             eventFieldList[actualEventFieldIndex].SetUsed(nichtVerfuegbar);
         }
@@ -114,7 +111,7 @@ public class QuestionManager : MonoBehaviour
         if(!availableFieldTypes.Contains(fieldtype)){
             Debug.Log("WARNING: NOT ENOUGH QUESTIONS. PICKED RANDOM QUESTIONTYPE");
             fieldtype = availableFieldTypes[rnd.Next(availableFieldTypes.Count)];
-            SetFieldTypeAndLoadTeaser(fieldtype);
+            StartNewQuestion(actualTeamIndex, fieldtype);
         }
 
         List<int> thisAvailableFields = new List<int>();
@@ -181,9 +178,9 @@ public class QuestionManager : MonoBehaviour
 
     public void DistributePoints(List<int> winnerTeams, int pointsToAdd){
         foreach (int winner in winnerTeams){
-            //Debug.Log("Punkte Team " + winner +" vor korrekter Antwort: " + FindObjectOfType<TeamHandler>().GetTeamList()[winner].GetScore());
-            FindObjectOfType<TeamHandler>().addOrTakePointsToScore(winner, pointsToAdd);
-            //Debug.Log("Punkte Team " + winner +" nach korrekter Antwort: " + FindObjectOfType<TeamHandler>().GetTeamList()[winner].GetScore());
+            //Debug.Log("Punkte Team " + winner +" vor korrekter Antwort: " + teamHandler.GetTeamList()[winner].GetScore());
+            teamHandler.addOrTakePointsToScore(winner, pointsToAdd);
+            //Debug.Log("Punkte Team " + winner +" nach korrekter Antwort: " + teamHandler.GetTeamList()[winner].GetScore());
         }
     }
 

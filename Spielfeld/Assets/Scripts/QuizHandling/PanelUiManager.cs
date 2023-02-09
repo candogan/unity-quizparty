@@ -7,6 +7,7 @@ using TMPro;
 
 public class PanelUiManager : MonoBehaviour
 {
+    public GameObject questionUi;
     public GameObject questionPanel;
     public GameObject timerStartButton;
     public GameObject timerPauseButton;
@@ -18,20 +19,22 @@ public class PanelUiManager : MonoBehaviour
     public GameObject estimationPopup;
     public GameObject winnerPopupSample;
     public GameObject winnerFieldSample;
-    public GameObject quizText;
+    public TextMeshProUGUI quizText;
+    public QuestionManager questionManager;
 
     public Image pictureContent;
 
-    private Timer timer;
+    public TeamHandler teamHandler;
+    public Timer timer;
+
     private int eventFieldTime;
     private GameObject winnersPopup;
-    private List<Team> teamList = new List<Team>();
+    private List<Team> teamList;
 
     // Start is called before the first frame update
     void Start()
-    {     
-        timer = FindObjectOfType<Timer>();
-        teamList = FindObjectOfType<TeamHandler>().GetTeamList();
+    {
+        teamList = teamHandler.GetTeamList();  
     }
 
     void Update(){
@@ -42,12 +45,18 @@ public class PanelUiManager : MonoBehaviour
             WaitForAnswer();
         }
 
-        if(FindObjectOfType<QuestionManager>().IsPictureField() && timer.isRunning()){
+        if(questionManager.IsPictureField() && timer.isRunning()){
             pictureContent.fillAmount += 1.1f / (float)eventFieldTime * Time.deltaTime;
         }
     }
 
-    public void Reset(){
+    public void ShowQuestionUi(){
+        questionUi.SetActive(true);
+    }
+
+    public void ResetQuestionUi(){
+        questionUi.SetActive(false);
+
         Destroy(winnersPopup);
         estimationPopup.SetActive(false);
         pictureTask.SetActive(false);
@@ -59,7 +68,7 @@ public class PanelUiManager : MonoBehaviour
         timerStartButton.SetActive(true);
         timer.StopTimer();
         timerPauseButton.transform.localPosition = new Vector3(0,0,0);
-        quizText.GetComponent<TextMeshProUGUI>().text = "Lade neues Rätsel...";
+        quizText.text = "Lade neues Rätsel...";
     }
 
 
@@ -68,10 +77,10 @@ public class PanelUiManager : MonoBehaviour
         timerStartButton.SetActive(false);
         timerPauseButton.SetActive(true);
 
-        if (FindObjectOfType<QuestionManager>().IsPictureField()){
+        if (questionManager.IsPictureField()){
             timerPauseButton.transform.Translate(0,-365,0);
             pictureTask.SetActive(true);
-            pictureContent.sprite = FindObjectOfType<QuestionManager>().LoadPictureFromDisk();
+            pictureContent.sprite = questionManager.LoadPictureFromDisk();
             pictureContent.fillAmount = 0;
         }
     }
@@ -90,7 +99,7 @@ public class PanelUiManager : MonoBehaviour
         showAnswerButton.SetActive(true);
         timer.PauseTimer();
 
-        if (FindObjectOfType<QuestionManager>().IsPictureField()){
+        if (questionManager.IsPictureField()){
             pictureTask.SetActive(false);
         }
     }
@@ -101,7 +110,7 @@ public class PanelUiManager : MonoBehaviour
         showAnswerButton.SetActive(false);
         timer.ContinueTimer();
 
-        if (FindObjectOfType<QuestionManager>().IsPictureField()){
+        if (questionManager.IsPictureField()){
             pictureTask.SetActive(true);
         }
     }
@@ -110,33 +119,34 @@ public class PanelUiManager : MonoBehaviour
         timerContinueButton.SetActive(false);
         showAnswerButton.SetActive(false);
         
-        if(FindObjectOfType<QuestionManager>().IsEstimationField()){
+        if(questionManager.IsEstimationField()){
             estimationPopup.SetActive(true);
-            FindObjectOfType<QuestionManager>().EmptyQuestiontext();
+            questionManager.EmptyQuestiontext();
         } else {
             rightAnswerButton.SetActive(true);
             wrongAnswerButton.SetActive(true);
-            FindObjectOfType<QuestionManager>().ShowCorrectAnswer();
+            questionManager.ShowCorrectAnswer();
         }
 
         //versetzen des Pause Buttons falls mehr Platz fuer ein Bildraetsel benoetigt wird
-        if (FindObjectOfType<QuestionManager>().IsPictureField()){
+        if (questionManager.IsPictureField()){
             timerPauseButton.transform.Translate(0,365,0);
         }
     }
 
     public void DisableEstimationPopup(){
         estimationPopup.SetActive(false);
-        FindObjectOfType<QuestionManager>().ShowCorrectAnswer();
-        winnersPopup.SetActive(true);
+        questionManager.ShowCorrectAnswer();
     }
 
     public void HandleCorrectAnswer(){
         int points = GetTimePointsAndRemoveAnswerButtons();
+
         List<int> winnerTeams = new List<int>();
-        int winner = FindObjectOfType<QuestionManager>().GetActualTeamIndex();
-        winnerTeams.Add(winner);
-        FindObjectOfType<QuestionManager>().DistributePoints(winnerTeams, points);
+        int winner = questionManager.GetActualTeamIndex();
+
+        winnerTeams.Add(winner-1);
+        questionManager.DistributePoints(winnerTeams, points);
         ShowDistributedPoints(winnerTeams, points);
 
         timer.StopTimer();
@@ -172,10 +182,16 @@ public class PanelUiManager : MonoBehaviour
         RectTransform popupRectTrans = GameObject.Find("WinnersPopup(Clone)").GetComponent<RectTransform>();
         Vector2 popupSize = popupRectTrans.sizeDelta;
 
+        GameObject questionDoneButton = winnersPopup.transform.GetChild(1).gameObject;
+        questionDoneButton.GetComponent<Button>().onClick.AddListener(() => ResetQuestionUi());
+
+
         foreach (int winner in winnerTeams){
+            questionDoneButton.transform.position += new Vector3(0, -42f, 0);
+
             popupSize.y += 85;
             popupRectTrans.sizeDelta = popupSize;
-            int winnerReadable = winner; 
+            int winnerReadable = winner + 1; 
             
             GameObject newWinnerField = Instantiate(winnerFieldSample, new Vector3(250 , yPosInputField , 0), Quaternion.identity);
             newWinnerField.transform.SetParent(winnersPopup.transform, false);

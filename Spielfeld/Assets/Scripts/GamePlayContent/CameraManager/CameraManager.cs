@@ -42,7 +42,7 @@ public class CameraManager : MonoBehaviour
 
     public void FocusSideCamera()
     {
-        Debug.Log("Inside");
+        //Debug.Log("Inside");
         diceCamera.SetActive(false);
         mainCamera.SetActive(false);
         sideCamera.SetActive(true);

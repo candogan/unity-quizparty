@@ -45,7 +45,7 @@ public class GamePlayHandler : MonoBehaviour
         //Wait for x seconds
         yield return new WaitForSecondsRealtime(5);
         diceValue = diceSc.getDiceValue();
-        Debug.Log("Folgende Zahl wurde gewürfelt: " + diceValue);
+        //Debug.Log("Folgende Zahl wurde gewürfelt: " + diceValue);
         camera.FocusSideCamera();
         characterOneSc.TransferDiceResult(diceValue);
         StartCoroutine(waitCharacterToMove());

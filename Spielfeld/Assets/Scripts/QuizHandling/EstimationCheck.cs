@@ -12,15 +12,20 @@ public class EstimationCheck : MonoBehaviour
     public GameObject inputFieldSample;
     public GameObject checkEstimationButton;
 
+    public TeamHandler teamHandler;
+    public QuestionManager questionManager;
+    public PanelUiManager panelUiManager;
+
     private List<Team> teamList = new List<Team>();
     private List<GameObject> InputFields = new List<GameObject>();
     private GameObject winnersPopup;
-    private int estimationFieldHeight = 50;
+    private int estimationFieldHeight = 95;
 
     Regex regexNumbers = new Regex(@"^\d+$");
     // Start is called before the first frame update
     void Start()
     {
+        InitializeEstimationPopup();
     }
 
     // Update is called once per frame
@@ -31,23 +36,12 @@ public class EstimationCheck : MonoBehaviour
 
     public void InitializeEstimationPopup()
     {
-        teamList = FindObjectOfType<TeamHandler>().GetTeamList();
+        teamList = teamHandler.GetTeamList();
 
         RectTransform popupRectTrans = estimationPopup.GetComponent<RectTransform>();
         Vector2 popupSize = popupRectTrans.sizeDelta;
 
-        Vector3 checkEstimationButtonPosition = checkEstimationButton.transform.position;
-        
-
-        foreach (Team thisTeam in teamList){
-            popupSize.y += estimationFieldHeight;
-            popupRectTrans.sizeDelta = popupSize;
-
-            checkEstimationButtonPosition += new Vector3(0, -22.5f, 0);
-            checkEstimationButton.transform.position = checkEstimationButtonPosition; 
-        }
-
-        if(InputFields.Count < 1 && FindObjectOfType<TestTeams>().GetTeamList().Count > 0) {
+        if(InputFields.Count < 1 && teamHandler.GetTeamList().Count > 0) {
 
             Debug.Log("-------- Start Initialization Estimation-Popup --------");
             GameObject newInputfield;
@@ -58,12 +52,18 @@ public class EstimationCheck : MonoBehaviour
             int yPosInputField = -235;
 
             foreach (Team thisTeam in teamList){
+
+                //Setup Pupup Size
+                popupSize.y += estimationFieldHeight;
+                popupRectTrans.sizeDelta = popupSize;
+                checkEstimationButton.transform.position += new Vector3(0, -43.5f, 0); 
+
+                //Instantiate Inputfield for each Team
                 newInputfield = Instantiate(inputFieldSample, new Vector3(400 , yPosInputField , 0), Quaternion.identity);
                 newInputfield.transform.SetParent(estimationPopup.transform, false);
 
-                //Set Inputfield Symbol to Teamcolor
+                //Set Inputfield Symbol to Teamcolor + default Text
                 newInputfield.transform.GetChild(1).GetComponent<Image>().color = thisTeam.GetColor();
-
                 newInputTextArea = newInputfield.transform.GetChild(2).gameObject;
                 newInputDefaultText= newInputTextArea.transform.GetChild(1).gameObject;
                 newInputDefaultText.GetComponent<TextMeshProUGUI>().text = "Antwort Team " + i;
@@ -74,7 +74,6 @@ public class EstimationCheck : MonoBehaviour
             }
 
         }
-        
     }
 
     private void ResetInputFields(){
@@ -90,9 +89,10 @@ public class EstimationCheck : MonoBehaviour
             List<int> winnerTeams = IdentifyEstimationWinner();
             ResetInputFields();
 
-            FindObjectOfType<QuestionManager>().DistributePoints(winnerTeams, 2);
-            FindObjectOfType<PanelUiManager>().ShowDistributedPoints(winnerTeams, 2);
-            FindObjectOfType<PanelUiManager>().DisableEstimationPopup();
+
+            panelUiManager.DisableEstimationPopup();
+            panelUiManager.ShowDistributedPoints(winnerTeams, 2);
+            questionManager.DistributePoints(winnerTeams, 2);
         }
     
     }
@@ -124,7 +124,7 @@ public class EstimationCheck : MonoBehaviour
     private List<int> IdentifyEstimationWinner(){
         List<int> differencesToSolution = new List<int>();
         List<int> teamsWithRightAnswer = new List<int>();
-        int.TryParse(FindObjectOfType<QuestionManager>().GetActualAnswer(), out int solution);
+        int.TryParse(questionManager.GetActualAnswer(), out int solution);
         int i = 0;
 
         foreach (GameObject thisInputfield in InputFields){
