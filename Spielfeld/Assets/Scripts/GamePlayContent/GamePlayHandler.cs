@@ -49,6 +49,10 @@ public class GamePlayHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (triggerQuestion) {
+            StartQuestion();
+        }
+
         if (gameFinished == false){
             ManageRoundLogic();
         }
@@ -56,10 +60,6 @@ public class GamePlayHandler : MonoBehaviour
 
 
     private void ManageRoundLogic(){
-        if (triggerQuestion) {
-            StartQuestion();
-        }
-
         finishedQuestion = !panelUiManager.UiIsActive();
 
         if (finishedQuestion && oneTeamFinished && actualRoundCount <= roundCount) {
@@ -82,6 +82,13 @@ public class GamePlayHandler : MonoBehaviour
         triggerQuestion = false;
         int fieldIndex = characterOneSc.GetActualFieldIndex();
         int fieldType = gameFieldHandler.GetFieldType(fieldIndex);
+
+        Debug.Log("FIELDTYPE: " + fieldType);
+        if (fieldIndex == GameFieldTypeEnum.NOTHING) {
+            finishedQuestion = true;
+            return;
+        }
+
         questionManager.StartNewQuestion(actualTeamCount, fieldType);
     }
 
