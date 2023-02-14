@@ -94,7 +94,7 @@ public class Character : MonoBehaviour
         if (currentLocation.x >= initCharacterPosition.x - fieldDistance) {
                 //character_Animator.SetTrigger("Run In Place");
                 //Temp Fix um Exception zu umgehen
-                Vector3 destiny = new Vector3(0, 0, 8) * Time.deltaTime;
+                Vector3 destiny = new Vector3(-8, 0, 0) * Time.deltaTime;
                 transform.Translate(destiny);
         } else {
             Vector3 speed = new Vector3(0, 0, 0) * Time.deltaTime;
@@ -111,7 +111,7 @@ public class Character : MonoBehaviour
         if (currentLocation.x <= initCharacterPosition.x + fieldDistance) {
                 //character_Animator.SetTrigger("Run In Place");
                 //Temp Fix um Exception zu umgehen
-                Vector3 destiny = new Vector3(0, 0, -8) * Time.deltaTime;
+                Vector3 destiny = new Vector3(8, 0, 0) * Time.deltaTime;
                 transform.Translate(destiny);
         } else {
             Vector3 speed = new Vector3(0, 0, 0) * Time.deltaTime;
@@ -128,7 +128,7 @@ public class Character : MonoBehaviour
         if (currentLocation.z >= initCharacterPosition.z - fieldDistance) {
                 //character_Animator.SetTrigger("Run In Place");
                 //Temp Fix um Exception zu umgehen
-                Vector3 destiny = new Vector3(-8, 0, 0) * Time.deltaTime;
+                Vector3 destiny = new Vector3(0, 0, -8) * Time.deltaTime;
                 transform.Translate(destiny);
         } else {
             Vector3 speed = new Vector3(0, 0, 0) * Time.deltaTime;
@@ -145,7 +145,7 @@ public class Character : MonoBehaviour
         if (currentLocation.z <= initCharacterPosition.z + fieldDistance) {
                 //character_Animator.SetTrigger("Run In Place");
                 //Temp Fix um Exception zu umgehen
-                Vector3 destiny = new Vector3(8, 0, 0) * Time.deltaTime;
+                Vector3 destiny = new Vector3(0, 0, 8) * Time.deltaTime;
                 transform.Translate(destiny);
         } else {
             Vector3 speed = new Vector3(0, 0, 0) * Time.deltaTime;

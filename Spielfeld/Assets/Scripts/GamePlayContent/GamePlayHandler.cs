@@ -17,7 +17,8 @@ public class GamePlayHandler : MonoBehaviour
     public GameObject characterOne;
     public Character characterOneSc;
     private bool oneRoundFinished;
-    private bool oneTeamFinished;
+    private bool oneTeamFinished = true;
+    private bool gameFinished;
     private int roundCount;
     private int actualRoundCount = 1;
     private int teamCount;
@@ -34,41 +35,41 @@ public class GamePlayHandler : MonoBehaviour
     IEnumerator startGameWithDelay()
     {
         // Wait for x seconds
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitForSecondsRealtime(2);
 
         Debug.Log("Erste Runde!");
-        Debug.Log(teamCount);
-        Debug.Log(roundCount);
-        StartRoundForTeam();
+        Debug.Log("Teamcount geladen: " + teamCount);
+        Debug.Log("Roundcount geladen: " + roundCount);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (oneTeamFinished) {
+        if (gameFinished == false){
+            ManageRoundLogic();
+        }
+    }
+
+
+    private void ManageRoundLogic(){
+        if (oneTeamFinished && actualRoundCount <= roundCount) {
             oneTeamFinished = false;
             if (actualTeamCount < teamCount-1) {
                 actualTeamCount += 1;
             } else {
-                oneRoundFinished = true;
                 actualTeamCount = 0;
+                actualRoundCount += 1;
             }
-
-            if (oneRoundFinished) {
-                oneRoundFinished = false;
-                if (actualRoundCount < roundCount) {
-                    actualRoundCount += 1;
-                } else {
-                    Debug.Log("KEINE RUNDE MEHR!");
-                }
-            }
-            Debug.Log("Neue Runde!");
             StartRoundForTeam();
+        } else if (actualRoundCount > roundCount){
+            Debug.Log("Finished");
+            gameFinished = true;
         }
     }
 
     public void StartRoundForTeam()
     {
+        Debug.Log("Team: " +  actualTeamCount + ", Runde: " + actualRoundCount);
         characterOne = teamHandler.getCharacterOfTeamindex(actualTeamCount);
         characterOneSc = (Character) characterOne.GetComponent<Character>();
         characterOneSc.StartClass();
