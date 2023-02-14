@@ -13750,8 +13750,7 @@ Transform:
   m_LocalPosition: {x: -28.883307, y: -147.04866, z: 145.69836}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1915425555}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14543,7 +14542,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41e78f648e467b540b7360a66d7b6d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
+  camera: {fileID: 758051467}
+  teamHandler: {fileID: 1114389114}
+  gameOptionsHandler: {fileID: 0}
   dice: {fileID: 0}
   diceSc: {fileID: 0}
   diceValue: 0
@@ -14561,9 +14562,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a52985b403b1a40b1e618a053bcff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diceCamera: {fileID: 0}
-  mainCamera: {fileID: 0}
-  sideCamera: {fileID: 0}
+  diceCamera: {fileID: 963194225}
+  mainCamera: {fileID: 2074744417}
+  sideCamera: {fileID: 1067762247}
 --- !u!4 &759326842 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 317944115831912086, guid: 9a91bc2b0a89c4748a0c5b940bd461a7, type: 3}
@@ -39139,11 +39140,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3805318389859771188, guid: 24457fdf8e66c3c49b7599931e0fdcb2, type: 3}
   m_PrefabInstance: {fileID: 2056979991}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1915425555 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6958564580954163468, guid: 58ccf772eed77b8489b6ea6ebe193840, type: 3}
-  m_PrefabInstance: {fileID: 6962146989606283946}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1917002500
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46199,67 +46195,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 800, y: 410}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &6962146989606283946
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 719806543}
-    m_Modifications:
-    - target: {fileID: 6958564580954163468, guid: 58ccf772eed77b8489b6ea6ebe193840, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958564580954163468, guid: 58ccf772eed77b8489b6ea6ebe193840, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 66
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958564580954163468, guid: 58ccf772eed77b8489b6ea6ebe193840, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 149.6774
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958564580954163468, guid: 58ccf772eed77b8489b6ea6ebe193840, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -140.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958564580954163468, guid: 58ccf772eed77b8489b6ea6ebe193840, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958564580954163468, guid: 58ccf772eed77b8489b6ea6ebe193840, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958564580954163468, guid: 58ccf772eed77b8489b6ea6ebe193840, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958564580954163468, guid: 58ccf772eed77b8489b6ea6ebe193840, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958564580954163468, guid: 58ccf772eed77b8489b6ea6ebe193840, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958564580954163468, guid: 58ccf772eed77b8489b6ea6ebe193840, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958564580954163468, guid: 58ccf772eed77b8489b6ea6ebe193840, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6960923796893010946, guid: 58ccf772eed77b8489b6ea6ebe193840, type: 3}
-      propertyPath: m_Name
-      value: Toon Chicken Team 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6960923796893010946, guid: 58ccf772eed77b8489b6ea6ebe193840, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 58ccf772eed77b8489b6ea6ebe193840, type: 3}
 --- !u!224 &7434475264906726561
 RectTransform:
   m_ObjectHideFlags: 0

@@ -9,37 +9,76 @@ public class GamePlayHandler : MonoBehaviour
 {
     //Objecttyp zu liste gewechselt -> bietet einfacheren zugriff auf die values
     public CameraManager camera;
+    public TeamHandler teamHandler;
+    public GameOptionsHandler gameOptionsHandler;
     public GameObject dice;
     public DiceScript diceSc;
     public int diceValue;
     public GameObject characterOne;
     public Character characterOneSc;
     private bool oneRoundFinished;
-
-    private float teamCount;
-    private float roundCount;
+    private bool oneTeamFinished;
+    private int roundCount;
+    private int actualRoundCount = 1;
+    private int teamCount;
+    private int actualTeamCount = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         InitializeClasses();
-        RollDice();
+        StartCoroutine(startGameWithDelay());
+    }
+
+    // Wait for other Scripts to load
+    IEnumerator startGameWithDelay()
+    {
+        // Wait for x seconds
+        yield return new WaitForSecondsRealtime(5);
+
+        Debug.Log("Erste Runde!");
+        Debug.Log(teamCount);
+        Debug.Log(roundCount);
+        StartRoundForTeam();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (oneRoundFinished) {
-            oneRoundFinished = false;
-            RollDice();
+        if (oneTeamFinished) {
+            oneTeamFinished = false;
+            if (actualTeamCount < teamCount-1) {
+                actualTeamCount += 1;
+            } else {
+                oneRoundFinished = true;
+                actualTeamCount = 0;
+            }
+
+            if (oneRoundFinished) {
+                oneRoundFinished = false;
+                if (actualRoundCount < roundCount) {
+                    actualRoundCount += 1;
+                } else {
+                    Debug.Log("KEINE RUNDE MEHR!");
+                }
+            }
+            Debug.Log("Neue Runde!");
+            StartRoundForTeam();
         }
+    }
+
+    public void StartRoundForTeam()
+    {
+        characterOne = teamHandler.getCharacterOfTeamindex(actualTeamCount);
+        characterOneSc = (Character) characterOne.GetComponent<Character>();
+        characterOneSc.StartClass();
+        RollDice();
     }
 
     public void RollDice()
     {
         camera.FocusDiceCamera();
         diceSc.TriggerDice();
-        // You dont get the result. Implementation required!
         StartCoroutine(waitForResult());
     }
 
@@ -58,23 +97,16 @@ public class GamePlayHandler : MonoBehaviour
     {
         // Wait for x seconds
         yield return new WaitForSecondsRealtime(7);
-        oneRoundFinished = true;
+        oneTeamFinished = true;
     }
 
     private void InitializeClasses()
     {
-        camera = new CameraManager();
-        camera.StartClass();
-
         dice = GameObject.Find("Dice (1)");
         diceSc = (DiceScript) dice.GetComponent<DiceScript>();
         diceSc.StartClass();
 
-        characterOne = GameObject.Find("Toon Chicken Team 1");
-        characterOneSc = (Character) characterOne.GetComponent<Character>();
-        characterOneSc.StartClass();
-
-        teamCount = GameOptionsHandler.getTeamCount();
-        roundCount = GameOptionsHandler.getRoundCount();
+        teamCount = (int) GameOptionsHandler.getTeamCount();
+        roundCount = (int) GameOptionsHandler.getRoundCount();
     }
 }
