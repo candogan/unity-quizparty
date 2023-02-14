@@ -14545,6 +14545,9 @@ MonoBehaviour:
   camera: {fileID: 758051467}
   teamHandler: {fileID: 1114389114}
   gameOptionsHandler: {fileID: 0}
+  gameFieldHandler: {fileID: 358187791}
+  questionManager: {fileID: 358187790}
+  panelUiManager: {fileID: 1264185661}
   dice: {fileID: 0}
   diceSc: {fileID: 0}
   diceValue: 0

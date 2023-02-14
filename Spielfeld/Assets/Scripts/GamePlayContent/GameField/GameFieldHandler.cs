@@ -32,6 +32,11 @@ public class GameFieldHandler : MonoBehaviour
         return gameFields[fieldindex].getPosition();
     }
 
+    public int GetFieldType(int fieldindex)
+    {
+        return gameFields[fieldindex].getType();
+    }
+
     public int GetFieldCount(){
         return gameFields.Count;
     }

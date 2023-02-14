@@ -14,13 +14,6 @@ public class CameraManager : MonoBehaviour
     {
     }
 
-    public void StartClass()
-    {
-        diceCamera = GameObject.Find("DiceCamera");
-        mainCamera = GameObject.Find("MainCamera");
-        sideCamera = GameObject.Find("SideCamera");
-    }
-
     // Update is called once per frame
     void Update()
     {

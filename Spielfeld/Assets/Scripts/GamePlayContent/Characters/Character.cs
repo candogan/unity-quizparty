@@ -35,6 +35,11 @@ public class Character : MonoBehaviour
         fieldCount = gameFieldHandler.GetFieldCount();
     }
 
+    public int GetActualFieldIndex()
+    {
+        return this.actualFieldIndex;
+    }
+
     // Update is called once per frame
     void Update()
     {

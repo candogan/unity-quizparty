@@ -11,14 +11,18 @@ public class GamePlayHandler : MonoBehaviour
     public CameraManager camera;
     public TeamHandler teamHandler;
     public GameOptionsHandler gameOptionsHandler;
+    public GameFieldHandler gameFieldHandler;
+    public QuestionManager questionManager;
+    public PanelUiManager panelUiManager;
     public GameObject dice;
     public DiceScript diceSc;
     public int diceValue;
     public GameObject characterOne;
     public Character characterOneSc;
-    private bool oneRoundFinished;
     private bool oneTeamFinished = true;
     private bool gameFinished;
+    private bool triggerQuestion = false;
+    private bool finishedQuestion = true;
     private int roundCount;
     private int actualRoundCount = 1;
     private int teamCount;
@@ -52,7 +56,13 @@ public class GamePlayHandler : MonoBehaviour
 
 
     private void ManageRoundLogic(){
-        if (oneTeamFinished && actualRoundCount <= roundCount) {
+        if (triggerQuestion) {
+            StartQuestion();
+        }
+
+        finishedQuestion = !panelUiManager.UiIsActive();
+
+        if (finishedQuestion && oneTeamFinished && actualRoundCount <= roundCount) {
             oneTeamFinished = false;
             if (actualTeamCount < teamCount-1) {
                 actualTeamCount += 1;
@@ -65,6 +75,14 @@ public class GamePlayHandler : MonoBehaviour
             Debug.Log("Finished");
             gameFinished = true;
         }
+    }
+
+    private void StartQuestion()
+    {
+        triggerQuestion = false;
+        int fieldIndex = characterOneSc.GetActualFieldIndex();
+        int fieldType = gameFieldHandler.GetFieldType(fieldIndex);
+        questionManager.StartNewQuestion(actualTeamCount, fieldType);
     }
 
     public void StartRoundForTeam()
@@ -99,6 +117,7 @@ public class GamePlayHandler : MonoBehaviour
         // Wait for x seconds
         yield return new WaitForSecondsRealtime(7);
         oneTeamFinished = true;
+        triggerQuestion = true;
     }
 
     private void InitializeClasses()
