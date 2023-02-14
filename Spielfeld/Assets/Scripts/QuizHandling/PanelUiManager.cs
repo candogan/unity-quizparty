@@ -71,6 +71,9 @@ public class PanelUiManager : MonoBehaviour
         quizText.text = "Lade neues Rätsel...";
     }
 
+    public bool UiIsActive(){
+        return questionUi.activeSelf;
+    }
 
     public void StartTimer(){
         timer.StartTimer();
