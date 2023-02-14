@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using static GameFieldTypeEnum;
+
 public class QuestionManager : MonoBehaviour
 {
     public TextMeshProUGUI questionTextField;
@@ -22,12 +24,6 @@ public class QuestionManager : MonoBehaviour
 
     private static int verfuegbar = 0;
     private static int nichtVerfuegbar = 1;
-
-    //private static int interaktionsfeld = 1;
-    //private static int wissensfeld = 2;
-    private static int bildraten = 3;
-    private static int schaetzfrage = 4;
-    //private static int actionfeld = 5;
 
     private static int actualEventFieldIndex;
     private static int actualFieldType;
@@ -185,11 +181,11 @@ public class QuestionManager : MonoBehaviour
     }
 
     public bool IsPictureField(){
-        return (currentEventField != default(GameEventField) && currentEventField.GetFieldType() == bildraten);
+        return (currentEventField != default(GameEventField) && currentEventField.GetFieldType() == GameFieldTypeEnum.GUESSPICTURE);
     }
 
     public bool IsEstimationField(){
-        return (currentEventField != default(GameEventField) && currentEventField.GetFieldType() == schaetzfrage);
+        return (currentEventField != default(GameEventField) && currentEventField.GetFieldType() == GameFieldTypeEnum.GUESSQUESTION);
     }
 
     public Sprite LoadPictureFromDisk(){
