@@ -69,6 +69,10 @@ public class Character : MonoBehaviour
         fieldsToMove = diceResult;
     }
 
+    public bool charcterIsOnTargetField(){
+        return fieldsToMove == 0;
+    }
+
     private void SpecifyMovingParameters(){
         initFieldPosition = gameFieldHandler.GetLocationOfFieldindex(actualFieldIndex);
         initCharacterPosition = transform.position;

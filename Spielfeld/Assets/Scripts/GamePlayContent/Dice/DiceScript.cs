@@ -36,6 +36,10 @@ public class DiceScript : MonoBehaviour
         }
     }
 
+    public bool DiceIsDone (){
+        return transform.position != initPosition && thrown == true && hasLanded == true;
+    }
+
     public void TriggerDice()
     {
         Reset();

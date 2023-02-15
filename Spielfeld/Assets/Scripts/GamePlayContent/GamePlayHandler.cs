@@ -19,57 +19,63 @@ public class GamePlayHandler : MonoBehaviour
     public int diceValue;
     public GameObject characterOne;
     public Character characterOneSc;
-    private bool oneTeamFinished = true;
-    private bool gameFinished;
-    private bool triggerQuestion = false;
-    private bool finishedQuestion = true;
-    private bool lastMoveThisRound = false;
     private int roundCount;
     private int actualRoundCount = 1;
     private int teamCount;
     private int actualTeamCount = 0;
+    private bool lastMoveThisRound = false;
+    private bool waiting = false;
+
+    private int gameState = GameStateEnum.INITIALIZING;
 
     // Start is called before the first frame update
     void Start()
     {
         InitializeClasses();
-        StartCoroutine(startGameWithDelay());
-    }
-
-    // Wait for other Scripts to load
-    IEnumerator startGameWithDelay()
-    {
-        // Wait for x seconds
-        yield return new WaitForSecondsRealtime(2);
-
-        /*
-        Debug.Log("Erste Runde!");
-        Debug.Log("Teamcount geladen: " + teamCount);
-        Debug.Log("Roundcount geladen: " + roundCount);
-        */
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (triggerQuestion) {
-            // Debug.Log("Starte Frage für Team: " + actualTeamCount);
-            StartQuestion();
-        }
-
-        if (gameFinished == false){
-            ManageRoundLogic();
-        }
+        ManageState();
     }
 
-
-    private void ManageRoundLogic(){
-        finishedQuestion = !panelUiManager.UiIsActive();
-
-        if (finishedQuestion && oneTeamFinished && actualRoundCount <= roundCount) {
-            oneTeamFinished = false;
-            StartRoundForTeam();
-            if (actualTeamCount < teamCount-1) {
+    // State Manager für die Rundenlogik -> generische wartezeiten, je nachdem wie lange der Würfe / Character für die aktive Handlung benötigt
+    private void ManageState(){
+        if(gameState == GameStateEnum.SWITCHING_ACTIVE_TEAM){
+            //Debug.Log("Roundchange");
+            if (actualTeamCount < teamCount && actualRoundCount < roundCount +1){
+                InitzializeRoundForTeam();
+                gameState = GameStateEnum.ROLLING_DICE;
+            } else {
+                gameState = GameStateEnum.GAME_FINISHED;
+            }
+        } else if(gameState == GameStateEnum.ROLLING_DICE){
+            //Debug.Log("Waiting for Dice");
+            RollDice();
+            gameState = GameStateEnum.WAITING_FOR_DICE;
+        } else if (gameState == GameStateEnum.WAITING_FOR_DICE && diceSc.DiceIsDone() && waiting == false){
+            waiting = true;
+            StartCoroutine(WaitASecond());
+            diceValue = diceSc.getDiceValue();
+            camera.FocusSideCamera();
+            characterOneSc.TransferDiceResult(diceValue);
+            //Debug.Log("Moving Character");
+            gameState = GameStateEnum.WAITING_FOR_MOVING_CHARACTER;
+        } else if (gameState == GameStateEnum.WAITING_FOR_MOVING_CHARACTER && characterOneSc.charcterIsOnTargetField() && waiting == false){
+            waiting = true;
+            StartCoroutine(WaitASecond());
+            //Debug.Log("Question Mode");
+            StartQuestion();
+            gameState = GameStateEnum.QUESTION_MODE;
+        } else if (gameState == GameStateEnum.QUESTION_MODE && !panelUiManager.UiIsActive() && waiting == false){
+            waiting = true;
+            StartCoroutine(WaitASecond());
+            //Debug.Log("Preparing next Round");
+            gameState = GameStateEnum.PREPARING_NEXT_ROUND;
+        } else if(gameState == GameStateEnum.PREPARING_NEXT_ROUND){
+            //Debug.Log("Changing Team");
+            if (actualTeamCount < teamCount -1 ){
                 actualTeamCount += 1;
                 lastMoveThisRound = false;
             } else {
@@ -77,61 +83,34 @@ public class GamePlayHandler : MonoBehaviour
                 actualRoundCount += 1;
                 lastMoveThisRound = true;
             }
-        } else if (actualRoundCount > roundCount){
-            Debug.Log("Finished");
-            gameFinished = true;
+            gameState = GameStateEnum.SWITCHING_ACTIVE_TEAM;
         }
     }
 
     private void StartQuestion()
     {
-        triggerQuestion = false;
         int fieldIndex = characterOneSc.GetActualFieldIndex();
         int fieldType = gameFieldHandler.GetFieldType(fieldIndex);
-
-        Debug.Log("FIELDTYPE: " + fieldType);
-        if (fieldType == GameFieldTypeEnum.NOTHING) {
-            finishedQuestion = true;
-            return;
-        } else {
+        //Debug.Log("FIELDTYPE: " + fieldType);
+        if (fieldType != GameFieldTypeEnum.NOTHING) {
             questionManager.StartNewQuestion(actualTeamCount, fieldType);
         }
     }
 
-    public void StartRoundForTeam()
+    public void InitzializeRoundForTeam()
     {
-        // Debug.Log("Team: " +  actualTeamCount + ", Runde: " + actualRoundCount);
+        Debug.Log("Team: " +  actualTeamCount + ", Runde: " + actualRoundCount);
         characterOne = teamHandler.getCharacterOfTeamindex(actualTeamCount);
         characterOneSc = (Character) characterOne.GetComponent<Character>();
         characterOneSc.StartClass();
-        RollDice();
     }
 
     public void RollDice()
     {
         camera.FocusDiceCamera();
         diceSc.TriggerDice();
-        StartCoroutine(waitForResult());
     }
 
-    IEnumerator waitForResult()
-    {
-        //Wait for x seconds
-        yield return new WaitForSecondsRealtime(5);
-        diceValue = diceSc.getDiceValue();
-        //Debug.Log("Folgende Zahl wurde gewürfelt: " + diceValue);
-        camera.FocusSideCamera();
-        characterOneSc.TransferDiceResult(diceValue);
-        StartCoroutine(waitCharacterToMove());
-    }
-
-    IEnumerator waitCharacterToMove()
-    {
-        // Wait for x seconds
-        yield return new WaitForSecondsRealtime(7);
-        oneTeamFinished = true;
-        triggerQuestion = true;
-    }
 
     private void InitializeClasses()
     {
@@ -141,6 +120,7 @@ public class GamePlayHandler : MonoBehaviour
 
         teamCount = (int) GameOptionsHandler.getTeamCount();
         roundCount = (int) GameOptionsHandler.getRoundCount();
+        gameState = GameStateEnum.SWITCHING_ACTIVE_TEAM;
     }
 
     public bool isLastMoveThisRound(){
@@ -149,5 +129,12 @@ public class GamePlayHandler : MonoBehaviour
 
     public int GetActualRound(){
         return actualRoundCount;
+    }
+
+    IEnumerator WaitASecond()
+    {
+        // Wait for x seconds
+        yield return new WaitForSecondsRealtime(3);
+        waiting = false;
     }
 }
