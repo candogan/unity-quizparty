@@ -23,6 +23,7 @@ public class GamePlayHandler : MonoBehaviour
     private bool gameFinished;
     private bool triggerQuestion = false;
     private bool finishedQuestion = true;
+    private bool lastMoveThisRound = false;
     private int roundCount;
     private int actualRoundCount = 1;
     private int teamCount;
@@ -41,15 +42,18 @@ public class GamePlayHandler : MonoBehaviour
         // Wait for x seconds
         yield return new WaitForSecondsRealtime(2);
 
+        /*
         Debug.Log("Erste Runde!");
         Debug.Log("Teamcount geladen: " + teamCount);
         Debug.Log("Roundcount geladen: " + roundCount);
+        */
     }
 
     // Update is called once per frame
     void Update()
     {
         if (triggerQuestion) {
+            Debug.Log("Starte Frage für Team: " + actualTeamCount);
             StartQuestion();
         }
 
@@ -64,13 +68,15 @@ public class GamePlayHandler : MonoBehaviour
 
         if (finishedQuestion && oneTeamFinished && actualRoundCount <= roundCount) {
             oneTeamFinished = false;
+            StartRoundForTeam();
             if (actualTeamCount < teamCount-1) {
                 actualTeamCount += 1;
+                lastMoveThisRound = false;
             } else {
                 actualTeamCount = 0;
                 actualRoundCount += 1;
+                lastMoveThisRound = true;
             }
-            StartRoundForTeam();
         } else if (actualRoundCount > roundCount){
             Debug.Log("Finished");
             gameFinished = true;
@@ -83,13 +89,14 @@ public class GamePlayHandler : MonoBehaviour
         int fieldIndex = characterOneSc.GetActualFieldIndex();
         int fieldType = gameFieldHandler.GetFieldType(fieldIndex);
 
-        Debug.Log("FIELDTYPE: " + fieldType);
+        //Debug.Log("FIELDTYPE: " + fieldType);
         if (fieldIndex == GameFieldTypeEnum.NOTHING) {
             finishedQuestion = true;
             return;
-        }
+        } else {
 
-        questionManager.StartNewQuestion(actualTeamCount, fieldType);
+            questionManager.StartNewQuestion(actualTeamCount, fieldType);
+        }
     }
 
     public void StartRoundForTeam()
@@ -135,5 +142,13 @@ public class GamePlayHandler : MonoBehaviour
 
         teamCount = (int) GameOptionsHandler.getTeamCount();
         roundCount = (int) GameOptionsHandler.getRoundCount();
+    }
+
+    public bool isLastMoveThisRound(){
+        return lastMoveThisRound;
+    }
+
+    public int GetActualRound(){
+        return actualRoundCount;
     }
 }

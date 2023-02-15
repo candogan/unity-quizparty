@@ -53,7 +53,7 @@ public class QuestionManager : MonoBehaviour
         actualTeamIndex = teamIndex;
 
         actualFieldType = fieldtype;
-        questionTextField.text = string.Format(teaserTextList[actualFieldType-1], actualTeamIndex);
+        questionTextField.text = string.Format(teaserTextList[actualFieldType-1], actualTeamIndex + 1);
         RandomQuestionPicker(actualFieldType);
 
         panelUiManager.SetupTimer(eventFieldList[actualEventFieldIndex].GetTime());
@@ -174,6 +174,7 @@ public class QuestionManager : MonoBehaviour
 
     public void DistributePoints(List<int> winnerTeams, int pointsToAdd){
         foreach (int winner in winnerTeams){
+            Debug.Log("Winner index: " + winner);
             //Debug.Log("Punkte Team " + winner +" vor korrekter Antwort: " + teamHandler.GetTeamList()[winner].GetScore());
             teamHandler.addOrTakePointsToScore(winner, pointsToAdd);
             //Debug.Log("Punkte Team " + winner +" nach korrekter Antwort: " + teamHandler.GetTeamList()[winner].GetScore());
@@ -190,7 +191,7 @@ public class QuestionManager : MonoBehaviour
 
     public Sprite LoadPictureFromDisk(){
         string filePath = Application.dataPath + "/Resources/" + currentEventField.GetContent();
-        Debug.Log("Lade: " + filePath);
+        //Debug.Log("Lade: " + filePath);
         Sprite newImage = IMG2Sprite.instance.LoadNewSprite(filePath);
         return newImage;
     }

@@ -43,7 +43,7 @@ public class EstimationCheck : MonoBehaviour
 
         if(InputFields.Count < 1 && teamHandler.GetTeamList().Count > 0) {
 
-            Debug.Log("-------- Start Initialization Estimation-Popup --------");
+            //Debug.Log("-------- Start Initialization Estimation-Popup --------");
             GameObject newInputfield;
             GameObject newInputTextArea;
             GameObject newInputDefaultText;
@@ -91,8 +91,9 @@ public class EstimationCheck : MonoBehaviour
 
 
             panelUiManager.DisableEstimationPopup();
-            panelUiManager.ShowDistributedPoints(winnerTeams, 2);
             questionManager.DistributePoints(winnerTeams, 2);
+            panelUiManager.ShowDistributedPoints(winnerTeams, 2);
+            panelUiManager.ShowRoundState();
         }
     
     }

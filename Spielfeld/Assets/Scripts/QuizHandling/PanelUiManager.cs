@@ -18,9 +18,12 @@ public class PanelUiManager : MonoBehaviour
     public GameObject pictureTask;
     public GameObject estimationPopup;
     public GameObject winnerPopupSample;
-    public GameObject winnerFieldSample;
+    public GameObject teamPointsFieldSample;
+    public GameObject winnerPointsFieldSample;
     public TextMeshProUGUI quizText;
     public QuestionManager questionManager;
+    public GamePlayHandler gameplayHandler;
+    public TextMeshProUGUI notificationText;
 
     public Image pictureContent;
 
@@ -69,6 +72,7 @@ public class PanelUiManager : MonoBehaviour
         timer.StopTimer();
         timerPauseButton.transform.localPosition = new Vector3(0,0,0);
         quizText.text = "Lade neues Rätsel...";
+        notificationText.text = "";
     }
 
     public bool UiIsActive(){
@@ -148,9 +152,10 @@ public class PanelUiManager : MonoBehaviour
         List<int> winnerTeams = new List<int>();
         int winner = questionManager.GetActualTeamIndex();
 
-        winnerTeams.Add(winner-1);
+        winnerTeams.Add(winner);
         questionManager.DistributePoints(winnerTeams, points);
         ShowDistributedPoints(winnerTeams, points);
+        ShowRoundState();
 
         timer.StopTimer();
     }
@@ -177,6 +182,8 @@ public class PanelUiManager : MonoBehaviour
         
     }
 
+
+
     public void ShowDistributedPoints(List<int> winnerTeams, int distributedPoints){
         int yPosInputField = -190;
 
@@ -188,22 +195,44 @@ public class PanelUiManager : MonoBehaviour
         GameObject questionDoneButton = winnersPopup.transform.GetChild(1).gameObject;
         questionDoneButton.GetComponent<Button>().onClick.AddListener(() => ResetQuestionUi());
 
+        int teamIndex = 0;
 
-        foreach (int winner in winnerTeams){
+
+        foreach (Team team in teamList){
+
             questionDoneButton.transform.position += new Vector3(0, -42f, 0);
 
             popupSize.y += 85;
             popupRectTrans.sizeDelta = popupSize;
-            int winnerReadable = winner + 1; 
+            int teamReadable = teamIndex + 1; 
             
-            GameObject newWinnerField = Instantiate(winnerFieldSample, new Vector3(250 , yPosInputField , 0), Quaternion.identity);
-            newWinnerField.transform.SetParent(winnersPopup.transform, false);
+            if (winnerTeams.Contains(teamIndex)){
+                GameObject newWinnerField = Instantiate(winnerPointsFieldSample, new Vector3(250 , yPosInputField , 0), Quaternion.identity);
+                newWinnerField.transform.SetParent(winnersPopup.transform, false);
 
-            newWinnerField.transform.GetChild(0).GetComponent<Image>().color = teamList[winner].GetColor();
-            newWinnerField.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Team " + winnerReadable + ": +"+ distributedPoints + " Punkte";
+                TextMeshProUGUI distributedPointsText = newWinnerField.transform.GetChild(2).gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+
+                newWinnerField.transform.GetChild(0).GetComponent<Image>().color = team.GetColor();
+
+                newWinnerField.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Team " + teamReadable + ": "+ team.GetScore() + " Punkte";
+                distributedPointsText.text = "+" + distributedPoints;
+            } else {
+                GameObject newPointsField = Instantiate(teamPointsFieldSample, new Vector3(250 , yPosInputField , 0), Quaternion.identity);
+                newPointsField.transform.SetParent(winnersPopup.transform, false);
+
+                newPointsField.transform.GetChild(0).GetComponent<Image>().color = team.GetColor();
+                newPointsField.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Team " + teamReadable + ": "+ team.GetScore() + " Punkte";
+            }
 
             yPosInputField -= 85;
+            teamIndex += 1;
         }
     }
 
+    public void ShowRoundState(){
+        if (gameplayHandler.isLastMoveThisRound()){
+            Debug.Log("Runde: " + gameplayHandler.GetActualRound());
+            notificationText.text = "Runde " + (gameplayHandler.GetActualRound() - 1) + " vorbei";
+        }
+    }
 }
