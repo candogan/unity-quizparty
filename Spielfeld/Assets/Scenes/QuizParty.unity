@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -22329,8 +22329,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0b1b323b9519b42b0675490706dc62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPrefab: {fileID: 6960923796893010946, guid: 58ccf772eed77b8489b6ea6ebe193840, type: 3}
+  characterPrefab: {fileID: 633292951904067170, guid: bea61dcb3df4c4f4fb108f8dd5ceaa9b, type: 3}
   characterArea: {fileID: 719806542}
+  materialRed: {fileID: 2100000, guid: 75021e7910af52a4b886cd31ca9d812e, type: 2}
+  materialBlue: {fileID: 2100000, guid: 0dcdada6fc0521c4c99c36b21730f215, type: 2}
+  materialYellow: {fileID: 2100000, guid: 23cbb8baa09069749b381e9cc99c3b30, type: 2}
+  materialGreen: {fileID: 2100000, guid: e3a203922a1c1054ea16e75d7824035a, type: 2}
 --- !u!4 &1115005825 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3916574325633068106, guid: 18bb023d75a113f4cb8d1452371f5c0e, type: 3}

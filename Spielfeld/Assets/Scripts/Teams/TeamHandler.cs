@@ -9,9 +9,16 @@ public class TeamHandler : MonoBehaviour
     public GameObject characterPrefab;
     public GameObject characterArea;
 
+    public Material materialRed;
+    public Material materialBlue;
+    public Material materialYellow;
+    public Material materialGreen;
+
     public static float teamCount;
 
     private List<Team> teamlist = new List<Team>();
+
+    private List<Material> characterMaterials = new List<Material>();
 
     private List<Color> colorlist = new List<Color>{                    // Colors for the Teams
         Color.red,
@@ -55,10 +62,17 @@ public class TeamHandler : MonoBehaviour
     private void InitializeTeams(){
         //ToDo: Charactere in Laufrichtung drehen
 
+        characterMaterials.Add(materialRed);
+        characterMaterials.Add(materialBlue);
+        characterMaterials.Add(materialYellow);
+        characterMaterials.Add(materialGreen);
+
 
         for (int i = 0; i < teamCount; i++){
             GameObject newCharacter = Instantiate(characterPrefab, initCharacterPositions[i], Quaternion.identity);
             newCharacter.transform.SetParent(characterArea.transform, false);
+
+            newCharacter.transform.GetChild (3).GetComponent<Renderer>().material = characterMaterials[i];
 
             Team newTeam = new Team(colorlist[i], newCharacter);
             teamlist.Add(newTeam);
