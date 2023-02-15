@@ -54,9 +54,9 @@ public class GameFieldHandler : MonoBehaviour
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (95)").transform.position, GameFieldTypeEnum.GUESSQUESTION, NextFieldDirectionEnum.X_ACHSIS_DOWN));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (97)").transform.position, GameFieldTypeEnum.KNOWLEDGE, NextFieldDirectionEnum.X_ACHSIS_DOWN));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (77)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_DOWN));
-        gameFields.Add(new GameField(GameObject.Find("bridge_small (5)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_DOWN)); // bridge
-        gameFields.Add(new GameField(GameObject.Find("bridge_small (1)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_DOWN)); // bridge
-        gameFields.Add(new GameField(GameObject.Find("bridge_small (2)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_DOWN)); // bridge
+        gameFields.Add(new GameField(GameObject.Find("bridge_small (5)").transform.position, GameFieldTypeEnum.NOTHING, NextFieldDirectionEnum.X_ACHSIS_DOWN)); // bridge
+        gameFields.Add(new GameField(GameObject.Find("bridge_small (1)").transform.position, GameFieldTypeEnum.NOTHING, NextFieldDirectionEnum.X_ACHSIS_DOWN)); // bridge
+        gameFields.Add(new GameField(GameObject.Find("bridge_small (2)").transform.position, GameFieldTypeEnum.NOTHING, NextFieldDirectionEnum.X_ACHSIS_DOWN)); // bridge
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (119)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_DOWN));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (108)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_DOWN));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (99)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_DOWN));
@@ -74,7 +74,7 @@ public class GameFieldHandler : MonoBehaviour
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (120)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (58)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (63)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP));
-        gameFields.Add(new GameField(GameObject.Find("bridge_small (6)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP)); // bridge
+        gameFields.Add(new GameField(GameObject.Find("bridge_small (6)").transform.position, GameFieldTypeEnum.NOTHING, NextFieldDirectionEnum.X_ACHSIS_UP)); // bridge
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (65)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (85)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_DOWN));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (87)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP));

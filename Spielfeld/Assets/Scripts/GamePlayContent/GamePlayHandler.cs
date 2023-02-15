@@ -53,7 +53,7 @@ public class GamePlayHandler : MonoBehaviour
     void Update()
     {
         if (triggerQuestion) {
-            Debug.Log("Starte Frage für Team: " + actualTeamCount);
+            // Debug.Log("Starte Frage für Team: " + actualTeamCount);
             StartQuestion();
         }
 
@@ -89,19 +89,18 @@ public class GamePlayHandler : MonoBehaviour
         int fieldIndex = characterOneSc.GetActualFieldIndex();
         int fieldType = gameFieldHandler.GetFieldType(fieldIndex);
 
-        //Debug.Log("FIELDTYPE: " + fieldType);
-        if (fieldIndex == GameFieldTypeEnum.NOTHING) {
+        Debug.Log("FIELDTYPE: " + fieldType);
+        if (fieldType == GameFieldTypeEnum.NOTHING) {
             finishedQuestion = true;
             return;
         } else {
-
             questionManager.StartNewQuestion(actualTeamCount, fieldType);
         }
     }
 
     public void StartRoundForTeam()
     {
-        Debug.Log("Team: " +  actualTeamCount + ", Runde: " + actualRoundCount);
+        // Debug.Log("Team: " +  actualTeamCount + ", Runde: " + actualRoundCount);
         characterOne = teamHandler.getCharacterOfTeamindex(actualTeamCount);
         characterOneSc = (Character) characterOne.GetComponent<Character>();
         characterOneSc.StartClass();
