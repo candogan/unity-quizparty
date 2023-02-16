@@ -31,6 +31,7 @@ public class FragenHandler : MonoBehaviour
                 if (field.GetFieldType() == 3)
                 {
                     string filePath = Application.dataPath + "/Resources/" + field.GetContent();
+                    Debug.Log(filePath);
                     Sprite newImage = IMG2Sprite.instance.LoadNewSprite(filePath);
                     g.transform.GetChild (0).GetComponent <Image> ().sprite = newImage;
                 }
