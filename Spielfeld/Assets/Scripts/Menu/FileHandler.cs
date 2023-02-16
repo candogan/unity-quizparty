@@ -56,7 +56,7 @@ public static class FileHandler
         return Application.dataPath + "/Resources/" +  filename;
     }
 
-    public static void DownloadOptions()
+    /*public static void DownloadOptions()
     {
         String path = EditorUtility.SaveFilePanel("Save texture as PNG", "", "" + "", "");
         
@@ -66,7 +66,7 @@ public static class FileHandler
     {
         String path = EditorUtility.SaveFilePanel("Save texture as PNG", "", "" + "", "");
         
-    }
+    }*/
 
     private static void WriteFile (string path, string content) 
     {
