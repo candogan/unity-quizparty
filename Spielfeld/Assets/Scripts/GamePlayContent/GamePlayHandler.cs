@@ -38,6 +38,10 @@ public class GamePlayHandler : MonoBehaviour
     void Update()
     {
         ManageState();
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            Application.Quit();
+        }
     }
 
     // State Manager für die Rundenlogik -> generische wartezeiten, je nachdem wie lange der Würfe / Character für die aktive Handlung benötigt
