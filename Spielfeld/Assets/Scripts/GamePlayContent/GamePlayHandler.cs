@@ -64,6 +64,7 @@ public class GamePlayHandler : MonoBehaviour
             gameState = GameStateEnum.WAITING_FOR_MOVING_CHARACTER;
         } else if (gameState == GameStateEnum.WAITING_FOR_MOVING_CHARACTER && characterOneSc.charcterIsOnTargetField() && waiting == false){
             waiting = true;
+            ManageRoundState();
             StartCoroutine(WaitASecond());
             //Debug.Log("Question Mode");
             StartQuestion();
@@ -75,13 +76,11 @@ public class GamePlayHandler : MonoBehaviour
             gameState = GameStateEnum.PREPARING_NEXT_ROUND;
         } else if(gameState == GameStateEnum.PREPARING_NEXT_ROUND){
             //Debug.Log("Changing Team");
-            if (actualTeamCount < teamCount -1 ){
+            if (actualTeamCount < teamCount - 1 ){
                 actualTeamCount += 1;
-                lastMoveThisRound = false;
             } else {
                 actualTeamCount = 0;
                 actualRoundCount += 1;
-                lastMoveThisRound = true;
             }
             gameState = GameStateEnum.SWITCHING_ACTIVE_TEAM;
         }
@@ -94,6 +93,8 @@ public class GamePlayHandler : MonoBehaviour
         //Debug.Log("FIELDTYPE: " + fieldType);
         if (fieldType != GameFieldTypeEnum.NOTHING) {
             questionManager.StartNewQuestion(actualTeamCount, fieldType);
+        } else {
+            gameState = GameStateEnum.PREPARING_NEXT_ROUND;
         }
     }
 
@@ -129,6 +130,15 @@ public class GamePlayHandler : MonoBehaviour
 
     public int GetActualRound(){
         return actualRoundCount;
+    }
+
+    //Prueft ob die Runde grade beim letzten Teamzug
+    private void ManageRoundState(){
+        if(actualTeamCount >= teamCount - 1){
+            lastMoveThisRound = true;
+        } else {
+            lastMoveThisRound = false;
+        }
     }
 
     IEnumerator WaitASecond()

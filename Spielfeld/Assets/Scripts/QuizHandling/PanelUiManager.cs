@@ -23,7 +23,7 @@ public class PanelUiManager : MonoBehaviour
     public TextMeshProUGUI quizText;
     public QuestionManager questionManager;
     public GamePlayHandler gameplayHandler;
-    public TextMeshProUGUI notificationText;
+    public GameObject notificationGameObject;
 
     public Image pictureContent;
 
@@ -69,10 +69,10 @@ public class PanelUiManager : MonoBehaviour
         timerContinueButton.SetActive(false);
         timerPauseButton.SetActive(false);
         timerStartButton.SetActive(true);
+        notificationGameObject.SetActive(false);
         timer.StopTimer();
         timerPauseButton.transform.localPosition = new Vector3(0,0,0);
         quizText.text = "Lade neues Rätsel...";
-        notificationText.text = "";
     }
 
     public bool UiIsActive(){
@@ -147,10 +147,13 @@ public class PanelUiManager : MonoBehaviour
     }
 
     public void HandleCorrectAnswer(){
-        int points = GetTimePointsAndRemoveAnswerButtons();
+        int points = GetTimePoints();
 
         List<int> winnerTeams = new List<int>();
         int winner = questionManager.GetActualTeamIndex();
+
+        rightAnswerButton.SetActive(false);
+        wrongAnswerButton.SetActive(false);
 
         winnerTeams.Add(winner);
         questionManager.DistributePoints(winnerTeams, points);
@@ -161,14 +164,17 @@ public class PanelUiManager : MonoBehaviour
     }
 
     public void HandleWrongAnswer(){
-
-    }
-
-    private int GetTimePointsAndRemoveAnswerButtons(){
-        double t = timer.GetRemainingSeconds() / eventFieldTime;
-
         rightAnswerButton.SetActive(false);
         wrongAnswerButton.SetActive(false);
+
+        ShowDistributedPoints(new List<int>(), 0);
+        ShowRoundState();
+
+        timer.StopTimer();
+    }
+
+    private int GetTimePoints(){
+        double t = timer.GetRemainingSeconds() / eventFieldTime;
 
         if (t > 0.75){
             return 4;
@@ -232,7 +238,8 @@ public class PanelUiManager : MonoBehaviour
     public void ShowRoundState(){
         if (gameplayHandler.isLastMoveThisRound()){
             Debug.Log("Runde: " + gameplayHandler.GetActualRound());
-            notificationText.text = "Runde " + (gameplayHandler.GetActualRound() - 1) + " vorbei";
+            notificationGameObject.SetActive(true);
+            notificationGameObject.GetComponent<TextMeshProUGUI>().text = "Runde " + (gameplayHandler.GetActualRound()) + " vorbei";
         }
     }
 }

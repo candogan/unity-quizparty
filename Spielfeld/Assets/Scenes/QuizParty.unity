@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -24958,7 +24958,7 @@ MonoBehaviour:
   quizText: {fileID: 846746862}
   questionManager: {fileID: 358187790}
   gameplayHandler: {fileID: 758051466}
-  notificationText: {fileID: 1376671156}
+  notificationGameObject: {fileID: 1376671153}
   pictureContent: {fileID: 164538309}
   teamHandler: {fileID: 1114389114}
   timer: {fileID: 2088352479859352672}
@@ -27067,7 +27067,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1375910264}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1264185661}
+        m_TargetAssemblyTypeName: PanelUiManager, Assembly-CSharp
+        m_MethodName: HandleWrongAnswer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1375910264
 MonoBehaviour:
   m_ObjectHideFlags: 0
