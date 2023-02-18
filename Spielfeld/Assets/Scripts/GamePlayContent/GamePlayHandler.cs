@@ -62,8 +62,9 @@ public class GamePlayHandler : MonoBehaviour
             waiting = true;
             StartCoroutine(WaitASecond());
             diceValue = diceSc.getDiceValue();
-            camera.FocusSideCamera();
+            camera.FocusPlayerCamera();
             characterOneSc.TransferDiceResult(diceValue);
+            
             //Debug.Log("Moving Character");
             gameState = GameStateEnum.WAITING_FOR_MOVING_CHARACTER;
         } else if (gameState == GameStateEnum.WAITING_FOR_MOVING_CHARACTER && characterOneSc.charcterIsOnTargetField() && waiting == false){
@@ -71,6 +72,7 @@ public class GamePlayHandler : MonoBehaviour
             ManageRoundState();
             StartCoroutine(WaitASecond());
             //Debug.Log("Question Mode");
+            camera.FocusSideCamera();
             StartQuestion();
             gameState = GameStateEnum.QUESTION_MODE;
         } else if (gameState == GameStateEnum.QUESTION_MODE && !panelUiManager.UiIsActive() && waiting == false){
@@ -107,7 +109,9 @@ public class GamePlayHandler : MonoBehaviour
         Debug.Log("Team: " +  actualTeamCount + ", Runde: " + actualRoundCount);
         characterOne = teamHandler.getCharacterOfTeamindex(actualTeamCount);
         characterOneSc = (Character) characterOne.GetComponent<Character>();
+        camera.setPlayerCamera(characterOneSc);
         characterOneSc.StartClass();
+
     }
 
     public void RollDice()

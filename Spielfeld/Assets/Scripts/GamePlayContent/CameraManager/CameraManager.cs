@@ -8,6 +8,8 @@ public class CameraManager : MonoBehaviour
     public GameObject diceCamera;
     public GameObject mainCamera;
     public GameObject sideCamera;
+    private GameObject playerCamera;
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,7 @@ public class CameraManager : MonoBehaviour
     {
         mainCamera.SetActive(false);
         sideCamera.SetActive(false);
+        playerCamera.SetActive(false);
         diceCamera.SetActive(true);
     }
 
@@ -30,6 +33,7 @@ public class CameraManager : MonoBehaviour
     {
         sideCamera.SetActive(false);
         diceCamera.SetActive(false);
+        playerCamera.SetActive(false);
         mainCamera.SetActive(true);
     }
 
@@ -38,6 +42,21 @@ public class CameraManager : MonoBehaviour
         //Debug.Log("Inside");
         diceCamera.SetActive(false);
         mainCamera.SetActive(false);
+        playerCamera.SetActive(false);
         sideCamera.SetActive(true);
+    }
+
+    public void FocusPlayerCamera()
+    {
+        diceCamera.SetActive(false);
+        mainCamera.SetActive(false);
+        sideCamera.SetActive(false);
+        playerCamera.SetActive(true);
+
+    }
+        //activeTeam.transform.GetChild (5).gameObject.SetActive(false);
+
+    public void setPlayerCamera(Character activeTeam){
+        playerCamera = activeTeam.transform.GetChild (5).gameObject;   
     }
 }

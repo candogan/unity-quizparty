@@ -85,6 +85,7 @@ public class Character : MonoBehaviour
         turnDegree = gameFieldHandler.GetNextFieldTurnDegree(actualFieldIndex);
 
 
+
         if (movingDirection == NextFieldDirectionEnum.X_ACHSIS_DOWN){
             //Debug.Log("X-DOWN, Field-ID: " + actualFieldIndex);
             fieldDistance = initFieldPosition.x - nextFieldLocation.x;
