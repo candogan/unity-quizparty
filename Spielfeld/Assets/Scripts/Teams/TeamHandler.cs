@@ -74,6 +74,8 @@ public class TeamHandler : MonoBehaviour
 
             newCharacter.transform.GetChild (3).GetComponent<Renderer>().material = characterMaterials[i];
 
+            newCharacter.transform.Rotate(0, -90, 0, Space.World);
+
             Team newTeam = new Team(colorlist[i], newCharacter);
             teamlist.Add(newTeam);
         }

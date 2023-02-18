@@ -9,15 +9,21 @@ public class GameField {
     Vector3 position;
     int type;
     string nextFieldMove;
+    int turnDegree;
 
-    public GameField (Vector3 position, int type, string nextFieldMove) {
+    public GameField (Vector3 position, int type, string nextFieldMove, int turnDegree) {
         this.position = position;
         this.type = type;
         this.nextFieldMove = nextFieldMove;
+        this.turnDegree = turnDegree;
     }
 
     public Vector3 getPosition(){
         return position;
+    }
+
+    public int getTurnDegree(){
+        return turnDegree;
     }
 
     public void setPosition(Vector3 newPosition){

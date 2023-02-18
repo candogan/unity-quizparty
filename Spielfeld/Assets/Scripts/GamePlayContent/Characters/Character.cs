@@ -16,6 +16,8 @@ public class Character : MonoBehaviour
     private float fieldDistance = 0;
     private int fieldsToMove = 0;
     private int fieldCount;
+    private int turnDegree;
+    private bool needsTurn = true;
 
     private Vector3 initFieldPosition;
     private Vector3 initCharacterPosition;
@@ -80,6 +82,7 @@ public class Character : MonoBehaviour
         nextFieldLocation = gameFieldHandler.GetLocationOfFieldindex((actualFieldIndex + 1) % fieldCount);
         // Debug.Log("Richtung: " + movingDirection + ", Ziel: " + nextFieldLocation + ",actualFieldIndex " + actualFieldIndex + ", readyForNextMove" + readyForNextMove);
         readyForNextMove = false;
+        turnDegree = gameFieldHandler.GetNextFieldTurnDegree(actualFieldIndex);
 
 
         if (movingDirection == NextFieldDirectionEnum.X_ACHSIS_DOWN){
@@ -103,16 +106,21 @@ public class Character : MonoBehaviour
         if (currentLocation.x >= initCharacterPosition.x - fieldDistance) {
                 //character_Animator.SetTrigger("Run In Place");
                 //Temp Fix um Exception zu umgehen
+                if(needsTurn){
+                    transform.Rotate(0, turnDegree, 0);
+                }
+                needsTurn = false;  
                 Vector3 destiny = new Vector3(-8, 0, 0) * Time.deltaTime;
-                transform.Translate(destiny);
+                transform.Translate(destiny, Space.World);
         } else {
             Vector3 speed = new Vector3(0, 0, 0) * Time.deltaTime;
-            transform.Translate(speed);
+            transform.Translate(speed, Space.Self);
             if (!readyForNextMove){
                 actualFieldIndex = (actualFieldIndex + 1) % fieldCount;
                 fieldsToMove -= 1;
             }
             readyForNextMove = true;
+            needsTurn = true;
         }
     }
 
@@ -120,16 +128,21 @@ public class Character : MonoBehaviour
         if (currentLocation.x <= initCharacterPosition.x + fieldDistance) {
                 //character_Animator.SetTrigger("Run In Place");
                 //Temp Fix um Exception zu umgehen
+                if(needsTurn){
+                    transform.Rotate(0, turnDegree, 0);
+                }
+                needsTurn = false;
                 Vector3 destiny = new Vector3(8, 0, 0) * Time.deltaTime;
-                transform.Translate(destiny);
+                transform.Translate(destiny, Space.World);
         } else {
             Vector3 speed = new Vector3(0, 0, 0) * Time.deltaTime;
-            transform.Translate(speed);
+            transform.Translate(speed, Space.Self);
             if (!readyForNextMove){
                 actualFieldIndex = (actualFieldIndex + 1) % fieldCount;
                 fieldsToMove -= 1;
             }
             readyForNextMove = true;
+            needsTurn = true;
         }
     }
 
@@ -137,16 +150,21 @@ public class Character : MonoBehaviour
         if (currentLocation.z >= initCharacterPosition.z - fieldDistance) {
                 //character_Animator.SetTrigger("Run In Place");
                 //Temp Fix um Exception zu umgehen
+                if(needsTurn){
+                    transform.Rotate(0, turnDegree, 0);
+                }
+                needsTurn = false;
                 Vector3 destiny = new Vector3(0, 0, -8) * Time.deltaTime;
-                transform.Translate(destiny);
+                transform.Translate(destiny, Space.World);
         } else {
             Vector3 speed = new Vector3(0, 0, 0) * Time.deltaTime;
-            transform.Translate(speed);
+            transform.Translate(speed, Space.Self);
             if (!readyForNextMove){
                 actualFieldIndex = (actualFieldIndex + 1) % fieldCount;
                 fieldsToMove -= 1;
             }
             readyForNextMove = true;
+            needsTurn = true;
         }
     }
 
@@ -154,16 +172,21 @@ public class Character : MonoBehaviour
         if (currentLocation.z <= initCharacterPosition.z + fieldDistance) {
                 //character_Animator.SetTrigger("Run In Place");
                 //Temp Fix um Exception zu umgehen
+                if(needsTurn){
+                    transform.Rotate(0, turnDegree, 0);
+                }
+                needsTurn = false;
                 Vector3 destiny = new Vector3(0, 0, 8) * Time.deltaTime;
-                transform.Translate(destiny);
+                transform.Translate(destiny, Space.World);
         } else {
             Vector3 speed = new Vector3(0, 0, 0) * Time.deltaTime;
-            transform.Translate(speed);
+            transform.Translate(speed, Space.Self);
             if (!readyForNextMove){
                 actualFieldIndex = (actualFieldIndex + 1) % fieldCount;
                 fieldsToMove -= 1;
             }
             readyForNextMove = true;
+            needsTurn = true;
         }
     }
 }
