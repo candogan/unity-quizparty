@@ -9,16 +9,23 @@ public class TeamHandler : MonoBehaviour
     public GameObject characterPrefab;
     public GameObject characterArea;
 
-    public Material materialRed;
-    public Material materialBlue;
-    public Material materialYellow;
-    public Material materialGreen;
+    public Material materialLionRed;
+    public Material materialLionBlue;
+    public Material materialLionYellow;
+    public Material materialLionGreen;
+
+    public Material materialDiamondRed;
+    public Material materialDiamondBlue;
+    public Material materialDiamondYellow;
+    public Material materialDiamondGreen;
 
     public static float teamCount;
 
     private List<Team> teamlist = new List<Team>();
 
     private List<Material> characterMaterials = new List<Material>();
+
+    private List<Material> characterDiamondMaterials = new List<Material>();
 
     private List<Color> colorlist = new List<Color>{                    // Colors for the Teams
         Color.red,
@@ -62,10 +69,15 @@ public class TeamHandler : MonoBehaviour
     private void InitializeTeams(){
         //ToDo: Charactere in Laufrichtung drehen
 
-        characterMaterials.Add(materialRed);
-        characterMaterials.Add(materialBlue);
-        characterMaterials.Add(materialYellow);
-        characterMaterials.Add(materialGreen);
+        characterMaterials.Add(materialLionRed);
+        characterMaterials.Add(materialLionBlue);
+        characterMaterials.Add(materialLionYellow);
+        characterMaterials.Add(materialLionGreen);
+
+        characterDiamondMaterials.Add(materialDiamondRed);
+        characterDiamondMaterials.Add(materialDiamondBlue);
+        characterDiamondMaterials.Add(materialDiamondYellow);
+        characterDiamondMaterials.Add(materialDiamondGreen);
 
 
         for (int i = 0; i < teamCount; i++){
@@ -73,6 +85,8 @@ public class TeamHandler : MonoBehaviour
             newCharacter.transform.SetParent(characterArea.transform, false);
 
             newCharacter.transform.GetChild (3).GetComponent<Renderer>().material = characterMaterials[i];
+
+            newCharacter.transform.GetChild (4).GetComponent<Renderer>().material = characterDiamondMaterials[i];
 
             newCharacter.transform.Rotate(0, -90, 0, Space.World);
 
