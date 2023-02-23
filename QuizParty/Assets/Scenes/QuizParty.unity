@@ -15263,7 +15263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74e932991b465947a4e08ba6064883d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamHudPrefab: {fileID: 716219846280149385, guid: 6fe88440d00268a44aeb04c3538edd85, type: 3}
+  teamHudPrefab: {fileID: 8269629902173764735, guid: 6fe88440d00268a44aeb04c3538edd85, type: 3}
   hudCanvas: {fileID: 1325099644}
   pauseButton: {fileID: 6714125287591238875}
   questionPanel: {fileID: 1974066387}
