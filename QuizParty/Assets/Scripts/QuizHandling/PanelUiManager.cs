@@ -144,8 +144,14 @@ public class PanelUiManager : MonoBehaviour
         //versetzen des Pause Buttons falls mehr Platz fuer ein Bildraetsel benoetigt wird
         if (questionManager.IsPictureField()){
             timerPauseButton.transform.Translate(0,365,0);
+            rightAnswerButton.transform.Translate(210,0,0);
+            wrongAnswerButton.transform.Translate(210,0,0);
+            pictureTask.SetActive(true);
+            pictureContent.fillAmount = 1;
+            pictureTask.transform.Translate(-510,-55,0);
         }
     }
+
 
     public void DisableEstimationPopup(){
         estimationPopup.SetActive(false);
@@ -160,6 +166,7 @@ public class PanelUiManager : MonoBehaviour
 
         rightAnswerButton.SetActive(false);
         wrongAnswerButton.SetActive(false);
+        ResetAfterPictureField();
 
         winnerTeams.Add(winner);
         questionManager.DistributePoints(winnerTeams, points);
@@ -172,11 +179,21 @@ public class PanelUiManager : MonoBehaviour
     public void HandleWrongAnswer(){
         rightAnswerButton.SetActive(false);
         wrongAnswerButton.SetActive(false);
+        ResetAfterPictureField();
 
         ShowDistributedPoints(new List<int>(), 0);
         ShowRoundState();
 
         timer.StopTimer();
+    }
+
+    private void ResetAfterPictureField(){
+        if (questionManager.IsPictureField()){
+            rightAnswerButton.transform.Translate(-210,0,0);
+            wrongAnswerButton.transform.Translate(-210,0,0);
+            pictureTask.transform.Translate(510,55,0);
+            pictureTask.SetActive(false);
+        }
     }
 
     private int GetTimePoints(){

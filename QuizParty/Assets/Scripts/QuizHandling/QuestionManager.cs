@@ -161,7 +161,11 @@ public class QuestionManager : MonoBehaviour
 
 
     public void ShowCorrectAnswer(){
-        questionTextField.text = "Lösung: " + currentEventField.GetAnswer();
+        if (currentEventField.GetFieldType() == GameFieldTypeEnum.KNOWLEDGE || currentEventField.GetFieldType() == GameFieldTypeEnum.GUESSQUESTION || currentEventField.GetFieldType() == GameFieldTypeEnum.GUESSPICTURE){
+            questionTextField.text = "Lösung: " + currentEventField.GetAnswer();
+        } else if (currentEventField.GetFieldType() == GameFieldTypeEnum.INTERACTION){
+            questionTextField.text = "Hat das Team die Aufgabe gemeistert?";
+        }
     }
 
     public string GetActualAnswer(){

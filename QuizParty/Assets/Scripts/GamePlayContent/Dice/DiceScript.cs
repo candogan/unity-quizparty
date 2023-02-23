@@ -31,13 +31,17 @@ public class DiceScript : MonoBehaviour
             rb.isKinematic = true;
 
             SideValueCheck();
-        } else if (rb.IsSleeping() && hasLanded && diceValue == 0) {
+        } else if (DiceStandsOnEdge()) {
             RollAgain();
         }
     }
 
+    private bool DiceStandsOnEdge(){
+        return rb.IsSleeping() && hasLanded && diceValue == 0;
+    }
+
     public bool DiceIsDone (){
-        return transform.position != initPosition && thrown == true && hasLanded == true;
+        return transform.position != initPosition && thrown == true && hasLanded == true && !DiceStandsOnEdge();
     }
 
     public void TriggerDice()

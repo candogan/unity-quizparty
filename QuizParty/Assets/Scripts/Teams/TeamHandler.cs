@@ -38,10 +38,10 @@ public class TeamHandler : MonoBehaviour
     };
     // Start is called before the first frame update
     private List<Vector3> initCharacterPositions = new List<Vector3>{   // Startpositionen der Charactere
-        new Vector3(66f,150f,-142.75f),
-        new Vector3(66f,150f,-140.75f),
-        new Vector3(68f,150f,-142.75f),
-        new Vector3(68f,150f,-140.75f)
+        new Vector3(66f,149.68f,-142.75f),
+        new Vector3(66f,149.68f,-140.75f),
+        new Vector3(68f,149.68f,-142.75f),
+        new Vector3(68f,149.68f,-140.75f)
     };
 
 
@@ -70,9 +70,9 @@ public class TeamHandler : MonoBehaviour
             if(i != teamIndex && thisTeam.GetScore() > scoreToCompare){
                 ranking += 1;
             }
-
+            i += 1;
         }
-
+        Debug.Log("Ranking of Teamindex" + teamIndex + " = " + ranking);
         return ranking;
     }
 
