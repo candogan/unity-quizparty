@@ -7282,6 +7282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1444bc37f7ec847a72aa7956bc6617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameplayHandler: {fileID: 758051466}
   questionTextField: {fileID: 846746862}
   timerPauseButton: {fileID: 698499538680339479}
   panelUiManager: {fileID: 1264185661}

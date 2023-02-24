@@ -60,7 +60,7 @@ public class GamePlayHandler : MonoBehaviour
             gameState = GameStateEnum.WAITING_FOR_DICE;
         } else if (gameState == GameStateEnum.WAITING_FOR_DICE && diceSc.DiceIsDone() && waiting == false){
             waiting = true;
-            StartCoroutine(WaitASecond());
+            StartCoroutine(WaitASecond(3));
             diceValue = diceSc.getDiceValue();
             camera.FocusPlayerCamera();
             characterOneSc.TransferDiceResult(diceValue);
@@ -70,17 +70,26 @@ public class GamePlayHandler : MonoBehaviour
         } else if (gameState == GameStateEnum.WAITING_FOR_MOVING_CHARACTER && characterOneSc.charcterIsOnTargetField() && waiting == false){
             waiting = true;
             ManageRoundState();
-            StartCoroutine(WaitASecond());
+            StartCoroutine(WaitASecond(3));
             //Debug.Log("Question Mode");
             camera.FocusSideCamera();
             StartQuestion();
             gameState = GameStateEnum.QUESTION_MODE;
         } else if (gameState == GameStateEnum.QUESTION_MODE && !panelUiManager.UiIsActive() && waiting == false){
-            waiting = true;
-            StartCoroutine(WaitASecond());
             //Debug.Log("Preparing next Round");
+            if(lastMoveThisRound){
+                questionManager.StartNewQuestion(actualTeamCount, GameFieldTypeEnum.GUESSQUESTION);
+                gameState = GameStateEnum.ROUND_ENDED_AND_ESTIMATION_TASK;
+            } else {
+                gameState = GameStateEnum.PREPARING_NEXT_ROUND;
+            }
+
+        //Wenn alle Teams in einer Runde dran waren, wird eine Schaetzfrage getriggert
+        } else if(gameState == GameStateEnum.ROUND_ENDED_AND_ESTIMATION_TASK && !panelUiManager.UiIsActive() && waiting == false){
             gameState = GameStateEnum.PREPARING_NEXT_ROUND;
-        } else if(gameState == GameStateEnum.PREPARING_NEXT_ROUND){
+
+
+        } else if(gameState == GameStateEnum.PREPARING_NEXT_ROUND && waiting == false){
             //Debug.Log("Changing Team");
             if (actualTeamCount < teamCount - 1 ){
                 actualTeamCount += 1;
@@ -149,10 +158,10 @@ public class GamePlayHandler : MonoBehaviour
         }
     }
 
-    IEnumerator WaitASecond()
+    IEnumerator WaitASecond(int secondsToWait)
     {
         // Wait for x seconds
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(secondsToWait);
         waiting = false;
     }
 }

@@ -5,8 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-using static HudHandler;
-
 public class PanelUiManager : MonoBehaviour
 {
     public GameObject questionUi;
@@ -171,7 +169,7 @@ public class PanelUiManager : MonoBehaviour
         winnerTeams.Add(winner);
         questionManager.DistributePoints(winnerTeams, points);
         ShowDistributedPoints(winnerTeams, points);
-        ShowRoundState();
+        //ShowRoundState(); Deprecated
 
         timer.StopTimer();
     }
@@ -182,7 +180,7 @@ public class PanelUiManager : MonoBehaviour
         ResetAfterPictureField();
 
         ShowDistributedPoints(new List<int>(), 0);
-        ShowRoundState();
+        //ShowRoundState(); Deprecated
 
         timer.StopTimer();
     }
@@ -258,6 +256,7 @@ public class PanelUiManager : MonoBehaviour
         }
     }
 
+/*
     public void ShowRoundState(){
         if (gameplayHandler.isLastMoveThisRound()){
             Debug.Log("Runde: " + gameplayHandler.GetActualRound());
@@ -265,4 +264,5 @@ public class PanelUiManager : MonoBehaviour
             notificationGameObject.GetComponent<TextMeshProUGUI>().text = "Runde " + (gameplayHandler.GetActualRound()) + " vorbei";
         }
     }
+*/
 }

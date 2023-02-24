@@ -9,6 +9,7 @@ using static GameFieldTypeEnum;
 
 public class QuestionManager : MonoBehaviour
 {
+    public GamePlayHandler gameplayHandler;
     public TextMeshProUGUI questionTextField;
     public GameObject timerPauseButton;
     public PanelUiManager panelUiManager;
@@ -35,7 +36,7 @@ public class QuestionManager : MonoBehaviour
         "TEAM {0}: Macht euch bereit für eine Interaktionsaufgabe!",
         "TEAM {0}: Macht euch bereit für eine Wissensaufgabe!",
         "TEAM {0}: Macht euch bereit für ein Bildrätsel!",
-        "Alle Teams: Macht euch bereit für ein Schätzrätsel!",
+        "Alle Teams: Runde {0} ist vorbei. Macht euch bereit für ein Schätzrätsel!",
         "TEAM {0}: Eure Figur Rückt 5 Felder weiter!"
         };
 
@@ -53,7 +54,11 @@ public class QuestionManager : MonoBehaviour
         actualTeamIndex = teamIndex;
 
         actualFieldType = fieldtype;
-        questionTextField.text = string.Format(teaserTextList[actualFieldType-1], actualTeamIndex + 1);
+        if(fieldtype != GameFieldTypeEnum.GUESSQUESTION){
+            questionTextField.text = string.Format(teaserTextList[actualFieldType-1], actualTeamIndex + 1);
+        } else {
+            questionTextField.text = string.Format(teaserTextList[actualFieldType-1], gameplayHandler.GetActualRound());
+        }
         RandomQuestionPicker(actualFieldType);
 
         panelUiManager.SetupTimer(eventFieldList[actualEventFieldIndex].GetTime());
