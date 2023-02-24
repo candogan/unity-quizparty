@@ -91,7 +91,7 @@ public class PanelUiManager : MonoBehaviour
         timerPauseButton.SetActive(true);
 
         if (questionManager.IsPictureField()){
-            timerPauseButton.transform.Translate(0,-365,0);
+            timerPauseButton.transform.Translate(0,-395,0);
             pictureTask.SetActive(true);
             pictureContent.sprite = questionManager.LoadPictureFromDisk();
             pictureContent.fillAmount = 0;
@@ -143,12 +143,12 @@ public class PanelUiManager : MonoBehaviour
 
         //versetzen des Pause Buttons falls mehr Platz fuer ein Bildraetsel benoetigt wird
         if (questionManager.IsPictureField()){
-            timerPauseButton.transform.Translate(0,365,0);
-            rightAnswerButton.transform.Translate(210,0,0);
-            wrongAnswerButton.transform.Translate(210,0,0);
+            timerPauseButton.transform.Translate(0,395,0);
+            rightAnswerButton.transform.Translate(230,0,0);
+            wrongAnswerButton.transform.Translate(230,0,0);
             pictureTask.SetActive(true);
             pictureContent.fillAmount = 1;
-            pictureTask.transform.Translate(-510,-55,0);
+            pictureTask.transform.Translate(-320,-55,0);
         }
     }
 
@@ -189,9 +189,9 @@ public class PanelUiManager : MonoBehaviour
 
     private void ResetAfterPictureField(){
         if (questionManager.IsPictureField()){
-            rightAnswerButton.transform.Translate(-210,0,0);
-            wrongAnswerButton.transform.Translate(-210,0,0);
-            pictureTask.transform.Translate(510,55,0);
+            rightAnswerButton.transform.Translate(-230,0,0);
+            wrongAnswerButton.transform.Translate(-230,0,0);
+            pictureTask.transform.Translate(320,55,0);
             pictureTask.SetActive(false);
         }
     }
