@@ -9,6 +9,7 @@ using static GameFieldTypeEnum;
 
 public class QuestionManager : MonoBehaviour
 {
+    public GamePlayHandler gameplayHandler;
     public TextMeshProUGUI questionTextField;
     public GameObject timerPauseButton;
     public PanelUiManager panelUiManager;
@@ -32,11 +33,11 @@ public class QuestionManager : MonoBehaviour
     private static string filename = "GameFieldQuestions.json";
 
     private static List<string> teaserTextList = new List<string>{
-        "TEAM {0}: Macht euch bereit für eine Interaktionsaufgabe!",
-        "TEAM {0}: Macht euch bereit für eine Wissensaufgabe!",
-        "TEAM {0}: Macht euch bereit für ein Bildrätsel!",
-        "Alle Teams: Macht euch bereit für ein Schätzrätsel!",
-        "TEAM {0}: Eure Figur Rückt 5 Felder weiter!"
+        "Team {0}: Macht euch bereit für eine Interaktionsaufgabe!",
+        "Team {0}: Macht euch bereit für eine Wissensaufgabe!",
+        "Team {0}: Macht euch bereit für ein Bildrätsel!",
+        "Alle Teams: Runde {0} ist vorbei. Macht euch bereit für ein Schätzrätsel!",
+        "Team {0}: Eure Figur Rückt 5 Felder weiter!"
         };
 
     void Start(){
@@ -53,7 +54,11 @@ public class QuestionManager : MonoBehaviour
         actualTeamIndex = teamIndex;
 
         actualFieldType = fieldtype;
-        questionTextField.text = string.Format(teaserTextList[actualFieldType-1], actualTeamIndex + 1);
+        if(fieldtype != GameFieldTypeEnum.GUESSQUESTION){
+            questionTextField.text = string.Format(teaserTextList[actualFieldType-1], actualTeamIndex + 1);
+        } else {
+            questionTextField.text = string.Format(teaserTextList[actualFieldType-1], gameplayHandler.GetActualRound());
+        }
         RandomQuestionPicker(actualFieldType);
 
         panelUiManager.SetupTimer(eventFieldList[actualEventFieldIndex].GetTime());
@@ -161,7 +166,11 @@ public class QuestionManager : MonoBehaviour
 
 
     public void ShowCorrectAnswer(){
-        questionTextField.text = "Lösung: " + currentEventField.GetAnswer();
+        if (currentEventField.GetFieldType() == GameFieldTypeEnum.KNOWLEDGE || currentEventField.GetFieldType() == GameFieldTypeEnum.GUESSQUESTION || currentEventField.GetFieldType() == GameFieldTypeEnum.GUESSPICTURE){
+            questionTextField.text = "Lösung: " + currentEventField.GetAnswer();
+        } else if (currentEventField.GetFieldType() == GameFieldTypeEnum.INTERACTION){
+            questionTextField.text = "Hat das Team die Aufgabe gemeistert?";
+        }
     }
 
     public string GetActualAnswer(){

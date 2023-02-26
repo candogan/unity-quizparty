@@ -93,7 +93,7 @@ public class EstimationCheck : MonoBehaviour
             panelUiManager.DisableEstimationPopup();
             questionManager.DistributePoints(winnerTeams, 2);
             panelUiManager.ShowDistributedPoints(winnerTeams, 2);
-            panelUiManager.ShowRoundState();
+            //panelUiManager.ShowRoundState(); Deprecated
         }
     
     }

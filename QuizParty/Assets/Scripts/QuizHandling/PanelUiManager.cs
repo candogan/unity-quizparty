@@ -5,8 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-using static HudHandler;
-
 public class PanelUiManager : MonoBehaviour
 {
     public GameObject questionUi;
@@ -91,7 +89,7 @@ public class PanelUiManager : MonoBehaviour
         timerPauseButton.SetActive(true);
 
         if (questionManager.IsPictureField()){
-            timerPauseButton.transform.Translate(0,-365,0);
+            timerPauseButton.transform.Translate(0,-395,0);
             pictureTask.SetActive(true);
             pictureContent.sprite = questionManager.LoadPictureFromDisk();
             pictureContent.fillAmount = 0;
@@ -143,9 +141,15 @@ public class PanelUiManager : MonoBehaviour
 
         //versetzen des Pause Buttons falls mehr Platz fuer ein Bildraetsel benoetigt wird
         if (questionManager.IsPictureField()){
-            timerPauseButton.transform.Translate(0,365,0);
+            timerPauseButton.transform.Translate(0,395,0);
+            rightAnswerButton.transform.Translate(230,0,0);
+            wrongAnswerButton.transform.Translate(230,0,0);
+            pictureTask.SetActive(true);
+            pictureContent.fillAmount = 1;
+            pictureTask.transform.Translate(-320,-55,0);
         }
     }
+
 
     public void DisableEstimationPopup(){
         estimationPopup.SetActive(false);
@@ -160,11 +164,12 @@ public class PanelUiManager : MonoBehaviour
 
         rightAnswerButton.SetActive(false);
         wrongAnswerButton.SetActive(false);
+        ResetAfterPictureField();
 
         winnerTeams.Add(winner);
         questionManager.DistributePoints(winnerTeams, points);
         ShowDistributedPoints(winnerTeams, points);
-        ShowRoundState();
+        //ShowRoundState(); Deprecated
 
         timer.StopTimer();
     }
@@ -172,11 +177,21 @@ public class PanelUiManager : MonoBehaviour
     public void HandleWrongAnswer(){
         rightAnswerButton.SetActive(false);
         wrongAnswerButton.SetActive(false);
+        ResetAfterPictureField();
 
         ShowDistributedPoints(new List<int>(), 0);
-        ShowRoundState();
+        //ShowRoundState(); Deprecated
 
         timer.StopTimer();
+    }
+
+    private void ResetAfterPictureField(){
+        if (questionManager.IsPictureField()){
+            rightAnswerButton.transform.Translate(-230,0,0);
+            wrongAnswerButton.transform.Translate(-230,0,0);
+            pictureTask.transform.Translate(320,55,0);
+            pictureTask.SetActive(false);
+        }
     }
 
     private int GetTimePoints(){
@@ -241,6 +256,7 @@ public class PanelUiManager : MonoBehaviour
         }
     }
 
+/*
     public void ShowRoundState(){
         if (gameplayHandler.isLastMoveThisRound()){
             Debug.Log("Runde: " + gameplayHandler.GetActualRound());
@@ -248,4 +264,5 @@ public class PanelUiManager : MonoBehaviour
             notificationGameObject.GetComponent<TextMeshProUGUI>().text = "Runde " + (gameplayHandler.GetActualRound()) + " vorbei";
         }
     }
+*/
 }

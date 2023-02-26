@@ -38,10 +38,10 @@ public class TeamHandler : MonoBehaviour
     };
     // Start is called before the first frame update
     private List<Vector3> initCharacterPositions = new List<Vector3>{   // Startpositionen der Charactere
-        new Vector3(66f,150f,-142.75f),
-        new Vector3(66f,150f,-140.75f),
-        new Vector3(68f,150f,-142.75f),
-        new Vector3(68f,150f,-140.75f)
+        new Vector3(37f,2.7f,5f),
+        new Vector3(37f,2.7f,3f),
+        new Vector3(39f,2.7f,3f),
+        new Vector3(39f,2.7f,5f)
     };
 
 
@@ -65,14 +65,16 @@ public class TeamHandler : MonoBehaviour
         int i = 0;
         int scoreToCompare = GetScoreOfTeamindex(teamIndex);
         int ranking = 1;
+        int previousScore = 0;
 
         foreach(Team thisTeam in teamlist){
-            if(i != teamIndex && thisTeam.GetScore() > scoreToCompare){
+            if(i != teamIndex && thisTeam.GetScore() > scoreToCompare && thisTeam.GetScore() != previousScore){
                 ranking += 1;
+                previousScore = thisTeam.GetScore();
             }
-
+            i += 1;
         }
-
+        Debug.Log("Ranking of Teamindex" + teamIndex + " = " + ranking);
         return ranking;
     }
 

@@ -8,6 +8,5 @@ public class GameFieldTypeEnum : MonoBehaviour
     public static int INTERACTION = 1; // Brown
     public static int KNOWLEDGE = 2; // blue
     public static int GUESSPICTURE = 3; // dark green
-    public static int GUESSQUESTION = 4; // yellow
-    public static int ACTION = 5; // red
+    public static int GUESSQUESTION = 4; // Not on fields - triggered after each round
 }

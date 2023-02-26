@@ -8,6 +8,7 @@ public class CameraManager : MonoBehaviour
     public GameObject diceCamera;
     public GameObject mainCamera;
     public GameObject sideCamera;
+    public GameObject awardCeremonyCamera;
     private GameObject playerCamera;
 
 
@@ -27,6 +28,7 @@ public class CameraManager : MonoBehaviour
         sideCamera.SetActive(false);
         playerCamera.SetActive(false);
         diceCamera.SetActive(true);
+        awardCeremonyCamera.SetActive(false);
     }
 
     public void FocusMainCamera()
@@ -35,6 +37,7 @@ public class CameraManager : MonoBehaviour
         diceCamera.SetActive(false);
         playerCamera.SetActive(false);
         mainCamera.SetActive(true);
+        awardCeremonyCamera.SetActive(false);
     }
 
     public void FocusSideCamera()
@@ -44,6 +47,7 @@ public class CameraManager : MonoBehaviour
         mainCamera.SetActive(false);
         playerCamera.SetActive(false);
         sideCamera.SetActive(true);
+        awardCeremonyCamera.SetActive(false);
     }
 
     public void FocusPlayerCamera()
@@ -52,7 +56,16 @@ public class CameraManager : MonoBehaviour
         mainCamera.SetActive(false);
         sideCamera.SetActive(false);
         playerCamera.SetActive(true);
+        awardCeremonyCamera.SetActive(false);
 
+    }
+
+    public void FocusAwardCeremonyCamera(){
+        diceCamera.SetActive(false);
+        mainCamera.SetActive(false);
+        sideCamera.SetActive(false);
+        playerCamera.SetActive(false);
+        awardCeremonyCamera.SetActive(true);
     }
         //activeTeam.transform.GetChild (5).gameObject.SetActive(false);
 
