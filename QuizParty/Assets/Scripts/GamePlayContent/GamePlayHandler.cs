@@ -10,6 +10,7 @@ public class GamePlayHandler : MonoBehaviour
     //Objecttyp zu liste gewechselt -> bietet einfacheren zugriff auf die values
     public CameraManager camera;
     public TeamHandler teamHandler;
+    public PauseHandler pauseHandler;
     public GameOptionsHandler gameOptionsHandler;
     public GameFieldHandler gameFieldHandler;
     public QuestionManager questionManager;
@@ -38,10 +39,6 @@ public class GamePlayHandler : MonoBehaviour
     void Update()
     {
         ManageState();
-
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            Application.Quit();
-        }
     }
 
     // State Manager für die Rundenlogik -> generische wartezeiten, je nachdem wie lange der Würfe / Character für die aktive Handlung benötigt
