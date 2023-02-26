@@ -33,11 +33,11 @@ public class QuestionManager : MonoBehaviour
     private static string filename = "GameFieldQuestions.json";
 
     private static List<string> teaserTextList = new List<string>{
-        "TEAM {0}: Macht euch bereit für eine Interaktionsaufgabe!",
-        "TEAM {0}: Macht euch bereit für eine Wissensaufgabe!",
-        "TEAM {0}: Macht euch bereit für ein Bildrätsel!",
+        "Team {0}: Macht euch bereit für eine Interaktionsaufgabe!",
+        "Team {0}: Macht euch bereit für eine Wissensaufgabe!",
+        "Team {0}: Macht euch bereit für ein Bildrätsel!",
         "Alle Teams: Runde {0} ist vorbei. Macht euch bereit für ein Schätzrätsel!",
-        "TEAM {0}: Eure Figur Rückt 5 Felder weiter!"
+        "Team {0}: Eure Figur Rückt 5 Felder weiter!"
         };
 
     void Start(){
