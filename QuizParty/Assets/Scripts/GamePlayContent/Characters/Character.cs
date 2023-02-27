@@ -109,13 +109,16 @@ public class Character : MonoBehaviour
                 //Temp Fix um Exception zu umgehen
                 if(needsTurn){
                     transform.Rotate(0, turnDegree, 0);
+                    //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, turnDegree, 0), 5);
                 }
                 needsTurn = false;  
                 Vector3 destiny = new Vector3(-8, 0, 0) * Time.deltaTime;
+                GetComponent<Animator>().Play("Walk");
                 transform.Translate(destiny, Space.World);
         } else {
             Vector3 speed = new Vector3(0, 0, 0) * Time.deltaTime;
             transform.Translate(speed, Space.Self);
+            GetComponent<Animator>().Play("Idle");
             if (!readyForNextMove){
                 actualFieldIndex = (actualFieldIndex + 1) % fieldCount;
                 fieldsToMove -= 1;
@@ -133,11 +136,13 @@ public class Character : MonoBehaviour
                     transform.Rotate(0, turnDegree, 0);
                 }
                 needsTurn = false;
+                GetComponent<Animator>().Play("Walk");
                 Vector3 destiny = new Vector3(8, 0, 0) * Time.deltaTime;
                 transform.Translate(destiny, Space.World);
         } else {
             Vector3 speed = new Vector3(0, 0, 0) * Time.deltaTime;
             transform.Translate(speed, Space.Self);
+            GetComponent<Animator>().Play("Idle");
             if (!readyForNextMove){
                 actualFieldIndex = (actualFieldIndex + 1) % fieldCount;
                 fieldsToMove -= 1;
@@ -156,10 +161,12 @@ public class Character : MonoBehaviour
                 }
                 needsTurn = false;
                 Vector3 destiny = new Vector3(0, 0, -8) * Time.deltaTime;
+                GetComponent<Animator>().Play("Walk");
                 transform.Translate(destiny, Space.World);
         } else {
             Vector3 speed = new Vector3(0, 0, 0) * Time.deltaTime;
             transform.Translate(speed, Space.Self);
+            GetComponent<Animator>().Play("Idle");
             if (!readyForNextMove){
                 actualFieldIndex = (actualFieldIndex + 1) % fieldCount;
                 fieldsToMove -= 1;
@@ -178,10 +185,12 @@ public class Character : MonoBehaviour
                 }
                 needsTurn = false;
                 Vector3 destiny = new Vector3(0, 0, 8) * Time.deltaTime;
+                GetComponent<Animator>().Play("Walk");
                 transform.Translate(destiny, Space.World);
         } else {
             Vector3 speed = new Vector3(0, 0, 0) * Time.deltaTime;
             transform.Translate(speed, Space.Self);
+            GetComponent<Animator>().Play("Idle");
             if (!readyForNextMove){
                 actualFieldIndex = (actualFieldIndex + 1) % fieldCount;
                 fieldsToMove -= 1;

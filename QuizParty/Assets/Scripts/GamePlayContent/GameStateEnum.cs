@@ -13,4 +13,5 @@ public class GameStateEnum : MonoBehaviour
     public static int PREPARING_NEXT_ROUND = 5;
     public static int ROUND_ENDED_AND_ESTIMATION_TASK = 6;
     public static int GAME_FINISHED = 7;
+    public static int AWARD_CEREMONY = 8;
 }
