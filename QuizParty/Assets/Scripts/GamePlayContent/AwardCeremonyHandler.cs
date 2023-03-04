@@ -50,8 +50,8 @@ public class AwardCeremonyHandler : MonoBehaviour
             teamList[i].GetCharacter().transform.position = awardPositions[i];
             teamList[i].GetCharacter().transform.eulerAngles  = awardRotations[i];
 
-            awardSteps[i].transform.position += CalculateStepHeight(teamList[i]);
-            teamList[i].GetCharacter().transform.position += CalculateStepHeight(teamList[i]);
+            awardSteps[i].transform.position += CalculateStepHeight(i);
+            teamList[i].GetCharacter().transform.position += CalculateStepHeight(i);
         }
 
         cameraManager.FocusAwardCeremonyCamera();
@@ -63,10 +63,9 @@ public class AwardCeremonyHandler : MonoBehaviour
     }
 
 
-    private Vector3 CalculateStepHeight(Team team){
-        int score = team.GetScore();
-        double relativeScore = (double)team.GetScore() / (double)( maxPoints + 2 );
-        Debug.Log("Score " + score + "   ( maxPoints + 2 ) " + ( maxPoints + 2 ) +  "  relativeScore " + relativeScore);
-        return new Vector3(0f, (float)( maxStepSize * relativeScore ) , 0f);
+    private Vector3 CalculateStepHeight(int teamIndex){
+        double relativeRank = 1 / teamHandler.GetRankingOfTeam(teamIndex);
+        //Debug.Log("Score " + score + "   ( maxPoints + 2 ) " + ( maxPoints + 2 ) +  "  relativeScore " + relativeScore);
+        return new Vector3(0f, (float)( maxStepSize * relativeRank ) , 0f);
      }
 }

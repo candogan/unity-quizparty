@@ -77,7 +77,11 @@ public class GameOptionsHandler : MonoBehaviour
         {
             teamCount = teamSlider.value;
             roundCount  = roundSlider.value;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            if (roundCount < 5){
+                SceneManager.LoadScene("QuizPartyMinimal");
+            } else if (roundCount > 4 && roundCount < 9){
+                SceneManager.LoadScene("QuizParty");
+            }
         } 
         else
         {
