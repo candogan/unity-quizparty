@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 using static GameFieldHandler;
 using static NextFieldDirectionEnum;
@@ -16,8 +17,10 @@ public class Character : MonoBehaviour
     private float fieldDistance = 0;
     private int fieldsToMove = 0;
     private int fieldCount;
+    private int turnedDegree = 0;
     private int turnDegree;
-    private bool needsTurn = true;
+    private bool needsTurn;
+    private bool readyToMove = true;
 
     private Vector3 initFieldPosition;
     private Vector3 initCharacterPosition;
@@ -50,19 +53,31 @@ public class Character : MonoBehaviour
             SpecifyMovingParameters();
 
         } else if(0 < fieldsToMove && !readyForNextMove){
-
+            
             if (movingDirection == NextFieldDirectionEnum.X_ACHSIS_DOWN){
                 //Debug.Log("X-DOWN, Field-ID: " + actualFieldIndex);
-                MoveCharacterXDown();
+                RotateCharacter();
+                if (readyToMove){
+                    MoveCharacterXDown();
+                }          
             } else if(movingDirection == NextFieldDirectionEnum.X_ACHSIS_UP){
                 //Debug.Log("X-UP, Field-ID: " + actualFieldIndex);
+                RotateCharacter();
+                if (readyToMove){
                 MoveCharacterXUp();
+                }
             } else if (movingDirection == NextFieldDirectionEnum.Z_ACHSIS_DOWN){
                 //Debug.Log("Z-Down, Field-ID: " + actualFieldIndex);
+                RotateCharacter();
+                if (readyToMove){
                 MoveCharacterZDown();
+                }
             } else if(movingDirection == NextFieldDirectionEnum.Z_ACHSIS_UP){
                 //Debug.Log("Z-Up, Field-ID: " + actualFieldIndex);
+                RotateCharacter();
+                if (readyToMove){
                 MoveCharacterZUp();
+                }
             }
         }
     }
@@ -75,6 +90,27 @@ public class Character : MonoBehaviour
         return fieldsToMove == 0;
     }
 
+    private void RotateCharacter(){
+        
+        if (needsTurn && turnedDegree != Math.Abs(turnDegree)){
+            readyToMove = false;
+            Debug.Log(turnedDegree);
+            if (turnDegree < 0){
+                transform.Rotate(0, -1, 0);
+            } else{
+                transform.Rotate(0, 1, 0);
+            }
+            turnedDegree += 1;
+        } 
+        if (turnedDegree == Math.Abs(turnDegree)){
+            needsTurn = false;
+            turnedDegree = 0;
+            readyToMove = true;
+            
+        }
+    }
+
+
     private void SpecifyMovingParameters(){
         initFieldPosition = gameFieldHandler.GetLocationOfFieldindex(actualFieldIndex);
         initCharacterPosition = transform.position;
@@ -83,6 +119,7 @@ public class Character : MonoBehaviour
         // Debug.Log("Richtung: " + movingDirection + ", Ziel: " + nextFieldLocation + ",actualFieldIndex " + actualFieldIndex + ", readyForNextMove" + readyForNextMove);
         readyForNextMove = false;
         turnDegree = gameFieldHandler.GetNextFieldTurnDegree(actualFieldIndex);
+        needsTurn = true;
 
 
 
@@ -107,10 +144,6 @@ public class Character : MonoBehaviour
         if (currentLocation.x >= initCharacterPosition.x - fieldDistance) {
                 //character_Animator.SetTrigger("Run In Place");
                 //Temp Fix um Exception zu umgehen
-                if(needsTurn){
-                    transform.Rotate(0, turnDegree, 0);
-                }
-                needsTurn = false;  
                 Vector3 destiny = new Vector3(-8, 0, 0) * Time.deltaTime;
                 transform.Translate(destiny, Space.World);
         } else {
@@ -121,7 +154,7 @@ public class Character : MonoBehaviour
                 fieldsToMove -= 1;
             }
             readyForNextMove = true;
-            needsTurn = true;
+            readyToMove = true;
         }
     }
 
@@ -129,10 +162,6 @@ public class Character : MonoBehaviour
         if (currentLocation.x <= initCharacterPosition.x + fieldDistance) {
                 //character_Animator.SetTrigger("Run In Place");
                 //Temp Fix um Exception zu umgehen
-                if(needsTurn){
-                    transform.Rotate(0, turnDegree, 0);
-                }
-                needsTurn = false;
                 Vector3 destiny = new Vector3(8, 0, 0) * Time.deltaTime;
                 transform.Translate(destiny, Space.World);
         } else {
@@ -143,7 +172,6 @@ public class Character : MonoBehaviour
                 fieldsToMove -= 1;
             }
             readyForNextMove = true;
-            needsTurn = true;
         }
     }
 
@@ -151,10 +179,6 @@ public class Character : MonoBehaviour
         if (currentLocation.z >= initCharacterPosition.z - fieldDistance) {
                 //character_Animator.SetTrigger("Run In Place");
                 //Temp Fix um Exception zu umgehen
-                if(needsTurn){
-                    transform.Rotate(0, turnDegree, 0);
-                }
-                needsTurn = false;
                 Vector3 destiny = new Vector3(0, 0, -8) * Time.deltaTime;
                 transform.Translate(destiny, Space.World);
         } else {
@@ -165,7 +189,6 @@ public class Character : MonoBehaviour
                 fieldsToMove -= 1;
             }
             readyForNextMove = true;
-            needsTurn = true;
         }
     }
 
@@ -173,10 +196,6 @@ public class Character : MonoBehaviour
         if (currentLocation.z <= initCharacterPosition.z + fieldDistance) {
                 //character_Animator.SetTrigger("Run In Place");
                 //Temp Fix um Exception zu umgehen
-                if(needsTurn){
-                    transform.Rotate(0, turnDegree, 0);
-                }
-                needsTurn = false;
                 Vector3 destiny = new Vector3(0, 0, 8) * Time.deltaTime;
                 transform.Translate(destiny, Space.World);
         } else {
@@ -187,7 +206,6 @@ public class Character : MonoBehaviour
                 fieldsToMove -= 1;
             }
             readyForNextMove = true;
-            needsTurn = true;
         }
     }
 }
