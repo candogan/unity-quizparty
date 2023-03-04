@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 4760e08158ba96d42a998910c1d8d215
   - enabled: 1
-    path: Assets/Scenes/QuizParty.unity
+    path: Assets/Scenes/QuizPartyMinimal.unity
     guid: 9b8a03cf83c2d7241b541eeaa9c41f72
   m_configObjects: {}

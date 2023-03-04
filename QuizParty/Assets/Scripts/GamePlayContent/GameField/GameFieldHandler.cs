@@ -6,12 +6,16 @@ public class GameFieldHandler : MonoBehaviour
 {
     private List<GameField> gameFields = new List<GameField>();
 
+    public int gameFieldLayout;
 
     // Start is called before the first frame update
     void Start()
     {
-        InitializeGameFields();
-        
+        if (gameFieldLayout == 1) {
+            InitializeGameFields();
+        } else {
+            InitializeMinimalGameFields();
+        }
     }
 
     // Update is called once per frame
@@ -82,6 +86,28 @@ public class GameFieldHandler : MonoBehaviour
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (65)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP, 0));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (85)").transform.position, GameFieldTypeEnum.GUESSPICTURE, NextFieldDirectionEnum.Z_ACHSIS_DOWN, 90));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (87)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.X_ACHSIS_UP, -90));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (106)").transform.position, GameFieldTypeEnum.GUESSPICTURE, NextFieldDirectionEnum.X_ACHSIS_UP, 0));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (59)").transform.position, GameFieldTypeEnum.KNOWLEDGE, NextFieldDirectionEnum.X_ACHSIS_UP, 0));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (109)").transform.position, GameFieldTypeEnum.KNOWLEDGE, NextFieldDirectionEnum.Z_ACHSIS_UP, -90));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (118)").transform.position, GameFieldTypeEnum.GUESSPICTURE, NextFieldDirectionEnum.X_ACHSIS_UP, 90));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (93)").transform.position, GameFieldTypeEnum.KNOWLEDGE, NextFieldDirectionEnum.X_ACHSIS_UP, 0));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (48)").transform.position, GameFieldTypeEnum.GUESSPICTURE, NextFieldDirectionEnum.Z_ACHSIS_DOWN, 90));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (57)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_DOWN, 0));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (94)").transform.position, GameFieldTypeEnum.GUESSPICTURE, NextFieldDirectionEnum.Z_ACHSIS_DOWN, 0));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (51)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_DOWN, 0));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (91)").transform.position, GameFieldTypeEnum.KNOWLEDGE, NextFieldDirectionEnum.Z_ACHSIS_DOWN, 0));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (56)").transform.position, GameFieldTypeEnum.KNOWLEDGE, NextFieldDirectionEnum.X_ACHSIS_DOWN, 90));
+    }
+
+    private void InitializeMinimalGameFields()
+    {
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (82)").transform.position, GameFieldTypeEnum.KNOWLEDGE, NextFieldDirectionEnum.X_ACHSIS_DOWN, 0));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (114)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_UP, 90));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (95)").transform.position, GameFieldTypeEnum.GUESSPICTURE, NextFieldDirectionEnum.X_ACHSIS_DOWN, -90));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (97)").transform.position, GameFieldTypeEnum.GUESSPICTURE, NextFieldDirectionEnum.X_ACHSIS_DOWN, 0));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (77)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_UP, 0));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (85)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_UP, 0));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (87)").transform.position, GameFieldTypeEnum.GUESSPICTURE, NextFieldDirectionEnum.Z_ACHSIS_UP, -90));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (106)").transform.position, GameFieldTypeEnum.GUESSPICTURE, NextFieldDirectionEnum.X_ACHSIS_UP, 0));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (59)").transform.position, GameFieldTypeEnum.KNOWLEDGE, NextFieldDirectionEnum.X_ACHSIS_UP, 0));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (109)").transform.position, GameFieldTypeEnum.KNOWLEDGE, NextFieldDirectionEnum.Z_ACHSIS_UP, -90));
