@@ -105,7 +105,7 @@ public class GameFieldHandler : MonoBehaviour
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (114)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_UP, 90));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (95)").transform.position, GameFieldTypeEnum.GUESSPICTURE, NextFieldDirectionEnum.X_ACHSIS_DOWN, -90));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (97)").transform.position, GameFieldTypeEnum.GUESSPICTURE, NextFieldDirectionEnum.X_ACHSIS_DOWN, 0));
-        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (77)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_UP, 0));
+        gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (77)").transform.position, GameFieldTypeEnum.GUESSPICTURE, NextFieldDirectionEnum.Z_ACHSIS_UP, 0));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (85)").transform.position, GameFieldTypeEnum.INTERACTION, NextFieldDirectionEnum.Z_ACHSIS_UP, 0));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (87)").transform.position, GameFieldTypeEnum.GUESSPICTURE, NextFieldDirectionEnum.Z_ACHSIS_UP, -90));
         gameFields.Add(new GameField(GameObject.Find("grass_with_soil_area (106)").transform.position, GameFieldTypeEnum.GUESSPICTURE, NextFieldDirectionEnum.X_ACHSIS_UP, 0));
