@@ -121,4 +121,11 @@ public class TeamHandler : MonoBehaviour
 
         hudHandler.InitializeHudForTheTeams(teamlist);
     }
+
+    public void SaveTeamData(){
+        for (int i = 0; i < teamCount; i++){
+            PlayerPrefs.SetInt("teamPoints" + i, teamlist[i].GetScore());
+            teamlist[i].GetCharacter().GetComponent<Character>().saveCharacterData(i);
+        }
+    }
 }

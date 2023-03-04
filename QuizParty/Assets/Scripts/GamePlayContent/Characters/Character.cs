@@ -208,4 +208,11 @@ public class Character : MonoBehaviour
             readyForNextMove = true;
         }
     }
+
+    public void saveCharacterData(int teamNumber){
+        PlayerPrefs.SetFloat("posX" + teamNumber, currentLocation.x);
+        PlayerPrefs.SetFloat("posY" + teamNumber, currentLocation.y);
+        PlayerPrefs.SetFloat("posZ" + teamNumber, currentLocation.z);
+        PlayerPrefs .SetInt("actualFieldIndex" + teamNumber, actualFieldIndex);
+    }
 }

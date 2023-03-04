@@ -164,4 +164,11 @@ public class GamePlayHandler : MonoBehaviour
         yield return new WaitForSecondsRealtime(secondsToWait);
         waiting = false;
     }
+
+    public void SaveGame(){
+        PlayerPrefs.SetInt("teamCount", (int) GameOptionsHandler.getTeamCount());
+        PlayerPrefs.SetInt("roundCount", (int) GameOptionsHandler.getRoundCount());
+        teamHandler.SaveTeamData();
+        PlayerPrefs.SetInt("actualRoundCount", actualRoundCount);
+    }
 }
