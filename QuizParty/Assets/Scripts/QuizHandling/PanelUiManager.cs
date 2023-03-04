@@ -25,6 +25,7 @@ public class PanelUiManager : MonoBehaviour
     public GamePlayHandler gameplayHandler;
     public GameObject notificationGameObject;
     public HudHandler hudHandler;
+    public GameObject saveGameButton;
 
     public Image pictureContent;
 
@@ -74,6 +75,7 @@ public class PanelUiManager : MonoBehaviour
         timerPauseButton.SetActive(false);
         timerStartButton.SetActive(true);
         notificationGameObject.SetActive(false);
+        saveGameButton.SetActive(false);
         timer.StopTimer();
         timerPauseButton.transform.localPosition = new Vector3(0,0,0);
         quizText.text = "Lade neues Rätsel...";
@@ -254,6 +256,10 @@ public class PanelUiManager : MonoBehaviour
             yPosInputField -= 85;
             teamIndex += 1;
         }
+    }
+
+    public void setSaveGameButtonActive(){
+        saveGameButton.SetActive(true);
     }
 
 /*

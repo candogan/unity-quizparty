@@ -213,6 +213,15 @@ public class Character : MonoBehaviour
         PlayerPrefs.SetFloat("posX" + teamNumber, currentLocation.x);
         PlayerPrefs.SetFloat("posY" + teamNumber, currentLocation.y);
         PlayerPrefs.SetFloat("posZ" + teamNumber, currentLocation.z);
+        PlayerPrefs.SetFloat("rotY" + teamNumber, transform.rotation.eulerAngles.y);
         PlayerPrefs .SetInt("actualFieldIndex" + teamNumber, actualFieldIndex);
+    }
+
+    public void loadCharacterData(int teamNumber){
+        transform.position = (new Vector3(PlayerPrefs.GetFloat("posX" + teamNumber),PlayerPrefs.GetFloat("posY" + teamNumber), PlayerPrefs.GetFloat("posZ" + teamNumber)));
+        actualFieldIndex = PlayerPrefs.GetInt("actualFieldIndex" + teamNumber);
+        currentLocation = new Vector3(PlayerPrefs.GetFloat("posX" + teamNumber),PlayerPrefs.GetFloat("posY" + teamNumber), PlayerPrefs.GetFloat("posZ" + teamNumber));
+        transform.Rotate(0, PlayerPrefs.GetInt("rotY" + teamNumber), 0, Space.Self);
+
     }
 }

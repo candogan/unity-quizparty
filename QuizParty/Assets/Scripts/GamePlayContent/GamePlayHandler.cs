@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 using static GameFieldTypeEnum;
 using static NextFieldDirectionEnum;
@@ -170,5 +171,11 @@ public class GamePlayHandler : MonoBehaviour
         PlayerPrefs.SetInt("roundCount", (int) GameOptionsHandler.getRoundCount());
         teamHandler.SaveTeamData();
         PlayerPrefs.SetInt("actualRoundCount", actualRoundCount);
+        SceneManager.LoadScene("MainMenu");
+    }
+    public void LoadGame(){
+
+        teamHandler.LoadTeamData();
+        actualRoundCount = PlayerPrefs.GetInt("actualRoundCount");
     }
 }

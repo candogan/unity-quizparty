@@ -49,6 +49,9 @@ public class TeamHandler : MonoBehaviour
     {
         teamCount = GameOptionsHandler.getTeamCount();
         InitializeTeams();
+        if (GameOptionsHandler.notNewGame){
+            LoadTeamData();
+        }
     }
 
     // Update is called once per frame
@@ -126,6 +129,13 @@ public class TeamHandler : MonoBehaviour
         for (int i = 0; i < teamCount; i++){
             PlayerPrefs.SetInt("teamPoints" + i, teamlist[i].GetScore());
             teamlist[i].GetCharacter().GetComponent<Character>().saveCharacterData(i);
+        }
+    }
+
+    public void LoadTeamData(){
+        for (int i = 0; i < teamCount; i++){
+            teamlist[i].SetScore(PlayerPrefs.GetInt("teamPoints" + i));
+            teamlist[i].GetCharacter().GetComponent<Character>().loadCharacterData(i);
         }
     }
 }

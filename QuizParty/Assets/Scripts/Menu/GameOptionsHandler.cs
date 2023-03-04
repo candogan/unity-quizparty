@@ -16,6 +16,8 @@ public class GameOptionsHandler : MonoBehaviour
 
     private static List<int> difficulties;
 
+    public static bool notNewGame = false;
+
     public Slider teamSlider;
     public Slider roundSlider;
 
@@ -38,6 +40,21 @@ public class GameOptionsHandler : MonoBehaviour
         checkDiffSelection();
     }
 
+    public void PlayOldGame(){
+        teamCount = PlayerPrefs.GetInt("teamCount");
+        roundCount = PlayerPrefs.GetInt("roundCount");
+        difficulty1 = true;
+        difficulty2 = true;
+        difficulty3 = true;
+        difficulties = new List<int>();
+        notNewGame = true;
+        if (roundCount < 5){
+            SceneManager.LoadScene("QuizPartyMinimal");
+        } else if (roundCount > 4 && roundCount < 9){
+            SceneManager.LoadScene("QuizParty");
+        }
+    }
+
     //Initialisieren der Variablen
     private void initialiazeVariables()
     {
@@ -47,6 +64,18 @@ public class GameOptionsHandler : MonoBehaviour
         difficulty2 = true;
         difficulty3 = true;
         difficulties = new List<int>();
+        if (difficulty1 == true)
+        {
+            difficulties.Add(1);
+        }
+        if (difficulty2 == true)
+        {
+            difficulties.Add(2);
+        }
+        if (difficulty3 == true)
+        {
+            difficulties.Add(3);
+        }
     }
 
     //Variablen der ausgewählten Schwierigkeit anpassen
