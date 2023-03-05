@@ -16,11 +16,13 @@ public class GamePlayHandler : MonoBehaviour
     public GameFieldHandler gameFieldHandler;
     public QuestionManager questionManager;
     public PanelUiManager panelUiManager;
+    public HudHandler hudHandler;
     public GameObject dice;
     public DiceScript diceSc;
     public int diceValue;
     public GameObject characterOne;
     public Character characterOneSc;
+
     private int roundCount;
     private int actualRoundCount = 1;
     private int teamCount;
@@ -49,6 +51,7 @@ public class GamePlayHandler : MonoBehaviour
             if (actualTeamCount < teamCount && actualRoundCount < roundCount +1){
                 InitzializeRoundForTeam();
                 gameState = GameStateEnum.ROLLING_DICE;
+                hudHandler.ShowDiceActualTeam(actualTeamCount);
             } else {
                 gameState = GameStateEnum.GAME_FINISHED;
             }
@@ -57,6 +60,7 @@ public class GamePlayHandler : MonoBehaviour
             RollDice();
             gameState = GameStateEnum.WAITING_FOR_DICE;
         } else if (gameState == GameStateEnum.WAITING_FOR_DICE && diceSc.DiceIsDone() && waiting == false){
+            hudHandler.HideDiceActualTeam();
             waiting = true;
             StartCoroutine(WaitASecond(3));
             diceValue = diceSc.getDiceValue();
@@ -97,6 +101,7 @@ public class GamePlayHandler : MonoBehaviour
             }
             gameState = GameStateEnum.SWITCHING_ACTIVE_TEAM;
         } else if (gameState == GameStateEnum.GAME_FINISHED){
+            hudHandler.HideDiceActualTeam();
             awardCeremonyHandler.IntizializeAwardCeremony();
             gameState = GameStateEnum.AWARD_CEREMONY;
         }

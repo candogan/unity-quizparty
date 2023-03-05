@@ -12,6 +12,7 @@ public class HudHandler : MonoBehaviour
     public GameObject hudCanvas;
     public GameObject pauseButton;
     public GameObject questionPanel;
+    public GameObject diceActualTeam;
     public TeamHandler teamHandler;
 
     private List<GameObject> teamHudList = new List<GameObject>();
@@ -59,6 +60,15 @@ public class HudHandler : MonoBehaviour
         }
 
         pauseButton.SetActive(true);
+    }
+
+    public void ShowDiceActualTeam(int actualTeam){
+        diceActualTeam.SetActive(true);
+        diceActualTeam.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Team " + (actualTeam + 1) + " würfelt";
+    }
+
+    public void HideDiceActualTeam(){
+        diceActualTeam.SetActive(false);
     }
 
 
