@@ -21699,11 +21699,13 @@ MonoBehaviour:
     der verteilten Punkte erscheint nun der Button \"Spiel speichern und Beenden\".
     Wird dieser Button geklickt, wird der aktuelle Spielstand gespeichert, um zu
     einem sp\xE4teren Zeitpunkt das Spiel an dem aktuellen Spielstand weiterspielen
-    zu k\xF6nnen.\r\n<br><br><br><u><b>Laden eines gespeicherten Spielstandes</b></u><br><br>\r\nIn
+    zu k\xF6nnen. Mit einem Klick auf den Button \"Vorzeitige Siegerehrung\" kann
+    das Spiel vorzeitig beendet werden und die Rangfolge der Teams wird abschlie\xDFend
+    pr\xE4sentiert.\r\n<br><br><br><u><b>Laden eines gespeicherten Spielstandes</b></u><br><br>\r\nIn
     dem Punkt \"Ende einer Runde\" wird in dieser Anleitung beschrieben, wie der
     ein Spielstand gespeichert werden kann. Wurde vor dem Start des Spiels ein Spielstand
     gespeichert, kann nach Klick auf den Button \"Spielen\" der Button \"Weiterspielen\"
-    geklickt werden, um einen gespeicherten Spielstand zu laden.\r\n"
+    geklickt werden, um einen gespeicherten Spielstand zu laden.\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bc2dde171c4938a4cbb9933857588bee, type: 2}
   m_sharedMaterial: {fileID: -8481826745768095760, guid: bc2dde171c4938a4cbb9933857588bee, type: 2}
