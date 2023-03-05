@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -162,7 +162,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 300}
-  m_SizeDelta: {x: 1300, y: 1672.41}
+  m_SizeDelta: {x: 1300, y: 4318.52}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &32011704
 MonoBehaviour:
@@ -4468,7 +4468,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1445722242}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.3587637
+  m_Size: 0.13893649
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -17946,7 +17946,7 @@ RectTransform:
   m_Father: {fileID: 271466450}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.6412363}
+  m_AnchorMin: {x: 0, y: 0.8610635}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -21583,8 +21583,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 650, y: -836.205}
-  m_SizeDelta: {x: 1300, y: 1672.41}
+  m_AnchoredPosition: {x: 650, y: -2159.26}
+  m_SizeDelta: {x: 1300, y: 4318.52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1765739680
 MonoBehaviour:
@@ -21599,7 +21599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
-  m_VerticalFit: 2
+  m_VerticalFit: 0
 --- !u!114 &1765739681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21620,39 +21620,90 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<u><b>Spielstart</b></u><br><br> Um das Spiel zu starten, klicken Sie
-    bitte im Hauptmen\xFC auf den Button \"Spielen\". In dem darauf folgenden Men\xFC
-    haben Sie die M\xF6glichkeit, das Spiel zu konfigurieren. Dabei k\xF6nnen Sie
-    die Teamzahl, die Rundenanzahl und die Schwierigkeit der Aufgaben im Spiel konfigurieren.
-    Bitte beachten Sie, dass f\xFCr die selektierte Schwierigkeit vorab genug Fragen
-    eingepflegt werden m\xFCssen. Falls nicht genug Fragen vorhanden sind, nutzt
-    das Spiel alle verf\xFCgbaren Schwierigkeiten. Mit dem Button \"Spiel Starten\"
-    starten Sie das Spiel mit den gew\xE4hlten Einstellungen. Mit dem Button \"zur\xFCck\"
-    gelangen Sie zur\xFCck ins Hauptmen\xFC. <br><br><br><br><u><b>Einpflegen / Anpassung
-    von Aufgaben</b></u><br><br><br><br><u><b>Spielablauf</b></u><br><br>Auf dem
-    Spielfeld wird jedes Team durch eine Spielfigur repr\xE4sentiert. Zu Beginn eines
-    Spielzuges wird die Feldanzahl f\xFCr das aktuelle Team erw\xFCrfelt. Der W\xFCrfelt
-    w\xFCrfelt automatisch im Anschluss wird die entsprechende Spielfigur auf dem
-    Feld bewegt. Falls die Spielfigur dann auf einem Aufgabenfeld steht, erh\xE4lt
-    das aktuelle Team eine Aufgabe. Die Aufgabe wird mit Klick auf den Button Start
-    gestartet. Im Anschluss wird dem aktuellen Team eine Aufgabe angezeigt, die es
-    in der vorgegebenen Zeit l\xF6sen muss. Je nachdem, wie lange es f\xFCr die L\xF6sung
-    der Aufgabe ben\xF6tigt, desto mehr Punkte kann das Team bekommen. Sobald der
-    Timer l\xE4uft, kann die Zeit mit einem Klick auf den \"Pause\" Button angehalten
-    werden. Mit einem anschlie\xDFenden Klick auf \"Aufl\xF6sen\" wird die Aufgabe
-    abgeschlossen. Dem Team wird die richtige Antwort angezeigt und der Spielmoderator
-    entscheidet, ob das Team die Aufgabe erfolgreich gemeistert hat. Wird nicht auf
-    den Button \"Aufl\xF6sen\", sondern auf \"weiter\" geklickt, l\xE4uft der Timer
-    weiter und der Moderator kann zu einem sp\xE4teren Zeitpunkt mit einem Klick
-    auf \"Pause\" die Aufgabe aufl\xF6sen. Ist der Timer jedoch abgelaufen, wird
-    die Aufgabe automatisch aufgel\xF6st.<br><br><br><br><u><b>Ende einer Runde</b></u><br><br>Wenn
-    jedes Team in einer Runde mit seinem Spielzug fertig ist, wird ein Sch\xE4tzr\xE4tsel
+  m_text: "<u><b>Einpflegen / Anpassung von Aufgaben</b></u><br><br>\r\nDas Spiel
+    QuizParty bietet Ihnen die M\xF6glichkeit, eigene Aufgaben zu verfassen und in
+    das Spiel einzupflegen. Dar\xFCber hinaus k\xF6nnen bestehende Aufgaben aus dem
+    Aufgabenkatalog gel\xF6scht werden. Um den Aufgabenkatalog zu bearbeiten, klicken
+    Sie im Hauptmen\xFC auf den Button \"Optionen\". Im Optionsmen\xFC sehen Sie
+    nun die Buttons \"Quizfragen\", \"Bildfragen\", \"Interaktionen\" und \"Sch\xE4tzfragen\".
+    Mit diesen Buttons k\xF6nnen Sie Aufgaben hinzuf\xFCgen und l\xF6schen. Quizfragen
+    repr\xE4sentieren dabei Fragen, bei denen ein Team eine Antwort geben muss. Bildfragen
+    sind Bilder, bei denen Teams raten m\xFCssen, was auf dem Bild abgebildet ist.
+    Bei Interaktionsaufgaben k\xF6nnen den Teams Aufgaben gestellt werden, f\xFCr
+    die sie miteinander agieren m\xFCssen (Beispiel: Stellt euch in Reihenfolge eures
+    Alters auf). Bei Sch\xE4tzfragen sind alle Teams involviert und bekommen ein
+    R\xE4tsel, bei dem jedes Team eine Zahl als L\xF6sung sch\xE4tzen muss (Beispiel:
+    Wie viele B\xFCrger hat Europa). Nach Klick auf einen der Buttons werden in einer
+    Liste alle Aufgaben f\xFCr den jeweiligen Aufgabentyp angezeigt. Mit dem Button
+    \"L\xF6schen\" k\xF6nnen einzelne Elemente gel\xF6scht werden. In der oberen
+    Bildschirmh\xE4lfte k\xF6nnen neue Aufgaben erg\xE4nzt werden. Dazu wird das
+    Feld Frage / Aufgabe und das Feld Antwort gef\xFCllt. Anschlie\xDFend muss die
+    Schwierigkeit mit dem Feld rechts oben ausgew\xE4hlt werden. Anhand des Schwierigkeitsgrades
+    kann man dieses Spiel gut f\xFCr Teilnehmergruppen mit in verschiedenen Altersgruppen
+    nutzen. Abschlie\xDFend kann die Aufgaben mit Klick auf den Button \"Hinzuf\xFCgen\"
+    in den Aufgabenkatalog \xFCbernommen werden.<br>\r\nBei Bildfragen ersetzt der
+    Button \"Bild hochladen\" das Feld Aufgabe / Frage. Nachdem in dem Antwortfeld
+    die L\xF6sung f\xFCr das neue Bildr\xE4tsel eingegeben wurde, kann eine Bilddatei
+    hochgeladen werden und die Schwierigkeitsstufe ausgew\xE4hlt werden. Mit einem
+    abschlie\xDFenden Klick auf den Button \"Hinzuf\xFCgen\" wird auch das neue Bildr\xE4tsel
+    in den Aufgabenkatalog \xFCbernommen.\r\n<br><br><br><u><b>Importieren / Exportieren
+    der Aufgaben</b></u><br><br>\r\nDie eingepflegten Fragen und Aufgaben k\xF6nnen
+    au\xDFerhalb des Spiels gesichert werden und wieder geladen werden. Diese Option
+    erm\xF6glicht es, einen Aufgabenkatalog zwischen mehreren Computern zu teilen.
+    Um diese Funktion zu nutzen, klicken Sie nach Start der Anwendung auf den Button
+    \"Optionen\". Im n\xE4chsten Schritt klicken Sie auf den Button \"Fragen exportieren\",
+    um alle eingepflegten Aufgaben zu speichern, klicken Sie nun auf den Button \"Fragen
+    exportieren\". Alle eingepflegten Fragen werden jetzt auf ihrem Desktop in einer
+    Datei mit dem Namen \"Ressources\" gespeichert. Diese Zip-Datei k\xF6nnen Sie
+    per Mail oder \xE4hnlichen Methoden auf einen zweiten Computer \xFCbertragen.
+    Um die Fragen jetzt auf diesem zweiten Ger\xE4t zu importieren, starten Sie an
+    diesem Ger\xE4t das Spiel und klicken im Hauptmen\xFC auf den Button \"Optionen\".
+    Im Anschluss klicken Sie auf den Button \"Fragen Importieren\", w\xE4hlen die
+    \"Ressources\" Datei aus und klicken auf \"Load\". Die Fragen wurden inzwischen
+    erfolgreich auf den zweiten Computer \xFCbertragen.\r\n<br><br><br><u><b>Spielstart</b></u><br><br>
+    \r\nUm das Spiel zu starten, klicken Sie bitte im Hauptmen\xFC auf den Button
+    \"Spielen\". In dem darauffolgenden Men\xFC haben Sie die M\xF6glichkeit, das
+    Spiel zu konfigurieren. Dabei k\xF6nnen Sie die Teamzahl, die Rundenanzahl und
+    die Schwierigkeit der Aufgaben im Spiel konfigurieren. Bitte beachten Sie, dass
+    f\xFCr die selektierte Schwierigkeit vorab genug Fragen eingepflegt werden m\xFCssen.
+    Falls nicht genug Fragen vorhanden sind, nutzt das Spiel alle verf\xFCgbaren
+    Schwierigkeiten. Mit dem Button \"Spiel Starten\" starten Sie das Spiel mit den
+    gew\xE4hlten Einstellungen. Mit dem Button \"zur\xFCck\" gelangen Sie zur\xFCck
+    ins Hauptmen\xFC.\r\n<br><br><br><u><b>Pausieren des Spiels</b></u><br><br>\r\nNach
+    Start das Spiels kann jederzeit pausiert werden. Dazu steht zum einen ein Pausebutton
+    am rechten oberen Rand des Spiels zu Verf\xFCgung oder es kann die \"Esc\" Taste
+    genutzt werden.\r\n<br><br><br><u><b>Spielablauf</b></u><br><br>\r\nAuf dem Spielfeld
+    wird jedes Team durch eine Spielfigur repr\xE4sentiert. Zu Beginn eines Spielzuges
+    wird die Feldanzahl f\xFCr das aktuelle Team erw\xFCrfelt. Der W\xFCrfelt w\xFCrfelt
+    automatisch im Anschluss wird die entsprechende Spielfigur auf dem Feld bewegt.
+    Falls die Spielfigur dann auf einem Aufgabenfeld steht, erh\xE4lt das aktuelle
+    Team eine Aufgabe. Die Aufgabe wird mit Klick auf den Button Start gestartet.
+    Im Anschluss wird dem aktuellen Team eine Aufgabe angezeigt, die es in der vorgegebenen
+    Zeit l\xF6sen muss. Je nachdem, wie lange es f\xFCr die L\xF6sung der Aufgabe
+    ben\xF6tigt, desto mehr Punkte kann das Team bekommen. Sobald der Timer l\xE4uft,
+    kann die Zeit mit einem Klick auf den \"Pause\" Button angehalten werden. Mit
+    einem anschlie\xDFenden Klick auf \"Aufl\xF6sen\" wird die Aufgabe abgeschlossen.
+    Dem Team wird die richtige Antwort angezeigt und der Spielmoderator entscheidet,
+    ob das Team die Aufgabe erfolgreich gemeistert hat. Wird nicht auf den Button
+    \"Aufl\xF6sen\", sondern auf \"weiter\" geklickt, l\xE4uft der Timer weiter und
+    der Moderator kann zu einem sp\xE4teren Zeitpunkt mit einem Klick auf \"Pause\"
+    die Aufgabe aufl\xF6sen. Ist der Timer jedoch abgelaufen, wird die Aufgabe automatisch
+    aufgel\xF6st.\r\n<br><br><br><u><b>Ende einer Runde</b></u><br><br>\r\nWenn jedes
+    Team in einer Runde mit seinem Spielzug fertig ist, wird ein Sch\xE4tzr\xE4tsel
     f\xFCr alle Teams gestartet, bevor die n\xE4chste Runde beginnt. Mit Klick auf
     den Button \"Start\" wird dieses R\xE4tsel gestartet. Anschlie\xDFend kann der
     Moderator wie gewohnt mit dem Button \"Pause\" und \"Aufl\xF6sen\" das R\xE4tsel
     vorzeitig beenden. Im Anschluss werden die jeweiligen Sch\xE4tzungen der Teams
     eingetragen und mit dem Button \"Pr\xFCfen\" gepr\xFCft. Die Teams, die am genausten
-    gesch\xE4tzt haben, erhalten im Anschluss zwei Bonuspunkte."
+    gesch\xE4tzt haben, erhalten im Anschluss zwei Bonuspunkten. Unter der Auflistung
+    der verteilten Punkte erscheint nun der Button \"Spiel speichern und Beenden\".
+    Wird dieser Button geklickt, wird der aktuelle Spielstand gespeichert, um zu
+    einem sp\xE4teren Zeitpunkt das Spiel an dem aktuellen Spielstand weiterspielen
+    zu k\xF6nnen.\r\n<br><br><br><u><b>Laden eines gespeicherten Spielstandes</b></u><br><br>\r\nIn
+    dem Punkt \"Ende einer Runde\" wird in dieser Anleitung beschrieben, wie der
+    ein Spielstand gespeichert werden kann. Wurde vor dem Start des Spiels ein Spielstand
+    gespeichert, kann nach Klick auf den Button \"Spielen\" der Button \"Weiterspielen\"
+    geklickt werden, um einen gespeicherten Spielstand zu laden.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bc2dde171c4938a4cbb9933857588bee, type: 2}
   m_sharedMaterial: {fileID: -8481826745768095760, guid: bc2dde171c4938a4cbb9933857588bee, type: 2}

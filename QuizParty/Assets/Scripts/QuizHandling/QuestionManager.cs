@@ -71,7 +71,6 @@ public class QuestionManager : MonoBehaviour
         if (IsPictureField()){
             questionTextField.text = "Wer / Was ist auf dem Bild abgebildet?";
         } else {
-
             questionTextField.text = eventFieldList[actualEventFieldIndex].GetContent();
         }
     }

@@ -9,7 +9,7 @@ using static NextFieldDirectionEnum;
 public class GamePlayHandler : MonoBehaviour
 {
     //Objecttyp zu liste gewechselt -> bietet einfacheren zugriff auf die values
-    public CameraManager camera;
+    public CameraManager cameraManager;
     public TeamHandler teamHandler;
     public AwardCeremonyHandler awardCeremonyHandler;
     public GameOptionsHandler gameOptionsHandler;
@@ -60,7 +60,7 @@ public class GamePlayHandler : MonoBehaviour
             waiting = true;
             StartCoroutine(WaitASecond(3));
             diceValue = diceSc.getDiceValue();
-            camera.FocusPlayerCamera();
+            cameraManager.FocusPlayerCamera();
             characterOneSc.TransferDiceResult(diceValue);
             
             //Debug.Log("Moving Character");
@@ -70,7 +70,7 @@ public class GamePlayHandler : MonoBehaviour
             ManageRoundState();
             StartCoroutine(WaitASecond(3));
             //Debug.Log("Question Mode");
-            camera.FocusSideCamera();
+            cameraManager.FocusSideCamera();
             StartQuestion();
             gameState = GameStateEnum.QUESTION_MODE;
         } else if (gameState == GameStateEnum.QUESTION_MODE && !panelUiManager.UiIsActive() && waiting == false){
@@ -119,14 +119,14 @@ public class GamePlayHandler : MonoBehaviour
         Debug.Log("Team: " +  actualTeamCount + ", Runde: " + actualRoundCount);
         characterOne = teamHandler.getCharacterOfTeamindex(actualTeamCount);
         characterOneSc = (Character) characterOne.GetComponent<Character>();
-        camera.setPlayerCamera(characterOneSc);
+        cameraManager.setPlayerCamera(characterOneSc);
         characterOneSc.StartClass();
 
     }
 
     public void RollDice()
     {
-        camera.FocusDiceCamera();
+        cameraManager.FocusDiceCamera();
         diceSc.TriggerDice();
     }
 
