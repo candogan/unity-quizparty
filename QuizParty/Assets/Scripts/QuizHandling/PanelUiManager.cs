@@ -26,6 +26,7 @@ public class PanelUiManager : MonoBehaviour
     public GameObject notificationGameObject;
     public HudHandler hudHandler;
     public GameObject saveGameButton;
+    public GameObject earlyEndGameButton;
 
     public Image pictureContent;
 
@@ -76,6 +77,7 @@ public class PanelUiManager : MonoBehaviour
         timerStartButton.SetActive(true);
         notificationGameObject.SetActive(false);
         saveGameButton.SetActive(false);
+        earlyEndGameButton.SetActive(false);
         timer.StopTimer();
         timerPauseButton.transform.localPosition = new Vector3(0,0,0);
         quizText.text = "Lade neues Rätsel...";
@@ -258,17 +260,10 @@ public class PanelUiManager : MonoBehaviour
         }
     }
 
-    public void setSaveGameButtonActive(){
+    public void setSaveGameButtonsActive(){
         saveGameButton.SetActive(true);
+        earlyEndGameButton.SetActive(true);
     }
 
-/*
-    public void ShowRoundState(){
-        if (gameplayHandler.isLastMoveThisRound()){
-            Debug.Log("Runde: " + gameplayHandler.GetActualRound());
-            notificationGameObject.SetActive(true);
-            notificationGameObject.GetComponent<TextMeshProUGUI>().text = "Runde " + (gameplayHandler.GetActualRound()) + " vorbei";
-        }
-    }
-*/
+
 }

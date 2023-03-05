@@ -178,4 +178,9 @@ public class GamePlayHandler : MonoBehaviour
         teamHandler.LoadTeamData();
         actualRoundCount = PlayerPrefs.GetInt("actualRoundCount");
     }
+
+    public void EarlierEnd(){
+        gameState = GameStateEnum.GAME_FINISHED;
+    }
+
 }
