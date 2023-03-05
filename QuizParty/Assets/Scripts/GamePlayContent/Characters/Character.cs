@@ -94,7 +94,7 @@ public class Character : MonoBehaviour
         
         if (needsTurn && turnedDegree != Math.Abs(turnDegree)){
             readyToMove = false;
-            Debug.Log(turnedDegree);
+            
             if (turnDegree < 0){
                 transform.Rotate(0, -1, 0);
             } else{
@@ -213,7 +213,9 @@ public class Character : MonoBehaviour
         PlayerPrefs.SetFloat("posX" + teamNumber, currentLocation.x);
         PlayerPrefs.SetFloat("posY" + teamNumber, currentLocation.y);
         PlayerPrefs.SetFloat("posZ" + teamNumber, currentLocation.z);
+        PlayerPrefs.SetFloat("rotX" + teamNumber, transform.rotation.eulerAngles.x);
         PlayerPrefs.SetFloat("rotY" + teamNumber, transform.rotation.eulerAngles.y);
+        PlayerPrefs.SetFloat("rotZ" + teamNumber, transform.rotation.eulerAngles.z);
         PlayerPrefs .SetInt("actualFieldIndex" + teamNumber, actualFieldIndex);
     }
 
@@ -221,7 +223,7 @@ public class Character : MonoBehaviour
         transform.position = (new Vector3(PlayerPrefs.GetFloat("posX" + teamNumber),PlayerPrefs.GetFloat("posY" + teamNumber), PlayerPrefs.GetFloat("posZ" + teamNumber)));
         actualFieldIndex = PlayerPrefs.GetInt("actualFieldIndex" + teamNumber);
         currentLocation = new Vector3(PlayerPrefs.GetFloat("posX" + teamNumber),PlayerPrefs.GetFloat("posY" + teamNumber), PlayerPrefs.GetFloat("posZ" + teamNumber));
-        transform.Rotate(0, PlayerPrefs.GetInt("rotY" + teamNumber), 0, Space.Self);
+        transform.Rotate(PlayerPrefs.GetFloat("rotX" + teamNumber), PlayerPrefs.GetFloat("rotY" + teamNumber) + 90, PlayerPrefs.GetFloat("rotZ" + teamNumber), Space.Self);
 
     }
 }
