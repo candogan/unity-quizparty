@@ -64,7 +64,7 @@ public class DownUpManager : MonoBehaviour
 		System.IO.DirectoryInfo di = new DirectoryInfo(Application.dataPath + "/Resources/");
 		foreach (FileInfo file in di.GetFiles())
 		{
-			if (file.Name == "unity default resources" || file.Name == "unity_builtin_extra")
+			if (file.Name == "unity default resources" || file.Name == "unity_builtin_extra" || file.Name == "saveGameQuestions.json")
 			{
 				return;
 			} 

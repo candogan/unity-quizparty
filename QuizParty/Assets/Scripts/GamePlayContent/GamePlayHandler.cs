@@ -24,7 +24,7 @@ public class GamePlayHandler : MonoBehaviour
     public Character characterOneSc;
 
     private int roundCount;
-    private int actualRoundCount = 1;
+    private int actualRoundCount;
     private int teamCount;
     private int actualTeamCount = 0;
     private bool lastMoveThisRound = false;
@@ -145,6 +145,12 @@ public class GamePlayHandler : MonoBehaviour
         teamCount = (int) GameOptionsHandler.getTeamCount();
         roundCount = (int) GameOptionsHandler.getRoundCount();
         gameState = GameStateEnum.SWITCHING_ACTIVE_TEAM;
+
+        if (GameOptionsHandler.getNotNewGame()){
+            actualRoundCount = PlayerPrefs.GetInt("actualRoundCount");
+        } else{
+            actualRoundCount = 1;
+        }
     }
 
     public bool isLastMoveThisRound(){
@@ -175,13 +181,13 @@ public class GamePlayHandler : MonoBehaviour
         PlayerPrefs.SetInt("teamCount", (int) GameOptionsHandler.getTeamCount());
         PlayerPrefs.SetInt("roundCount", (int) GameOptionsHandler.getRoundCount());
         teamHandler.SaveTeamData();
-        PlayerPrefs.SetInt("actualRoundCount", actualRoundCount);
+        PlayerPrefs.SetInt("actualRoundCount", actualRoundCount + 1);
         SceneManager.LoadScene("MainMenu");
+        GameOptionsHandler.saveDifficulties();
+        questionManager.saveQuestions();
     }
     public void LoadGame(){
-
         teamHandler.LoadTeamData();
-        actualRoundCount = PlayerPrefs.GetInt("actualRoundCount");
     }
 
     public void EarlierEnd(){

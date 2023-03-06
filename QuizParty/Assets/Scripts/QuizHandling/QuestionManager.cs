@@ -4,6 +4,7 @@ using Random = System.Random;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.IO;
 
 using static GameFieldTypeEnum;
 
@@ -42,7 +43,12 @@ public class QuestionManager : MonoBehaviour
 
     void Start(){
         difficulty = GameOptionsHandler.getDifficulties();
-        eventFieldList = FileHandler.ReadListFromJSON<GameEventField> (filename);
+        if (GameOptionsHandler.getNotNewGame()){
+            loadQuestions();
+        }else{
+            eventFieldList = FileHandler.ReadListFromJSON<GameEventField> (filename);
+        }
+        
         SearchAvailableTypes();
     }
 
@@ -203,4 +209,16 @@ public class QuestionManager : MonoBehaviour
         Sprite newImage = IMG2Sprite.instance.LoadNewSprite(filePath);
         return newImage;
     }
+
+    public void saveQuestions(){
+        if (File.Exists (Application.dataPath + "/Resources/saveGameQuestions.json")){
+            File.Delete(Application.dataPath + "/Resources/saveGameQuestions.json");
+        }
+        FileHandler.SaveToJSON<GameEventField> (eventFieldList, "saveGameQuestions.json");
+    }
+
+    private void loadQuestions(){
+        eventFieldList = FileHandler.ReadListFromJSON<GameEventField> ("saveGameQuestions.json");
+    }
+
 }

@@ -135,6 +135,7 @@ public class TeamHandler : MonoBehaviour
     public void LoadTeamData(){
         for (int i = 0; i < teamCount; i++){
             teamlist[i].SetScore(PlayerPrefs.GetInt("teamPoints" + i));
+            hudHandler.TransferTeamStatsToHud();
             teamlist[i].GetCharacter().GetComponent<Character>().loadCharacterData(i);
         }
     }

@@ -7,14 +7,14 @@ using UnityEngine.SceneManagement;
 public class GameOptionsHandler : MonoBehaviour
 {
     
-    private static float teamCount;
-    private static float roundCount;
+    private static float teamCount = 2;
+    private static float roundCount = 3;
 
-    private static bool difficulty1;
-    private static bool difficulty2;
-    private static bool difficulty3;
+    private static bool difficulty1 = false;
+    private static bool difficulty2 = false;
+    private static bool difficulty3 = false;
 
-    private static List<int> difficulties;
+    private static List<int> difficulties = new List<int>();
 
     public static bool notNewGame = false;
 
@@ -28,12 +28,13 @@ public class GameOptionsHandler : MonoBehaviour
     // Initialisieren der Variablen bei Start des Spiels
     void Start()
     {
-        initialiazeVariables();
+
     }
 
     public void PlayGame ()
     {
         //Variablen der ausgewählten Schwierigkeit anpassen
+        updateToggle();
         updateDiffList();
         //Prüfen ob mindestens eine Schwierigkeit ausgewählt wurde
         //Spiel starten
@@ -43,47 +44,22 @@ public class GameOptionsHandler : MonoBehaviour
     public void PlayOldGame(){
         teamCount = PlayerPrefs.GetInt("teamCount");
         roundCount = PlayerPrefs.GetInt("roundCount");
-        difficulty1 = true;
-        difficulty2 = true;
-        difficulty3 = true;
-        difficulties = new List<int>();
+        getSavedDifficulties();
+        updateDiffList();
         notNewGame = true;
-        if (roundCount < 5){
-            SceneManager.LoadScene("QuizPartyMinimal");
-        } else if (roundCount > 4 && roundCount < 9){
-            SceneManager.LoadScene("QuizParty");
-        }
-    }
-
-    //Initialisieren der Variablen
-    private void initialiazeVariables()
-    {
-        teamCount = 2;
-        roundCount = 3;
-        difficulty1 = true;
-        difficulty2 = true;
-        difficulty3 = true;
-        difficulties = new List<int>();
-        if (difficulty1 == true)
-        {
-            difficulties.Add(1);
-        }
-        if (difficulty2 == true)
-        {
-            difficulties.Add(2);
-        }
-        if (difficulty3 == true)
-        {
-            difficulties.Add(3);
-        }
+        LoadScene();
     }
 
     //Variablen der ausgewählten Schwierigkeit anpassen
-    private void updateDiffList()
+    private void updateToggle()
     {
         difficulty1 = diffOneToggle.isOn;
         difficulty2 = diffTwoToggle.isOn;
         difficulty3 = diffThreeToggle.isOn;
+    }
+
+    private void updateDiffList()
+    {
 
         if (difficulty1 == true)
         {
@@ -98,6 +74,7 @@ public class GameOptionsHandler : MonoBehaviour
             difficulties.Add(3);
         }
     }
+
 
     //Prüfen ob mindestens eine Schwierigkeit ausgewählt wurde
     //Spiel starten
@@ -106,15 +83,19 @@ public class GameOptionsHandler : MonoBehaviour
         {
             teamCount = teamSlider.value;
             roundCount  = roundSlider.value;
-            if (roundCount < 5){
-                SceneManager.LoadScene("QuizPartyMinimal");
-            } else if (roundCount > 4 && roundCount < 9){
-                SceneManager.LoadScene("QuizParty");
-            }
+            LoadScene();
         } 
         else
         {
             difficulties.Clear();
+        }
+    }
+
+    private void LoadScene(){
+        if (roundCount < 5){
+            SceneManager.LoadScene("QuizPartyMinimal");
+        } else if (roundCount > 4 && roundCount < 9){
+                SceneManager.LoadScene("QuizParty");
         }
     }
 
@@ -146,5 +127,42 @@ public class GameOptionsHandler : MonoBehaviour
     public static List<int> getDifficulties()
     {
         return difficulties;      
+    }
+
+    public static bool getNotNewGame(){
+        return notNewGame;
+    }
+
+    public static void saveDifficulties(){
+        if (difficulty1 == true)
+        {
+            PlayerPrefs.SetInt("diff1", 1);
+        }else{
+            PlayerPrefs.SetInt("diff1", 0);
+        }
+        if (difficulty2 == true)
+        {
+            PlayerPrefs.SetInt("diff2", 1);
+        }else{
+            PlayerPrefs.SetInt("diff2", 0);
+        }
+        if (difficulty3 == true)
+        {
+            PlayerPrefs.SetInt("diff3", 1);
+        }else{
+            PlayerPrefs.SetInt("diff3", 0);
+        }
+    }
+
+    private void getSavedDifficulties(){
+        if(PlayerPrefs.GetInt("diff1") == 1){
+            difficulty1 = true;
+        }
+        if(PlayerPrefs.GetInt("diff2") == 1){
+            difficulty2 = true;
+        }
+        if(PlayerPrefs.GetInt("diff3") == 1){
+            difficulty3 = true;
+        }
     }
 }
