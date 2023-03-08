@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameOptionsHandler : MonoBehaviour
 {
@@ -25,10 +26,23 @@ public class GameOptionsHandler : MonoBehaviour
     public Toggle diffTwoToggle;
     public Toggle diffThreeToggle;
 
+    public GameObject textUI;
+    public TMP_Text text;
+    public TMP_Text mapText;
+    public GameObject backgroundUI;
+
     // Initialisieren der Variablen bei Start des Spiels
     void Start()
     {
 
+    }
+
+    void Update(){
+        if (roundSlider.value < 5){
+            mapText.GetComponent <TMP_Text> ().text = "Kleine Karte";
+        }else{
+            mapText.GetComponent <TMP_Text> ().text = "Große Karte";
+        }
     }
 
     public void PlayGame ()
@@ -83,12 +97,27 @@ public class GameOptionsHandler : MonoBehaviour
         {
             teamCount = teamSlider.value;
             roundCount  = roundSlider.value;
-            LoadScene();
+            if(getNumberOfQuestions() < roundCount * teamCount){
+                text.GetComponent <TMP_Text> ().text = "Sie haben aktuell " + getNumberOfQuestions() + " Fragen eingepflegt. Für ein Spiel mit den aktuellen Einstellungen sollten midenstens " + roundCount * teamCount + " Fragen eingepflegt sein, um ein Spiel ohne doppelte Fragen zu garantieren.";
+                textUI.SetActive(true);
+                backgroundUI.SetActive(false);
+            }else{
+                LoadScene();
+            } 
         } 
         else
         {
             difficulties.Clear();
         }
+    }
+
+    public void startAnyway(){
+        LoadScene();
+    }
+
+    public void BackButton(){
+        textUI.SetActive(false);
+        backgroundUI.SetActive(true);
     }
 
     private void LoadScene(){
@@ -164,5 +193,16 @@ public class GameOptionsHandler : MonoBehaviour
         if(PlayerPrefs.GetInt("diff3") == 1){
             difficulty3 = true;
         }
+    }
+
+    private int getNumberOfQuestions(){
+        int number = 0;
+        List<GameEventField> fragenKatalog = FileHandler.ReadListFromJSON<GameEventField> ("GameFieldQuestions.json");
+        foreach (GameEventField question in fragenKatalog){
+            if (difficulties.Contains(question.GetDifficulty())){
+                number += 1;
+            }
+        }
+        return number;
     }
 }

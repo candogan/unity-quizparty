@@ -14,6 +14,7 @@ public class FragenHandler : MonoBehaviour
     void Start()
     {
         LoadList(gameEventType);
+        checkInvalidData();
     }
 
     public void LoadList(int type)
@@ -22,7 +23,9 @@ public class FragenHandler : MonoBehaviour
         GameObject g;
 
         List<GameEventField> fragenKatalog = FileHandler.ReadListFromJSON<GameEventField> ("GameFieldQuestions.json");
- 
+
+        //checkInvalidData(type);
+
         foreach (GameEventField field in fragenKatalog) 
         {
             if (field.GetFieldType() == type)
@@ -76,5 +79,33 @@ public class FragenHandler : MonoBehaviour
         }
         LoadList(gameEventType);
     }
+
+     private void checkInvalidData(){
+
+         List<GameEventField> fragenKatalog = FileHandler.ReadListFromJSON<GameEventField> ("GameFieldQuestions.json");
+         System.IO.DirectoryInfo di = new DirectoryInfo(Application.dataPath + "/Resources/");
+
+         bool existingPictureFound = false;
+
+	 	foreach (FileInfo file in di.GetFiles())
+	 	{
+            if (file.Name.EndsWith(".png")){
+                foreach (GameEventField field in fragenKatalog) 
+                {
+                 if ((field.GetContent() == file.Name))
+                 {
+                     existingPictureFound = true;
+                 }        
+                }
+            }else{
+                existingPictureFound = true;
+            }
+            if (existingPictureFound == false){
+                file.Delete();
+                Debug.Log(file.Name);
+            }
+            existingPictureFound = false;
+         }
+     }
 
 }
