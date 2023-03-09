@@ -6185,6 +6185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog: {fileID: 439391438}
   text: {fileID: 310485990}
+  pictureHandler: {fileID: 955616860}
 --- !u!1 &506701605
 GameObject:
   m_ObjectHideFlags: 0
@@ -26500,6 +26501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog: {fileID: 0}
   text: {fileID: 0}
+  pictureHandler: {fileID: 0}
 --- !u!114 &1938429453
 MonoBehaviour:
   m_ObjectHideFlags: 0

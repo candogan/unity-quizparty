@@ -13,6 +13,7 @@ public class DownUpManager : MonoBehaviour
 
 	public GameObject dialog;
 	public TMP_Text text;
+	public FragenHandler pictureHandler;
 
 	public void ShowDialog(int i, String path){
 		dialog.SetActive(true);
@@ -68,6 +69,8 @@ public class DownUpManager : MonoBehaviour
 			File.Delete(Application.dataPath + "/Resources/" +  "RessourceOrdner.zip");
 
 			ShowDialog(1, "");
+
+			pictureHandler.RenewList();
 
 		}
 	}
