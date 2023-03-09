@@ -21,6 +21,7 @@ public class Character : MonoBehaviour
     private int turnDegree;
     private bool needsTurn;
     private bool readyToMove = true;
+    private bool IsMoved = false;
 
     private Vector3 initFieldPosition;
     private Vector3 initCharacterPosition;
@@ -78,6 +79,16 @@ public class Character : MonoBehaviour
                 if (readyToMove){
                 MoveCharacterZUp();
                 }
+            }
+        }
+        moveCheck();
+        if (IsMoved){
+            if (AnimatorIsPlaying("Idle")){
+                GetComponent<Animator>().Play("Walk");
+            }
+        }else{
+            if (AnimatorIsPlaying("Walk")){
+                GetComponent<Animator>().Play("Idle");
             }
         }
     }
@@ -207,6 +218,24 @@ public class Character : MonoBehaviour
             }
             readyForNextMove = true;
         }
+    }
+
+
+ 
+    private void moveCheck(){
+        Vector3 p1 = transform.position;
+        StartCoroutine(AnimatorWait());
+        Vector3 p2 = transform.position;
+        IsMoved = (p1 != p2);
+    }
+
+    IEnumerator AnimatorWait()
+    {
+        yield return new WaitForSeconds(0.100F);
+    }
+
+    private bool AnimatorIsPlaying(string stateName){
+        return GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(stateName);
     }
 
     public void saveCharacterData(int teamNumber){
