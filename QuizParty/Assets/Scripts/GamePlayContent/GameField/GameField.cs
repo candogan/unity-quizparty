@@ -1,34 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using System;
 
 [Serializable]
 public class GameField {
-    Vector3 position;
+    GameObject fieldObject;
     int type;
     string nextFieldMove;
     int turnDegree;
 
-    public GameField (Vector3 position, int type, string nextFieldMove, int turnDegree) {
-        this.position = position;
+
+    public GameField (GameObject fieldObject, int type, string nextFieldMove, int turnDegree) {
+        this.fieldObject = fieldObject;
         this.type = type;
         this.nextFieldMove = nextFieldMove;
         this.turnDegree = turnDegree;
     }
 
     public Vector3 getPosition(){
-        return position;
+        return fieldObject.transform.position;
     }
 
     public int getTurnDegree(){
         return turnDegree;
     }
-
-    public void setPosition(Vector3 newPosition){
-        position = newPosition;
+    
+    public GameObject getGameObject(){
+        return fieldObject;
     }
+
+    // public void setPosition(Vector3 newPosition){
+    //     position = newPosition;
+    // }
 
     public void setNextFieldMove(string newNextFieldMove){
         nextFieldMove = newNextFieldMove;
