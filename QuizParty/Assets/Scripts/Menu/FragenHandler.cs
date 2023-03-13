@@ -13,7 +13,7 @@ public class FragenHandler : MonoBehaviour
 
     void Start()
     {
-        LoadList(gameEventType);
+        RenewList(gameEventType);
         checkInvalidData();
     }
 
@@ -68,10 +68,10 @@ public class FragenHandler : MonoBehaviour
         File.Delete(FileHandler.GetPath("GameFieldQuestions.json"));
         FileHandler.SaveToJSON<GameEventField> (fragenKatalog, "GameFieldQuestions.json");
 
-        RenewList(); 
+        RenewList(gameEventType); 
     }
 
-    public void RenewList()
+    public void RenewList(int type)
     {
         for (int i = 1; i < transform.childCount; i++)
         {

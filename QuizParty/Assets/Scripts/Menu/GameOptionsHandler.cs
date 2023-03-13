@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.IO;
 
 public class GameOptionsHandler : MonoBehaviour
 {
@@ -31,10 +32,11 @@ public class GameOptionsHandler : MonoBehaviour
     public TMP_Text mapText;
     public GameObject backgroundUI;
 
+
     // Initialisieren der Variablen bei Start des Spiels
     void Start()
     {
-
+   
     }
 
     void Update(){
@@ -97,8 +99,8 @@ public class GameOptionsHandler : MonoBehaviour
         {
             teamCount = teamSlider.value;
             roundCount  = roundSlider.value;
-            if(getNumberOfQuestions() < roundCount * teamCount){
-                text.GetComponent <TMP_Text> ().text = "Sie haben aktuell " + getNumberOfQuestions() + " Fragen eingepflegt. Für ein Spiel mit den aktuellen Einstellungen sollten midenstens " + roundCount * teamCount + " Fragen eingepflegt sein, um ein Spiel ohne doppelte Fragen zu garantieren.";
+            if(getNumberOfQuestions() < roundCount * teamCount || getNumberOfGuesses() < roundCount){
+                text.GetComponent <TMP_Text> ().text = "Sie haben aktuell " + getNumberOfQuestions() + " normale Fragen und " + getNumberOfGuesses() + " Schätzfragen eingepflegt. Für ein Spiel mit den aktuellen Einstellungen sollten midenstens " + roundCount * teamCount + " normale Fragen und " + roundCount + " Schätzfragen eingepflegt sein.";
                 textUI.SetActive(true);
                 backgroundUI.SetActive(false);
             }else{
@@ -109,10 +111,6 @@ public class GameOptionsHandler : MonoBehaviour
         {
             difficulties.Clear();
         }
-    }
-
-    public void startAnyway(){
-        LoadScene();
     }
 
     public void BackButton(){
@@ -199,10 +197,22 @@ public class GameOptionsHandler : MonoBehaviour
         int number = 0;
         List<GameEventField> fragenKatalog = FileHandler.ReadListFromJSON<GameEventField> ("GameFieldQuestions.json");
         foreach (GameEventField question in fragenKatalog){
-            if (difficulties.Contains(question.GetDifficulty())){
+            if (difficulties.Contains(question.GetDifficulty()) && question.GetFieldType() != 4){
                 number += 1;
             }
         }
         return number;
     }
+
+    private int getNumberOfGuesses(){
+        int number = 0;
+        List<GameEventField> fragenKatalog = FileHandler.ReadListFromJSON<GameEventField> ("GameFieldQuestions.json");
+        foreach (GameEventField question in fragenKatalog){
+            if (difficulties.Contains(question.GetDifficulty()) && question.GetFieldType() == 4){
+                number += 1;
+            }
+        }
+        return number;
+    }
+
 }
