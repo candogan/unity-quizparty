@@ -218,7 +218,7 @@ public class PanelUiManager : MonoBehaviour
     public void ShowDistributedPoints(List<int> winnerTeams, int distributedPoints){
         int yPosInputField = -190;
 
-        winnersPopup = Instantiate(winnerPopupSample, new Vector3(0 , 0 , 0), Quaternion.identity);
+        winnersPopup = Instantiate(winnerPopupSample, new Vector3(0 , -70 , 0), Quaternion.identity);
         winnersPopup.transform.SetParent(questionPanel.transform, false);
         RectTransform popupRectTrans = GameObject.Find("WinnersPopup(Clone)").GetComponent<RectTransform>();
         Vector2 popupSize = popupRectTrans.sizeDelta;
@@ -231,9 +231,9 @@ public class PanelUiManager : MonoBehaviour
 
         foreach (Team team in teamList){
 
-            questionDoneButton.transform.position += new Vector3(0, -42f, 0);
+            questionDoneButton.transform.position += new Vector3(0, -41f, 0);
 
-            popupSize.y += 85;
+            popupSize.y += 70;
             popupRectTrans.sizeDelta = popupSize;
             int teamReadable = teamIndex + 1; 
             
