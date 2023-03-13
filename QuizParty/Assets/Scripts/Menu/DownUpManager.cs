@@ -14,9 +14,13 @@ public class DownUpManager : MonoBehaviour
 	public GameObject dialog;
 	public TMP_Text text;
 	public FragenHandler pictureHandler;
+	public FragenHandler knowledgeHandler;
+	public FragenHandler interactionHandler;
+	public FragenHandler guessHandler;
+	public GameObject hudSammler;
 
 	public void ShowDialog(int i, String path){
-		dialog.SetActive(true);
+		ActivateDialog();
 		if (i == 0){
 			text.GetComponent <TMP_Text> ().text = "Die Frageliste wurde auf Ihrem Desktop unter " + path + " gespeichert";
 		}else{
@@ -27,10 +31,12 @@ public class DownUpManager : MonoBehaviour
 	public void DeactivateUI(){
 		dialog.SetActive(false);
 		text.GetComponent <TMP_Text> ().text = "";
+		hudSammler.SetActive(true);
 	}
 
-	public void confirmButton(){
-		dialog.SetActive(false);
+	public void ActivateDialog(){
+		dialog.SetActive(true);
+		hudSammler.SetActive(false);
 		text.GetComponent <TMP_Text> ().text = "";
 	}
 
@@ -70,8 +76,10 @@ public class DownUpManager : MonoBehaviour
 
 			ShowDialog(1, "");
 
-			pictureHandler.RenewList();
-
+			pictureHandler.RenewList(3);
+			interactionHandler.RenewList(1);
+			guessHandler.RenewList(4);
+			knowledgeHandler.RenewList(2);
 		}
 	}
 
