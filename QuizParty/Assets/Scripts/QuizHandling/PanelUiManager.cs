@@ -131,6 +131,7 @@ public class PanelUiManager : MonoBehaviour
     }
 
     public void WaitForAnswer(){
+        timerPauseButton.SetActive(false);
         timerContinueButton.SetActive(false);
         showAnswerButton.SetActive(false);
         
