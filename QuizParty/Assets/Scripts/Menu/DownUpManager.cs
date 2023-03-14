@@ -72,6 +72,8 @@ public class DownUpManager : MonoBehaviour
 			
 			UnpackResources();
 
+			File.Delete(Application.dataPath + "/Resources/saveGameQuestions.json");
+
 			File.Delete(Application.dataPath + "/Resources/" +  "RessourceOrdner.zip");
 
 			ShowDialog(1, "");
