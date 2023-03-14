@@ -64,8 +64,8 @@ public class AwardCeremonyHandler : MonoBehaviour
 
 
     private Vector3 CalculateStepHeight(int teamIndex){
-        double relativeRank = 1 / teamHandler.GetRankingOfTeam(teamIndex);
-        //Debug.Log("Score " + score + "   ( maxPoints + 2 ) " + ( maxPoints + 2 ) +  "  relativeScore " + relativeScore);
+        float relativeRank = (float) 1 / (float) teamHandler.GetRankingOfTeam(teamIndex);
+        Debug.Log("teamHandler.GetRankingOfTeam(teamIndex) " + teamHandler.GetRankingOfTeam(teamIndex) +  "  relativeRank " + relativeRank);
         return new Vector3(0f, (float)( maxStepSize * relativeRank ) , 0f);
      }
 }
