@@ -100,7 +100,7 @@ public class GameOptionsHandler : MonoBehaviour
             teamCount = teamSlider.value;
             roundCount  = roundSlider.value;
             if(getNumberOfQuestions() < roundCount * teamCount || getNumberOfGuesses() < roundCount){
-                text.GetComponent <TMP_Text> ().text = "Sie haben aktuell " + getNumberOfQuestions() + " normale Fragen und " + getNumberOfGuesses() + " Schätzfragen eingepflegt. Für ein Spiel mit den aktuellen Einstellungen sollten midenstens " + roundCount * teamCount + " normale Fragen und " + roundCount + " Schätzfragen eingepflegt sein.";
+                text.GetComponent <TMP_Text> ().text = "Sie haben aktuell " + getNumberOfQuestions() + " normale Fragen und " + getNumberOfGuesses() + " Schätzfragen eingepflegt. Für ein Spiel mit den aktuellen Einstellungen sollten mindestens " + roundCount * teamCount + " normale Fragen und " + roundCount + " Schätzfragen eingepflegt sein.";
                 textUI.SetActive(true);
                 backgroundUI.SetActive(false);
             }else{
